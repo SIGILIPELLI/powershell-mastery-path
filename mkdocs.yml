@@ -1,0 +1,100 @@
+site_name: PowerShell Mastery Path
+site_description: A structured, module-wise PowerShell training program from entry level to master level.
+site_url: https://sigilipelli.github.io/powershell-mastery-path/
+repo_url: https://github.com/SIGILIPELLI/powershell-mastery-path
+repo_name: powershell-mastery-path
+
+theme:
+  name: material
+  custom_dir: docs/overrides
+  palette:
+    - media: "(prefers-color-scheme: light)"
+      scheme: default
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-7
+        name: Switch to dark mode
+    - media: "(prefers-color-scheme: dark)"
+      scheme: slate
+      primary: indigo
+      accent: indigo
+      toggle:
+        icon: material/brightness-4
+        name: Switch to light mode
+  features:
+    - navigation.tabs
+    - navigation.sections
+    - navigation.top
+    - navigation.indexes
+    - content.code.copy
+    - content.code.annotate
+    - search.suggest
+    - search.highlight
+
+markdown_extensions:
+  - admonition
+  - pymdownx.highlight:
+      anchor_linenums: true
+  - pymdownx.inlinehilite
+  - pymdownx.superfences
+  - pymdownx.snippets
+  - pymdownx.tabbed:
+      alternate_style: true
+  - toc:
+      permalink: true
+
+extra_css:
+  - stylesheets/extra.css
+
+nav:
+  - Home: index.md
+  - Privacy Policy: privacy.md
+  - "Level 1 · Entry":
+      - Overview: level-1/index.md
+      - "01 · Setup & First Script": level-1/01-setup.md
+      - "02 · Variables & Types": level-1/02-variables-types.md
+      - "03 · Control Flow": level-1/03-control-flow.md
+      - "04 · Functions": level-1/04-functions.md
+      - "05 · Objects & the Pipeline": level-1/05-objects-pipeline.md
+      - "06 · Arrays & Hashtables": level-1/06-arrays-hashtables.md
+      - "07 · Working with Files": level-1/07-working-with-files.md
+      - "08 · Error Handling Basics": level-1/08-error-handling-basics.md
+      - "09 · Modules Basics": level-1/09-modules-basics.md
+      - "10 · Project — System Info Reporter": level-1/10-project-system-info-reporter.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · Advanced Pipeline": level-2/01-advanced-pipeline.md
+      - "02 · Cmdlet Design": level-2/02-cmdlet-design.md
+      - "03 · Error Handling Advanced": level-2/03-error-handling-advanced.md
+      - "04 · Regular Expressions": level-2/04-regular-expressions.md
+      - "05 · Remoting Basics": level-2/05-remoting-basics.md
+      - "06 · Testing with Pester": level-2/06-testing-pester.md
+      - "07 · JSON & REST APIs": level-2/07-json-rest-apis.md
+      - "08 · Script Modules & Manifests": level-2/08-script-modules-manifests.md
+      - "09 · CSV/Excel Data": level-2/09-csv-excel-data.md
+      - "10 · Project — Log Monitoring Script": level-2/10-project-log-monitoring.md
+  - "Level 3 · Advanced":
+      - Overview: level-3/index.md
+      - "01 · Advanced Functions & Validation": level-3/01-advanced-functions-validation.md
+      - "02 · DSC Basics": level-3/02-dsc-basics.md
+      - "03 · Working with .NET": level-3/03-working-with-dotnet.md
+      - "04 · Building Reusable Modules": level-3/04-building-reusable-modules.md
+      - "05 · Testing Advanced (Pester Mocking)": level-3/05-testing-advanced-mocking.md
+      - "06 · Security": level-3/06-security.md
+      - "07 · Performance Optimization": level-3/07-performance-optimization.md
+      - "08 · Active Directory & Admin Cmdlets": level-3/08-active-directory-admin.md
+      - "09 · Scheduled Tasks & Automation": level-3/09-scheduled-tasks-automation.md
+      - "10 · Project — Admin Toolkit Module": level-3/10-project-admin-toolkit.md
+  - "Level 4 · Master":
+      - Overview: level-4/index.md
+      - "01 · Advanced Remoting & Background Jobs": level-4/01-advanced-remoting-jobs.md
+      - "02 · CI/CD with PowerShell": level-4/02-cicd-powershell.md
+      - "03 · Cross-Platform PowerShell": level-4/03-cross-platform.md
+      - "04 · Security Hardening (JEA)": level-4/04-security-hardening-jea.md
+      - "05 · Testing at Scale & CI": level-4/05-testing-at-scale-ci.md
+      - "06 · Performance at Scale": level-4/06-performance-at-scale.md
+      - "07 · Building DevOps Tools": level-4/07-devops-tools.md
+      - "08 · Publishing Modules (PowerShell Gallery)": level-4/08-publishing-modules.md
+      - "09 · Logging & Observability": level-4/09-logging-observability.md
+      - "10 · Capstone Project": level-4/10-capstone-project.md
