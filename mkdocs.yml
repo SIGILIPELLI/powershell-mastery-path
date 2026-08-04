@@ -62,8 +62,19 @@ nav:
       - "08 · Error Handling Basics": level-1/08-error-handling-basics.md
       - "09 · Modules Basics": level-1/09-modules-basics.md
       - "10 · Project — System Info Reporter": level-1/10-project-system-info-reporter.md
+  - "Level 2 · Intermediate":
+      - Overview: level-2/index.md
+      - "01 · Advanced Pipeline": level-2/01-advanced-pipeline.md
+      - "02 · Cmdlet Design": level-2/02-cmdlet-design.md
+      - "03 · Error Handling Advanced": level-2/03-error-handling-advanced.md
+      - "04 · Regular Expressions in PowerShell": level-2/04-regular-expressions.md
+      - "05 · Remoting Basics": level-2/05-remoting-basics.md
+      - "06 · Testing with Pester": level-2/06-testing-pester.md
+      - "07 · Working with JSON/REST APIs": level-2/07-json-rest-apis.md
+      - "08 · Script Modules & Manifests": level-2/08-script-modules-manifests.md
+      - "09 · Working with CSV/Excel Data": level-2/09-csv-excel-data.md
+      - "10 · Project — Log Monitoring Script": level-2/10-project-log-monitoring.md
 # --- auto-pruned stub levels (see AdSense low-value-content fix) ---
 exclude_docs: |
-  level-2/*.md
   level-3/*.md
   level-4/*.md

@@ -14,7 +14,7 @@ code snippets in every module and a hands-on project at the end of each level.
 | Level | Focus | Modules |
 |-------|-------|---------|
 | [Level 1 · Entry](level-1/index.md) | PowerShell foundations & the object pipeline | 9 topics + 1 project |
-| Level 2 · Intermediate (coming soon) | Idiomatic, testable, API-connected scripts | 9 topics + 1 project |
+| [Level 2 · Intermediate](level-2/index.md) | Idiomatic, testable, API-connected scripts | 9 topics + 1 project |
 | Level 3 · Advanced (coming soon) | Modules, DSC, security, performance | 9 topics + 1 project |
 | Level 4 · Master (coming soon) | Production automation, DevOps & publishing | 9 topics + 1 capstone |
 
