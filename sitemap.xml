@@ -2,98 +2,98 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/privacy/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/01-setup/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/02-variables-types/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/03-control-flow/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/04-functions/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/05-objects-pipeline/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/06-arrays-hashtables/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/07-working-with-files/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/08-error-handling-basics/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/09-modules-basics/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-1/10-project-system-info-reporter/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/01-advanced-pipeline/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/02-cmdlet-design/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/03-error-handling-advanced/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/04-regular-expressions/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/05-remoting-basics/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/06-testing-pester/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/07-json-rest-apis/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/08-script-modules-manifests/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/09-csv-excel-data/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
     <url>
          <loc>https://sigilipelli.github.io/powershell-mastery-path/level-2/10-project-log-monitoring/</loc>
-         <lastmod>2026-08-04</lastmod>
+         <lastmod>2026-08-26</lastmod>
     </url>
 </urlset>
