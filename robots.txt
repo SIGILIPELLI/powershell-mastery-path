@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://sigilipelli.github.io/powershell-skillmastery/sitemap.xml
+Sitemap: https://sigilipelli.github.io/powershell-mastery-path/sitemap.xml
