@@ -985,6 +985,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2514,6 +2536,35 @@ specifically want the same formatted output that would print to console.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>File cmdlets in PowerShell don't talk to the filesystem directly — they go
+through the <strong>PSProvider/PSDrive abstraction</strong>. <code>Get-ChildItem</code>,
+<code>Get-Content</code>, <code>Set-Content</code>, <code>Test-Path</code>, and friends are all
+<em>provider-agnostic</em> cmdlets; the actual work is delegated to whichever
+<code>CmdletProvider</code> owns the drive the path resolves to. <code>C:\</code>, <code>/home/user</code>,
+and a mapped network share all route through the built-in <code>FileSystem</code>
+provider, but the exact same cmdlets also work unmodified against the
+<code>Registry:</code>, <code>Cert:</code>, <code>Env:</code>, <code>Function:</code>, and <code>Variable:</code> providers —
+<code>Get-ChildItem Env:</code> and <code>Get-ChildItem C:\Temp</code> are literally the same
+cmdlet dispatching to two different provider implementations of
+<code>GetChildItems</code>. This is why PowerShell calls filesystem locations
+"drives" even when there's no physical drive involved.</p>
+<p><code>Get-Content</code> reads the whole file's encoding-aware text by default and
+returns it as an <strong>array of strings, one per line</strong> (or one giant string
+with <code>-Raw</code>), because internally it wraps a <code>StreamReader</code> and calls
+<code>ReadLine()</code> in a loop, emitting each line as a separate pipeline object —
+this is exactly why <code>(Get-Content file.txt).Count</code> gives you a line count
+for free and why piping <code>Get-Content</code> into <code>Where-Object</code> filters
+line-by-line rather than needing manual splitting.</p>
+<p><code>Out-File</code>/<code>Set-Content</code> differ in more than convenience: <code>Set-Content</code>
+writes strings as strings via the provider's content-writer interface
+with <code>Encoding</code> control and is optimized as a straight write; <code>Out-File</code>
+first pushes every object through the formatting subsystem (the same
+<code>Format-*</code> engine behind console output) producing formatted display text
+<em>before</em> writing — which is why redirecting complex objects with <code>&gt;</code> /
+<code>Out-File</code> can silently truncate columns to console width while
+<code>ConvertTo-Json | Set-Content</code> preserves full structure: one path goes
+through the formatter, the other doesn't.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>word-count.ps1</code> that reads a text file path from a parameter, checks
 it exists with <code>Test-Path</code> (printing an error and exiting if not), then

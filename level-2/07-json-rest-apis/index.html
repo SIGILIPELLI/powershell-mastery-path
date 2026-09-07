@@ -1350,6 +1350,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2555,6 +2577,41 @@ code for branching logic (retry on 503, fail fast on 401, etc.).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Invoke-RestMethod</code> is not <code>Invoke-WebRequest</code> with automatic parsing
+bolted on for convenience — it inspects the response's <code>Content-Type</code>
+header and dispatches to a format-specific deserializer (JSON via
+<code>System.Text.Json</code>/<code>JavaScriptSerializer</code>, XML via <code>XmlDocument</code>, RSS/Atom
+via feed parsing) and hands back <strong>already-materialized PowerShell
+objects</strong>, whereas <code>Invoke-WebRequest</code> always gives you the raw
+<code>HttpResponseMessage</code> wrapper with <code>.Content</code> as a byte/string payload you
+must parse yourself. This is the real distinction, not "REST vs. web" as
+the names suggest — you can call a JSON API with <code>Invoke-WebRequest</code> and
+manually pipe <code>.Content</code> through <code>ConvertFrom-Json</code>, but <code>Invoke-
+RestMethod</code> does that content-negotiation step for you.</p>
+<p><code>ConvertFrom-Json</code> parses text into either <code>PSCustomObject</code> (default) or,
+with <code>-AsHashtable</code>, a <code>Hashtable</code>/<code>OrderedDictionary</code> tree — the default
+<code>PSCustomObject</code> path matters because JSON objects have no fixed .NET
+type, so each JSON object becomes a synthetic ETS-only object with
+note properties for each JSON key, recursively, all the way down; property
+<em>names</em> that aren't valid PowerShell identifiers still work via
+<code>$obj.'weird-name'</code> because ETS property access doesn't require identifier
+syntax, only dot-or-quote member access.</p>
+<p>Authentication headers and body serialization both hinge on the same
+content-negotiation logic: <code>-Body</code> combined with <code>-ContentType
+'application/json'</code> sends the string as-is, but passing a hashtable to
+<code>-Body</code> without JSON conversion sends it as <code>application/x-www-form-
+urlencoded</code> key/value pairs instead — the cmdlet infers encoding from
+what you hand it and the declared content type, not from any deep
+inspection of your data's shape, which is the actual reason
+<code>-Body (ConvertTo-Json $obj)</code> is written explicitly rather than relying on
+implicit conversion.</p>
+<p>Non-2xx responses throw a <strong>terminating</strong> <code>HttpResponseException</code>/
+<code>WebException</code> from <code>Invoke-RestMethod</code>, unlike a plain socket call which
+would just hand you the error body — this is why <code>try/catch</code> around API
+calls is idiomatic here specifically, and why the error response body
+(often containing the API's own error JSON) has to be extracted from
+<code>$_.Exception.Response</code> rather than from a normal successful return value.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Get-RandomJoke</code> that calls <code>https://official-joke-api.appspot.com/random_joke</code>,
 returns a <code>[pscustomobject]</code> with just the <code>setup</code> and <code>punchline</code>

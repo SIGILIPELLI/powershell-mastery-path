@@ -940,6 +940,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2371,6 +2382,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2553,6 +2575,38 @@ own property names and types.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PowerShell's pipeline is not a byte stream between processes the way a
+Unix pipe is — it's a sequence of live .NET object references passed
+one-at-a-time between cmdlets running on the <em>same thread</em> inside the
+<em>same runspace</em>, with no serialization in between (serialization only
+happens crossing a remoting boundary). Every value in the pipeline is
+wrapped in a <code>PSObject</code>, which carries two layers: the underlying .NET
+object (<code>BaseObject</code>) and an <strong>adapted member set</strong> — properties, script
+methods, and note properties attached by <code>Update-TypeData</code>,
+<code>ETS</code> (Extended Type System) rules in <code>*.types.ps1xml</code>, or ad hoc via
+<code>Add-Member</code>. This is why <code>Get-Process | Select-Object Name, WS</code> can show
+a <code>WS</code> property that isn't a real field on <code>System.Diagnostics.Process</code> —
+it's an ETS alias property defined in PowerShell's own type data.</p>
+<p>Cmdlet chaining (<code>Get-Process | Where-Object ... | Sort-Object ...</code>)
+executes with <strong>streaming, per-object semantics</strong>, not batch-then-forward:
+each cmdlet in the pipe is instantiated once, and the pipeline processor
+calls the first cmdlet's <code>ProcessRecord</code> once, then immediately calls the
+next cmdlet's <code>ProcessRecord</code> with that single object, all the way down
+the chain, before returning for the next object. This is why a badly
+ordered pipeline (<code>Sort-Object</code> before a slow filter) is slower — sorting
+requires buffering the <em>entire</em> stream (it must see every object before
+it can emit the first one), which breaks the streaming model and forces a
+synchronous barrier, unlike a pure filter like <code>Where-Object</code> that can
+pass objects through one at a time.</p>
+<p><code>Where-Object</code> and <code>ForEach-Object</code> predicates run as compiled
+<code>ScriptBlock</code> delegates invoked once per pipeline object with <code>$_</code>
+(<code>$PSItem</code>) bound in a fresh child scope — the "simplified syntax" forms
+(<code>Where-Object Status -eq 'Running'</code>) bypass script-block compilation
+entirely and instead build a comparison directly against the named
+property via reflection/ETS lookup, which is marginally faster and also
+why that syntax can't express compound conditions the way a script block
+predicate can.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>top-processes.ps1</code> that gets all running processes, filters to those
 using more than 20MB of working set, sorts by memory descending, selects the

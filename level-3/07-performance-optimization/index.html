@@ -1693,6 +1693,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2440,6 +2462,40 @@ profiler modules (e.g. <code>PSProfiler</code> from the gallery) go deeper than
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Measure-Command</code> works by capturing a <code>System.Diagnostics.Stopwatch</code>
+timestamp immediately before and after invoking your script block as a
+single pipeline execution — it reports <strong>wall-clock elapsed time</strong>, not
+CPU time, which is why I/O-bound code (network calls, disk reads) shows
+large <code>Measure-Command</code> numbers that don't reflect CPU cost, and why
+comparing two approaches fairly usually means running each multiple times
+and looking at the distribution, not trusting one sample against JIT
+warm-up variance.</p>
+<p>The <code>+=</code> array anti-pattern's actual cost is allocation, not iteration:
+each <code>$arr += $x</code> calls into the array-building AST node, which allocates
+a new <code>System.Object[]</code> sized <code>N+1</code>, calls <code>Array.Copy</code> to move all <code>N</code>
+existing elements, then appends the new one — the copy cost grows
+linearly with array size, so total cost across a loop of <code>N</code> iterations is
+the sum <code>1+2+...+N</code>, which is O(N²). <code>[System.Collections.Generic.
+List[T]].Add()</code> avoids this because <code>List&lt;T&gt;</code> maintains spare backing-
+array capacity and only reallocates (typically doubling) when that
+capacity is exhausted, making amortized per-<code>Add()</code> cost O(1).</p>
+<p><code>ForEach-Object</code> script-block iteration is measurably slower per element
+than a native <code>foreach</code> statement for the same reason <code>Where-Object</code>'s
+simplified syntax beats its script-block form: each <code>ForEach-Object</code>
+invocation calls into the cmdlet's <code>ProcessRecord</code>, invokes your script
+block as a genuine nested scope creation and pipeline dispatch through the
+full cmdlet-calling machinery, while <code>foreach ($x in $collection) { }</code> is
+a language-level loop construct executed directly by the AST interpreter
+with no per-element cmdlet-call or child-scope overhead — for large
+in-memory collections where you don't need streaming, that per-element
+overhead is exactly what accumulates into a real, measurable difference.</p>
+<p>The <code>Where-Object</code>/<code>.Where()</code> method distinction is similar:
+<code>$collection.Where({...})</code> is a native collection method added to arrays
+by PowerShell's own type extension, evaluated without going through the
+pipeline's object-by-object streaming machinery at all — it can be faster
+for in-memory filtering precisely because it skips pipeline dispatch
+overhead entirely, operating as a single method call over the whole array.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Take a script that builds a report by looping over 50,000 numbers,
 filtering to multiples of 7, doubling them, and appending each result to

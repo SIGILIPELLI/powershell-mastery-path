@@ -1036,6 +1036,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2469,6 +2491,34 @@ script works no matter what directory you invoke it from.</p>
 <li>Add Pester tests for <code>Get-BasicSystemInfo</code> and <code>Get-TopMemoryProcesses</code>
   (Level 2's testing module).</li>
 </ul>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>This project stitches together the two abstractions the whole level has
+been building toward: the module system's child-session-state isolation,
+and the object pipeline's ability to carry structured .NET data all the
+way to serialization. When <code>SystemReport.ps1</code> calls
+<code>Get-SystemInfo</code>, it isn't receiving text — it's receiving a live
+<code>PSCustomObject</code> (built by <code>[PSCustomObject]@{...}</code>, which the engine
+compiles into an ordered-property <code>PSObject</code> with no backing .NET type of
+its own, purely an ETS-defined shape) that still carries full type
+fidelity: nested hashtables, numbers as numbers, dates as <code>DateTime</code>
+instances.</p>
+<p>That fidelity is exactly what makes <code>ConvertTo-Json</code> meaningful rather
+than a glorified string formatter: it walks the object graph via
+reflection/ETS member enumeration, recursing into properties up to
+<code>-Depth</code> levels, and serializes each .NET primitive to its correct JSON
+type (<code>DateTime</code> becomes an ISO-8601 string, <code>bool</code> becomes <code>true</code>/
+<code>false</code>, nested <code>PSCustomObject</code>/hashtable becomes a nested JSON object).
+Contrast this with <code>Out-File</code>, which would have routed the same object
+through the <em>formatting</em> subsystem instead and produced a column-truncated
+text table — the reporter works because it stays on the "structured
+object" side of the pipeline until the very last step, converting to text
+only at genuine output time.</p>
+<p>Sourcing the logic from a <code>.psm1</code> rather than inlining it in the script
+also means the module's internal helper functions (anything not
+<code>Export-ModuleMember</code>'d) are invisible to <code>SystemReport.ps1</code>'s own scope —
+the entry-point script can only see the deliberately exported surface,
+which is the module boundary doing real isolation work, not just
+organizational tidiness.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend <code>SystemInfo.psm1</code> with a new function <code>Get-DiskSummary</code> that uses
 <code>Get-PSDrive -PSProvider FileSystem</code> to report each drive's name, used space,

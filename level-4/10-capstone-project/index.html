@@ -2184,6 +2184,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#stretch-goals" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2318,6 +2329,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2589,6 +2611,31 @@ pre-merge, the same split covered earlier in this level.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>This capstone's shape — manifest-declared module, <code>Public</code>/<code>Private</code>
+loader, <code>SupportsShouldProcess</code> on anything destructive, structured
+stream-based logging, and a tagged Pester suite runnable in CI — is every
+mechanism from this whole path composed together, and the composition
+only holds because each layer respects the boundary the next one depends
+on. The manifest's <code>FunctionsToExport</code> list is what makes the module's
+private helpers genuinely unreachable from the outside (Module 04's
+shared-session-state model), which is exactly why <code>InModuleScope</code> is
+needed for the tests that exercise those helpers directly rather than
+only through the public surface (Module 05's mocking-across-boundaries
+mechanics).</p>
+<p>Every destructive public function's <code>$PSCmdlet.ShouldProcess()</code> call
+still gates on the same <code>ConfirmPreference</code>/<code>$WhatIfPreference</code> chain
+covered in Module 02 — bundled into one toolkit doesn't change that the
+guard has to be present at <em>each</em> individual side-effecting call site,
+since <code>SupportsShouldProcess</code> only grants the capability, it doesn't
+retroactively make unguarded code inside the function safe.</p>
+<p>The CI pipeline wired up for this project depends on the exit-code
+contract from Module 02's CI mechanics (<code>pwsh</code> exits 0 regardless of
+internal PowerShell errors unless the script explicitly translates a
+caught terminating error into a non-zero <code>exit</code>) combined with Pester's
+NUnit/JUnit XML output — the same two mechanisms, not new ones, are what
+let a CI platform correctly report both "did the module's own logic
+throw" and "which specific tests passed or failed" from one pipeline run.</p>
 <h2 id="stretch-goals">Stretch goals<a class="headerlink" href="#stretch-goals" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add a <code>Send-AuditAlert</code> function that only fires (e.g. writes an

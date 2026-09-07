@@ -1013,6 +1013,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2529,6 +2551,40 @@ post-mortem debugging in an interactive session.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PowerShell has two genuinely different error mechanisms sharing one
+vocabulary, and confusing them is the single biggest source of "my
+try/catch didn't catch it" bugs. A <strong>terminating error</strong> unwinds the call
+stack as a real CLR exception (<code>RuntimeException</code> subclasses like
+<code>RuntimeException</code>, <code>CommandNotFoundException</code>, or your own <code>throw</code>'d
+object wrapped in <code>RuntimeException</code>) — this is what <code>try/catch</code> is built
+to intercept, because <code>catch</code> is compiled to an actual CLR <code>catch</code> block
+around the <code>try</code> script block's execution. A <strong>non-terminating error</strong>,
+by contrast, is a cmdlet calling <code>WriteError()</code> on its internal
+<code>Cmdlet</code> API — it appends an <code>ErrorRecord</code> to the error stream and the
+cmdlet's <code>ProcessRecord</code> <em>keeps running</em>; no exception is thrown, so a
+bare <code>try/catch</code> around it does nothing at all, which is exactly why
+<code>Get-ChildItem BadPath -ErrorAction Stop</code> (forcing the non-terminating
+error to escalate into a terminating one) or checking <code>-ErrorVariable</code>
+afterward are the two real ways to handle it.</p>
+<p>Every error, terminating or not, materializes as an <code>ErrorRecord</code> — a
+structured object holding the <code>Exception</code>, a <code>CategoryInfo</code> (a coarse
+classification like <code>ObjectNotFound</code> or <code>PermissionDenied</code> used for
+<code>-ErrorAction</code>/filtering), a <code>FullyQualifiedErrorId</code> (a stable string
+identifier meant for programmatic matching, unlike the free-text message),
+and <code>InvocationInfo</code> (line number, script path, offending command) — this
+structured shape is why <code>catch { $_.Exception.Message }</code> and
+<code>catch { $_.CategoryInfo.Reason }</code> are both meaningful on the same caught
+object: <code>$_</code> in a catch block is the <code>ErrorRecord</code>, not the raw exception.</p>
+<p><code>-ErrorAction</code> is implemented as a <strong>common parameter</strong> injected into
+every cmdlet's parameter set by the engine (not opted into per-cmdlet), and
+it works by wrapping the cmdlet's calls to <code>WriteError</code> — <code>Stop</code> makes
+<code>WriteError</code> throw instead of append, <code>SilentlyContinue</code> makes it a no-op,
+<code>Continue</code> (the default) appends to <code>$Error</code>/the error stream and
+displays it. <code>$Error</code> itself is a fixed-capacity queue
+(<code>$Error.Count</code> capped by <code>$MaximumErrorCount</code>, default 256) maintained by
+the engine on every error of either kind, which is why it accumulates
+across an entire session, not just the current statement.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>safe-divide.ps1</code> containing a function <code>Invoke-SafeDivide</code> that takes
 two <code>[double]</code> parameters, throws a custom error message if the divisor is

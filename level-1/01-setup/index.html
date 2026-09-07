@@ -795,6 +795,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2472,6 +2494,42 @@ self-documenting.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>pwsh</code> is not "the Windows console with new commands" — it's a hosted .NET
+process. When you launch it, the executable spins up a <strong>runspace</strong>: a CLR
+<code>AppDomain</code>-hosted environment containing a session state (variables,
+functions, aliases, drives) and an engine that parses and executes commands
+against it. Every PowerShell host — the console, the ISE, VS Code's
+terminal, a remote session — is just a different front end creating and
+talking to a runspace through the same <code>System.Management.Automation</code> API.</p>
+<p>When you type a line and press Enter, three distinct stages run before
+anything happens on screen:</p>
+<ol>
+<li><strong>Tokenizing/parsing</strong> — the engine's parser (not a shell-style word
+   splitter) builds an <strong>Abstract Syntax Tree (AST)</strong> from the line, using
+   PowerShell's actual grammar: pipelines, statements, expressions,
+   command-parameter-argument triples. This is why <code>Get-Process | Stop-</code> +
+   half a cmdlet name gives you a real parse error, not a "command not
+   found" from a shell.</li>
+<li><strong>Command resolution</strong> — the parser hands each command element to the
+   engine's command discovery service, which searches, in order: functions
+   in the current session state, aliases, cmdlets registered by loaded
+   modules, then external executables on <code>PATH</code>. This ordering is why you
+   can define a function named <code>ls</code> that silently wins over the built-in
+   alias.</li>
+<li><strong>Execution</strong> — the AST is compiled (in PowerShell 5+/7, actually
+   JIT-compiled via expression trees for hot code, not purely
+   tree-walked) and run. Cmdlets are .NET classes implementing
+   <code>Cmdlet</code>/<code>PSCmdlet</code> with <code>BeginProcessing</code>/<code>ProcessRecord</code>/<code>EndProcessing</code>
+   methods called by the pipeline processor — this is why every cmdlet
+   supports the pipeline uniformly, unlike shell tools that only understand
+   text streams.</li>
+</ol>
+<p>Cross-platform <code>pwsh</code> (built on .NET, formerly .NET Core) achieves the same
+behavior on macOS/Linux/Windows by shipping the whole engine as managed
+code rather than shelling out to OS-specific APIs — the handful of
+Windows-only cmdlets (like <code>Get-WmiObject</code>) are the exceptions that rely on
+Windows-specific COM/WMI interop unavailable on other platforms.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>greet.ps1</code> that uses <code>Write-Output</code> to print a greeting, then calls
 <code>Get-Date</code> and stores the result in a variable, then prints a second message

@@ -1204,6 +1204,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2371,6 +2382,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2671,6 +2693,39 @@ languages who expect <code>return</code> to exit the enclosing function.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The <code>Begin</code>/<code>Process</code>/<code>End</code> blocks you write in an advanced function map
+directly onto the three virtual methods the pipeline processor calls on
+every cmdlet instance: <code>BeginProcessing()</code> once before any input arrives,
+<code>ProcessRecord()</code> once per pipeline object, and <code>EndProcessing()</code> once
+after the upstream command signals it's done. This isn't an abstraction
+PowerShell invented for script functions — it's the same <code>Cmdlet</code> base
+class contract compiled C# cmdlets implement, which is why a script
+function with <code>[CmdletBinding()]</code> genuinely behaves like a compiled cmdlet
+in the pipeline, including streaming output per object rather than
+buffering.</p>
+<p><code>Where-Object</code>/<code>ForEach-Object</code>'s <code>-Begin</code>/<code>-Process</code>/<code>-End</code> script-block
+parameters exist for the same reason: without them, the script block you
+pass runs once per object with no way to accumulate state across calls
+(each invocation gets a fresh child scope), so <code>-Begin { $total = 0 }</code>
+paired with <code>-Process { $total += $_.Size }</code> works only because both
+blocks close over the <em>same</em> enclosing scope variable, not because
+<code>ForEach-Object</code> does anything special with <code>$total</code>.</p>
+<p><code>continue</code> inside a <code>ForEach-Object</code> script block behaves differently from
+<code>continue</code> inside a real <code>foreach</code> loop for a mechanical reason: a script
+block is its own scope, and <code>continue</code>/<code>break</code> are resolved against the
+nearest <em>enclosing loop construct</em> at parse time, not against the
+"logical iteration" of the pipeline — inside <code>ForEach-Object</code>, there is no
+enclosing loop AST node, so <code>continue</code> there just exits the current
+script block invocation early (equivalent to <code>return</code>), while inside an
+actual <code>foreach (...)</code> statement, <code>continue</code> unwinds via the interpreter's
+<code>ContinueException</code> straight back to the loop's re-evaluation point.</p>
+<p><code>$PSCmdlet.WriteObject()</code> versus a bare pipeline-emitting expression
+matters at the C# API level too: <code>WriteObject($obj, $true)</code> explicitly
+enumerates a collection and emits each element separately, while
+<code>WriteObject($obj, $false)</code> emits the collection as one object — this is
+the actual switch behind PowerShell's usually-automatic array unrolling in
+pipeline output, exposed for the rare case you want to suppress it.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Get-WordStats</code> with <code>[CmdletBinding()]</code> and a
 <code>[Parameter(ValueFromPipeline = $true)]</code> string parameter called <code>Line</code>.

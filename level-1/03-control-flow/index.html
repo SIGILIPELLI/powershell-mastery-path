@@ -851,6 +851,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2548,6 +2570,39 @@ directly on a collection.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Every <code>if</code>, <code>switch</code>, and loop keyword in PowerShell compiles down through
+the same AST node types — <code>IfStatementAst</code>, <code>SwitchStatementAst</code>,
+<code>PipelineAst</code> inside <code>WhileStatementAst</code>, and so on — that the parser
+builds from your script text before a single instruction runs. This
+two-phase design (parse fully, then execute) is why a syntax error deep
+inside an <code>if</code> branch that never runs is still caught immediately: the
+whole AST has to be valid before execution starts, unlike a naive
+line-by-line interpreter.</p>
+<p><code>switch</code> is more than sugar for <code>if/elseif</code> chains — its default mode
+evaluates <strong>every</strong> case top to bottom against the subject (falling
+through unless you <code>break</code>), and each case label is itself a full
+expression, not just a literal: <code>switch ($x) { {$_ -gt 10} {...} }</code>
+compiles the <code>{...}</code> script block as a predicate and calls it with <code>$_</code>
+bound to the subject via <code>$PSItem</code>/<code>$_</code> — this is how <code>-Regex</code>, <code>-Wildcard</code>,
+and script-block cases can all coexist in one construct. Internally the
+switch statement evaluator tries, per case in order: exact/type match,
+wildcard match (if <code>-Wildcard</code>), regex match (if <code>-Regex</code>, compiling a
+<code>System.Text.RegularExpressions.Regex</code> per case), or script-block
+invocation, short-circuiting to the next case only when the current one
+returns <code>$false</code>.</p>
+<p>Loops (<code>foreach</code>, <code>while</code>, <code>for</code>, <code>do/while</code>) each lower to a
+<code>LoopStatementAst</code> with a condition pipeline and body script block; the
+runtime re-enters the body's own child scope on every iteration for
+<code>foreach</code>, which is why a <code>function</code> or <code>$using:</code> closure captured inside
+a loop body captures the <em>current</em> iteration's binding, not a shared one —
+PowerShell doesn't have the "closures share the loop variable" trap that
+some C-family languages have with <code>var</code>. <code>break</code> and <code>continue</code> are
+implemented as special control-flow exceptions (<code>BreakException</code>,
+<code>ContinueException</code>) that unwind the call stack until caught by the
+nearest enclosing loop or labeled block — which is exactly why labeled
+<code>break Outer</code> works across nested loops: it's a targeted exception with a
+label match, not a jump instruction.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>fizzbuzz.ps1</code> that loops from 1 to 30 using a <code>for</code> loop and, for each
 number, uses a <code>switch</code> statement (not chained <code>if</code>) to print <code>"Fizz"</code> for

@@ -2119,6 +2119,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2298,6 +2309,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2491,6 +2513,34 @@ into a clean folder before calling <code>Publish-Module</code> on that.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Publish-Module</code> doesn't upload your working directory as-is — it first
+runs the same manifest validation <code>Test-ModuleManifest</code> performs (parsing
+the <code>.psd1</code> in restricted language mode, as covered in Module 08's
+manifest mechanics), then packages the module folder into a <strong>NuGet
+package</strong> (<code>.nupkg</code>, a renamed ZIP with a NuGet-specific manifest
+generated from your <code>.psd1</code> fields), because the PowerShell Gallery is
+built on NuGet's hosting/versioning infrastructure under the hood —
+<code>Find-Module</code>/<code>Install-Module</code> are PowerShell-shaped clients over what is
+functionally a NuGet feed, which is why module versions follow strict
+semantic-version parsing rules (NuGet's own <code>NuGetVersion</code> type) and why
+a malformed version string in your manifest fails publishing with a NuGet-
+level error rather than a PowerShell-specific one.</p>
+<p>Because the entire module folder becomes the package payload, "local/test
+artifacts still in the folder" (a <code>bin/Debug</code> build output, a stray
+<code>.git</code> directory, local test-data fixtures) get packaged and published
+verbatim — there's no build step that prunes non-essential files unless
+you explicitly maintain a separate build/staging folder and publish
+<em>that</em>, which is exactly why real-world module projects keep source
+layout separate from the folder actually passed to <code>Publish-Module</code>.</p>
+<p>Version immutability on the Gallery (you can't overwrite <code>1.2.0</code> once
+published, only publish a new version) mirrors NuGet's own immutable-
+package-version guarantee — this exists specifically so that anyone who
+already resolved a dependency against <code>1.2.0</code> keeps getting the exact
+bytes they tested against, which is the same reasoning behind
+<code>RequiredVersion</code>/<code>ModuleVersion</code> semantics in <code>RequiredModules</code> from
+Module 08: the whole dependency-resolution model assumes a given
+version string always refers to identical, unchanging content.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Take the <code>AdminToolkit</code> module from Level 3's project. Generate its
 manifest properly with <code>New-ModuleManifest</code> (rather than the hand-written

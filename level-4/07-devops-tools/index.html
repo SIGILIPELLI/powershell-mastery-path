@@ -2058,6 +2058,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2232,6 +2243,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2456,6 +2478,37 @@ that can't ask it questions — a few conventions make that much smoother:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>DevOps-facing PowerShell tools that wrap other CLIs (<code>az</code>, <code>kubectl</code>,
+<code>docker</code>) work by invoking them as <strong>native external commands</strong> — when the
+engine's command resolver can't find a matching function, alias, or
+cmdlet, it falls through to searching <code>PATH</code> for an executable, then
+launches it as a genuine child process via <code>System.Diagnostics.Process</code>
+with the remaining tokens passed as raw argument strings. This is the
+mechanical reason argument quoting for native commands is fragile in a
+way cmdlet parameters aren't: cmdlet parameter binding understands
+PowerShell's own type system, but a native executable only ever receives
+a flat array of strings assembled by the OS's process-creation API, so
+values containing spaces, quotes, or the ampersand need platform-specific
+escaping (<code>--%</code> batch-parsing-stop-mode existing specifically to hand off
+raw, unescaped argument text when PowerShell's own tokenizer would
+otherwise interfere).</p>
+<p>Output captured from these native tools (<code>kubectl get pods -o json |
+ConvertFrom-Json</code>) has none of the ETS-object richness native cmdlets
+provide — it's plain text on stdout, so any structure a DevOps tool
+built around it has to explicitly re-establish, either by requesting
+JSON output from the CLI itself and parsing it, or by regex-parsing
+formatted table output (fragile, since a CLI's human-readable table
+format is not a stable contract the way its JSON schema usually is).</p>
+<p><code>$LASTEXITCODE</code> and stderr are the only structured signal a wrapped
+native tool provides back to PowerShell — unlike cmdlets, whose failures
+integrate into <code>$Error</code>/<code>-ErrorAction</code>, a failing native command doesn't
+throw a terminating error PowerShell recognizes on its own (with <code>pwsh</code>
+defaults) unless you explicitly check <code>$LASTEXITCODE</code> after the call,
+which is why "designing for the caller" in a DevOps wrapper function
+means translating that raw exit-code/stderr contract into PowerShell's
+richer error model (<code>throw</code>/<code>Write-Error</code> with proper <code>ErrorRecord</code>s)
+rather than leaking the native tool's flat signal straight through.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Build a <code>db-tool.ps1</code> with three parameter sets — <code>Backup</code> (requires
 <code>-Database</code>), <code>Restore</code> (requires <code>-Database</code> and <code>-BackupFile</code>), and

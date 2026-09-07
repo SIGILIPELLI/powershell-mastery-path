@@ -1625,6 +1625,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2552,6 +2574,35 @@ exception occurred (<code>FormatException</code>, <code>ArgumentOutOfRangeExcept
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>When you write <code>[System.IO.File]::ReadAllText($path)</code>, PowerShell's parser
+recognizes the <code>[Type]::Member</code> syntax as a <strong>static member expression</strong>
+node in the AST and resolves it through .NET reflection at runtime,
+looking up the type by name against loaded assemblies (using the type
+resolution/<code>using namespace</code> search list you've declared) and then
+binding to the best-matching overload of <code>ReadAllText</code> based on your
+argument types and count — the same overload-resolution algorithm the C#
+compiler uses, just performed dynamically instead of at compile time,
+which is why passing the wrong argument type produces a runtime
+<code>MethodException</code> rather than a compile error.</p>
+<p>Instantiating a .NET type with <code>New-Object System.Collections.Generic.
+List[int]</code> or the newer <code>[System.Collections.Generic.List[int]]::new()</code>
+both ultimately call the CLR's <code>Activator.CreateInstance</code>-equivalent
+constructor-invocation path — the bracket-and-<code>::new()</code> form is generally
+preferred because it goes through the same static-member-resolution
+machinery as any other <code>::</code> call (supporting generic type parameters and
+constructor overload selection cleanly), while <code>New-Object</code> has to parse
+its <code>-ArgumentList</code> array and match it against constructors via a
+separate, older binding path.</p>
+<p>Exceptions thrown by .NET methods you call directly (not through a
+cmdlet) surface as <strong>raw CLR exceptions</strong>, not <code>ErrorRecord</code>-wrapped
+non-terminating errors — there's no <code>Cmdlet.WriteError</code> layer between you
+and the .NET call, so <code>catch [System.IO.FileNotFoundException]</code> here is
+catching the literal exception type .NET itself throws, with none of
+PowerShell's <code>ErrorRecord</code>/<code>CategoryInfo</code> enrichment layered on top; this
+is the actual reason .NET interop code needs typed <code>catch</code> blocks that
+mirror the target framework's own exception hierarchy rather than
+PowerShell-specific error handling idioms.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a function <code>Measure-TextStats</code> that takes a block of text, uses
 <code>[System.Text.StringBuilder]</code> internally to normalize it (lowercase, strip

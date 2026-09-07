@@ -1940,6 +1940,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2484,6 +2506,36 @@ for instance) that also needs to fail the pipeline correctly.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>CI runners invoke <code>pwsh -File script.ps1</code> (or <code>-Command</code>) as a plain
+child process and, after it exits, inspect the OS-level <strong>process exit
+code</strong> — this is the entire contract between PowerShell and any CI
+system, and it's a narrower contract than PowerShell's own rich error
+model. An uncaught terminating exception inside a script does <em>not</em>
+automatically produce a non-zero exit code the way it would in many other
+languages; <code>pwsh</code> by default exits 0 unless the script explicitly calls
+<code>exit &lt;n&gt;</code> with a non-zero value, or unless <code>$ErrorActionPreference =
+'Stop'</code> combined with an uncaught error reaches the top of the script and
+<code>pwsh</code> is invoked with <code>-NonInteractive</code>, which changes how an unhandled
+terminating error is surfaced. This mismatch — rich structured errors
+internally, one flat integer externally — is exactly why CI-oriented
+PowerShell scripts wrap their body in <code>try { ... } catch { Write-Error
+$_; exit 1 }</code> rather than relying on natural error propagation.</p>
+<p>Pester's CI integration works because <code>Invoke-Pester</code> can emit results in
+<strong>NUnit/JUnit XML</strong> (<code>-OutputFormat NUnitXml</code>/<code>-CI</code>), a format every major
+CI system (Azure DevOps, GitHub Actions, Jenkins) already knows how to
+parse for its test-results UI — the test runner itself doesn't talk to CI
+APIs directly; it writes a standard file, and the CI platform's own
+XML-consuming step does the reporting integration, which is why the same
+Pester output format works unmodified across different CI providers.</p>
+<p><code>$LASTEXITCODE</code> versus PowerShell's own error state are two entirely
+separate signals that CI scripts often need to reconcile manually:
+<code>$LASTEXITCODE</code> is set only after invoking a <strong>native external
+executable</strong> (reflecting that process's own exit code), while a failed
+<em>cmdlet</em> call sets <code>$?</code> to <code>$false</code> and appends to <code>$Error</code> — neither
+mechanism updates the other, which is why a script calling both native
+tools and cmdlets needs explicit checks against both signals to correctly
+detect and propagate failure to the calling CI job's exit code.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>Lint</code> task to <code>build.ps1</code> that runs <code>Invoke-ScriptAnalyzer</code>
 (PSScriptAnalyzer) against <code>./src</code> and fails the build (throws, causing a

@@ -2007,6 +2007,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2491,6 +2513,38 @@ restricted session from the inside.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>JEA works by registering a <strong>session configuration</strong> (<code>Register-
+PSSessionConfiguration -Path Role.pssc</code>) with WinRM that WSMan consults
+when establishing a remoting connection targeting that specific
+endpoint — this is the same WSMan/WinRM transport from Module 05's
+remoting basics, but instead of connecting to the default shell resource
+(a full, unrestricted PowerShell session), the client connects to a named
+endpoint whose session configuration file declares a <strong>restricted
+runspace</strong>: a <code>RoleDefinitions</code> mapping from security-group membership to
+a specific set of visible cmdlets/functions, run under a <strong>virtual
+account</strong> or a configured gMSA rather than the connecting user's own
+credentials.</p>
+<p>The privilege boundary is enforced at two layers simultaneously, which is
+why it's meaningfully different from just hiding a menu in a UI: the
+session's <code>LanguageMode</code> is forced to <code>NoLanguage</code>/<code>ConstrainedLanguage</code>
+(so arbitrary script execution, <code>Add-Type</code>, or .NET type instantiation
+outside the allow-listed surface is refused by the interpreter itself,
+not just by convention), and the visible command table only contains
+<code>VisibleCmdlets</code>/<code>VisibleFunctions</code> explicitly whitelisted in the role
+capability file — a command not on that list isn't merely hidden from
+tab-completion, it genuinely isn't registered in that restricted
+runspace's command table, so <code>Invoke-Expression "Remove-Item ..."</code> fails
+with <code>CommandNotFoundException</code> exactly like calling a truly nonexistent
+cmdlet, because as far as that runspace is concerned, it is one.</p>
+<p>The reason testing must happen <em>as the restricted role</em> rather than as an
+administrator connecting normally is structural: an admin's ordinary
+<code>Enter-PSSession</code> doesn't route through the JEA endpoint's session
+configuration at all unless you explicitly target it with
+<code>-ConfigurationName</code>, so testing without specifying that endpoint
+silently exercises the full unrestricted session and tells you nothing
+about whether the role capability file's whitelist actually permits the
+workflow you designed it for.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Design (as <code>.psrc</code>/<code>.pssc</code> files, without needing a live WinRM endpoint to
 verify) a JEA role for a "backup operator": allowed to run a specific

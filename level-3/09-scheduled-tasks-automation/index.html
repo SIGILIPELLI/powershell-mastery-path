@@ -1760,6 +1760,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2515,6 +2537,41 @@ scheduler running it:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The <code>ScheduledTasks</code> module's <code>Register-ScheduledTask</code> doesn't create a
+lightweight cron-style entry — it builds an XML <strong>task definition</strong>
+document (the same schema Task Scheduler's GUI produces, visible if you
+export a task with <code>Export-ScheduledTask</code>) describing triggers, actions,
+principal (the run-as identity and its logon type/privilege level), and
+settings, then hands that document to the Task Scheduler service (a
+Windows service running independently of any user session) via its COM/
+RPC API. This is exactly why a "task that works interactively but not
+unattended" is a real, common category of bug: interactively, your script
+runs inside <em>your</em> logged-in desktop session with your loaded user
+profile, mapped drives, and interactive-window-station access, while a
+task registered to run whether-or-not-the-user-is-logged-on executes
+under Task Scheduler's own session — typically Session 0, the
+non-interactive service session — with no desktop, no mapped drives
+(those are established at interactive logon, not by the mere user
+identity), and often a different or minimal environment-variable set.</p>
+<p><code>-Principal</code>'s <code>LogonType</code> setting determines <em>how</em> Task Scheduler
+authenticates the run-as account at trigger time: <code>Interactive</code>
+requires the account to already be logged on (the task effectively piggy-
+backs on an existing session and inherits its environment), while
+<code>ServiceAccount</code>/<code>Password</code> logon types cause Task Scheduler to perform
+its own logon using cached credentials via LSA, producing a genuinely
+different, more minimal session than an interactive one — this
+credential-and-session distinction, not anything about the script's code,
+is the actual root cause behind most "works when I test it, fails when
+scheduled" reports.</p>
+<p><code>Get-ScheduledTaskInfo</code> reads execution history (<code>LastRunTime</code>,
+<code>LastTaskResult</code>) from the Task Scheduler service's own operational event
+log and history store, not from anything your script itself writes —
+<code>LastTaskResult</code> is the raw exit code Task Scheduler observed from the
+launched process, which is why scripts intended for scheduling should
+<code>exit</code> with a meaningful non-zero code on failure: it's the only signal
+that reliably survives all the way to that history record regardless of
+what the script's own logging did.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a script <code>Invoke-ScheduledSync.ps1</code> meant to run under cron/Task
 Scheduler: it should use <code>$PSScriptRoot</code> for all file paths, wrap its main

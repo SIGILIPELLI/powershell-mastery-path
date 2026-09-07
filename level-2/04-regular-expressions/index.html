@@ -1294,6 +1294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2383,6 +2394,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2605,6 +2627,37 @@ one string, when it will only ever report one.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PowerShell's regex operators (<code>-match</code>, <code>-replace</code>, <code>-split</code> in regex
+mode) are thin wrappers over .NET's <code>System.Text.RegularExpressions.Regex</code>
+engine, which is a <strong>backtracking NFA (nondeterministic finite automaton)
+simulator</strong>, not a linear-time DFA matcher like <code>grep -E</code>'s engine.
+Concretely: the engine walks the pattern's compiled instruction tree
+against the input, and whenever a branch fails to continue matching, it
+backtracks to the last choice point and tries the next alternative. This
+is why "catastrophic backtracking" is a real, reproducible performance
+bug in PowerShell regexes — a pattern like <code>(a+)+b</code> against a long string
+of <code>a</code>s with no trailing <code>b</code> causes exponential blowup in the number of
+backtracking states explored, and it's the exact same failure mode Perl,
+Java, and JavaScript regex engines share, because they're all
+backtracking engines too.</p>
+<p><code>-match</code> sets the automatic <code>$Matches</code> variable as a side effect of a
+successful match — it's populated from the <code>Regex.Match()</code> call's
+<code>GroupCollection</code>, keyed by group number for unnamed captures and by name
+for <code>(?&lt;name&gt;...)</code> named groups, which is why <code>$Matches.name</code> works
+directly as a hashtable lookup rather than needing index arithmetic.
+<code>-replace</code> with a script-block-like substitution isn't supported directly
+in the operator form, but the underlying <code>[regex]::Replace()</code> with a
+<code>MatchEvaluator</code> delegate (available when you drop to the .NET type
+directly) is how you can substitute based on per-match computed logic
+that the simple <code>-replace 'pattern', 'replacement'</code> string-template form
+can't express.</p>
+<p><code>-split</code> in regex mode compiles the delimiter pattern once and calls
+<code>Regex.Split()</code>, which — unlike simple string <code>.Split()</code> — evaluates the
+pattern against the whole input in one pass and additionally captures any
+parenthesized delimiter groups <em>into</em> the result array positions between
+elements, a detail that surprises people expecting only the non-delimiter
+segments back.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a script that takes an array of log lines like
 <code>"2026-08-02 10:15:03 ERROR Failed to connect to db"</code> and, using a single

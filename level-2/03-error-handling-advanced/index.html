@@ -1249,6 +1249,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2636,6 +2658,39 @@ readable about exactly which statements are being guarded.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>trap</code> predates <code>try/catch</code> in PowerShell's design and works on an
+entirely different mechanism: it's not a block scoped to a specific
+statement, it's a <strong>handler registered against the enclosing scope</strong>
+(script, function, or block) that the engine consults whenever a
+terminating error propagates through that scope, regardless of which
+statement in the scope raised it. This is why <code>trap</code> can feel "spooky
+action at a distance" — it fires for an error thrown on line 40 even
+though the <code>trap</code> statement is declared on line 3, because it's not
+control flow, it's an error-dispatch registration on the scope object
+itself.</p>
+<p><code>$_</code>/<code>$PSItem</code> inside a <code>catch</code> block is bound to the actual
+<code>ErrorRecord</code> that terminated the <code>try</code>, retrieved from the engine's
+current-error context at the moment the <code>catch</code> handler is entered — this
+is distinct from <code>$Error[0]</code>, which is whatever the <em>last</em> error appended
+to the session-wide <code>$Error</code> queue was; they usually agree but can
+diverge if other code (a nested <code>-ErrorAction SilentlyContinue</code> call, for
+instance) appended to <code>$Error</code> between the throw and your catch.</p>
+<p>Typed <code>catch</code> blocks (<code>catch [System.IO.FileNotFoundException] {...}</code>)
+work through .NET's normal exception-type matching — the runtime walks
+your listed <code>catch</code> clauses top to bottom and uses <code>is</code>-style
+assignability checks (a caught <code>IOException</code> matches a <code>catch
+[System.Exception]</code> clause too, since it's a subtype), so <strong>order
+matters</strong>: a broad <code>catch [System.Exception]</code> placed before a specific
+<code>catch [System.IO.FileNotFoundException]</code> will swallow everything and the
+specific clause becomes dead code, exactly as in C#/Java exception
+ordering.</p>
+<p><code>finally</code> is guaranteed to run via the CLR's own structured exception
+handling — it executes whether the <code>try</code> completed normally, threw, or
+even if a <code>catch</code> block that ran the value threw again while handling the
+first exception, because it's compiled to sit in the <code>finally</code> clause of
+the actual IL-level <code>try/catch/finally</code> the script block's execution is
+wrapped in, not reimplemented as script-level bookkeeping.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a class <code>ValidationException</code> (inheriting <code>System.Exception</code>) with an
 extra <code>[string]$FieldName</code> property. Write a function <code>Test-AgeInput</code> that

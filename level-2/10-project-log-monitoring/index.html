@@ -1423,6 +1423,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-to-take-it-from-here" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2316,6 +2327,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#where-to-take-it-from-here" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2702,6 +2724,32 @@ underlying <code>[datetime]</code> values and filtering logic are what matters.)
 <a id="__codelineno-8-9" name="__codelineno-8-9" href="#__codelineno-8-9"></a>  [+] only returns ERROR entries within the time window
 <a id="__codelineno-8-10" name="__codelineno-8-10" href="#__codelineno-8-10"></a>Tests Passed: 6, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 </code></pre></div>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>This project's <code>Get-LogEntries</code> function is a good example of the
+pipeline's <strong>streaming contract</strong> actually mattering for a real workload:
+because it's built as an advanced function with a <code>Process</code> block reading
+via <code>Get-Content -ReadCount 0</code> or line-by-line, each parsed log line can
+flow immediately into <code>Where-Object</code>/<code>Group-Object</code> downstream without
+the whole file being held in memory as one array first — the regex match
+against each line happens inside <code>ProcessRecord</code>, called once per line by
+the pipeline processor exactly as described in Module 01's advanced
+pipeline mechanics, which is what lets this scale to log files far larger
+than available RAM as long as nothing downstream deliberately buffers
+(like <code>Sort-Object</code>, which must see everything before emitting the first
+result).</p>
+<p>The manifest-driven module structure means <code>Watch-Logs.ps1</code> only ever
+sees the functions <code>LogMonitor.psd1</code> explicitly lists in
+<code>FunctionsToExport</code> — the regex-parsing internals, if kept unexported,
+are genuinely inaccessible from the entry-point script's scope, not just
+conventionally private, which is the same child-session-state isolation
+covered in Module 09 applied to a real multi-file layout.</p>
+<p>The Pester tests here exercise <code>Mock</code> against <code>Get-Content</code> specifically
+because it decouples the test from real files on disk — since <code>Mock</code>
+works by replacing the command's binding in the session's command table
+for the scope under test, the test can simulate arbitrary file contents
+(including malformed lines or simulated I/O failures) without ever
+touching the filesystem, making the suite fast and deterministic
+regardless of what's actually present in <code>Tests/</code>.</p>
 <h2 id="where-to-take-it-from-here">Where to take it from here<a class="headerlink" href="#where-to-take-it-from-here" title="Permanent link">&para;</a></h2>
 <ul>
 <li>Add a <code>-Since &lt;datetime&gt;</code> parameter to filter entries before summarizing,

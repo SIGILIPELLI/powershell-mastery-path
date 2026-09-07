@@ -1305,6 +1305,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2563,6 +2585,38 @@ infrastructure instead of needing a separate protocol like SCP or SMB.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PowerShell Remoting runs over <strong>WS-Management (WSMan/WinRM)</strong>, a
+SOAP-over-HTTP(S) protocol standardized for remote system management —
+<code>Enter-PSSession</code>/<code>Invoke-Command</code> don't open a raw socket and stream
+script text; they establish a WinRM <strong>shell resource</strong> on the remote
+machine (an actual server-side object tracked by the WinRM service,
+listable with <code>winrm enumerate winrm/config/shell</code> or, in PowerShell
+terms, visible via <code>Get-PSSession</code>/<code>Get-WSManInstance</code>), then exchange
+SOAP-enveloped XML messages that carry serialized command invocations and
+their results.</p>
+<p>The critical mechanical detail is <strong>serialization depth</strong>: objects
+crossing a remoting boundary are not the live .NET objects you'd get
+locally — the remote runspace serializes each result via the same CLIXML
+format used by <code>Export-Clixml</code>, walking properties down to a fixed depth
+(typically 1-3 levels), then deserializes it locally into a
+<code>Deserialized.&lt;TypeName&gt;</code> object. That deserialized object keeps the
+original property <em>values</em> as static data but loses the original type's
+<em>methods</em> — this is exactly why <code>Invoke-Command { Get-Process } | Stop-
+Process</code> fails or behaves unexpectedly: <code>Stop-Process</code> needs a live
+process handle or PID from a real <code>Process</code> object, but what came back
+over the wire is an inert snapshot, <code>Deserialized.System.Diagnostics.
+Process</code>, with no attached <code>.Kill()</code> machinery.</p>
+<p>A <code>PSSession</code> created with <code>New-PSSession</code> is a <strong>persistent</strong> WinRM
+shell resource — variables and state survive between separate
+<code>Invoke-Command -Session $s</code> calls because the remote runspace keeps
+running between invocations, whereas <code>Invoke-Command -ComputerName ...</code>
+without a saved session opens and tears down a fresh transient runspace
+per call. <code>Enter-PSSession</code> behaves like an interactive shell but is
+mechanically identical to <code>New-PSSession</code> plus attaching your local host's
+input/output loop to that remote runspace's streams — it's not a
+different remoting mode, just a different UI over the same WSMan
+transport.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Assuming you have two machines reachable over remoting (or use
 <code>-ComputerName localhost</code> if remoting is enabled locally for testing),

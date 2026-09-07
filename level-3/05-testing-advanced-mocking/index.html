@@ -1648,6 +1648,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2514,6 +2536,35 @@ no unwanted copy happened.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Pester's <code>Mock</code> doesn't monkey-patch the original command object — it
+creates a new function with the mocked name and injects it into the
+<strong>current test's scope's command table</strong>, at a higher precedence than the
+real command would normally resolve to, using the same function-shadowing
+mechanism a user-defined function uses to override a built-in cmdlet
+(covered back in the setup module's command-resolution order: function
+before cmdlet). This is exactly why a mock only applies within the scope
+it was declared in (and child scopes) — it's ordinary scope-based
+shadowing, not a global monkey-patch, so a mock set inside one <code>Describe</code>
+block doesn't leak into a sibling one.</p>
+<p><code>-ParameterFilter</code> on a mock is evaluated as a script-block predicate
+against the <strong>actual arguments the calling code passed</strong>, checked every
+time the mocked command is invoked — Pester's mock proxy captures the
+call's bound parameters and runs each registered mock definition's filter
+in order, using the first one whose filter returns <code>$true</code> (or has no
+filter) as the implementation to execute. This lets you register multiple
+mocks for the same command name with different behaviors per input, and
+it's also the mechanism <code>Should -Invoke -ParameterFilter</code> uses to verify
+not just "was this called" but "was this called with these specific
+arguments" — both features query the same recorded call-history structure
+Pester's mock maintains internally.</p>
+<p><code>Should -Invoke -Times 0</code> asserting a command was <em>not</em> called relies on
+that same call-history ledger existing regardless of whether the mock's
+filter ever matched: Pester records every attempted invocation of a
+mocked command name during the test, so proving zero calls happened is a
+direct query against an empty recorded-calls list, not an inferred
+absence — which is why it can reliably distinguish "never called" from
+"called but with arguments that didn't match your filter."</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Extend <code>Deploy.psm1</code> with a <code>Send-DeployNotification</code> function that
 <code>Publish-Release</code> calls after a successful deploy (mock it out in the

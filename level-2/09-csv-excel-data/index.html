@@ -1445,6 +1445,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2405,6 +2416,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2602,6 +2624,38 @@ values.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Import-Csv</code> doesn't parse CSV with a naive <code>.Split(',')</code> — it uses a
+proper RFC 4180-aware tokenizer (<code>Microsoft.PowerShell.Commands.
+ImportCsvCommand</code>, backed by a <code>CsvParser</code>) that correctly handles quoted
+fields containing embedded commas, escaped quotes (<code>""</code>), and multi-line
+quoted values. It reads the first non-comment line as the header row and,
+for every subsequent row, builds a <code>PSCustomObject</code> whose property names
+come from that header — this is why every row from <code>Import-Csv</code> is a
+genuine PowerShell object you can pipe into <code>Where-Object</code>/<code>Sort-Object</code>
+immediately, unlike a raw text split which would give you plain string
+arrays with no property names attached.</p>
+<p>Every value coming out of <code>Import-Csv</code>, though, is a <strong>string</strong> — CSV as a
+format has no type system, so <code>$row.Age -gt 30</code> silently works only
+because PowerShell's <code>-gt</code> operator itself does implicit type coercion at
+comparison time (converting the string to a number to match the other
+operand), not because <code>Import-Csv</code> inferred a numeric type. This is the
+actual mechanical reason CSV round-tripping loses type fidelity — export a
+<code>[datetime]</code> property with <code>Export-Csv</code> and re-import it, and you get back
+a string that merely <em>looks</em> like a date, requiring an explicit
+<code>[datetime]::Parse()</code> or <code>-as [datetime]</code> cast to use it as one again.</p>
+<p><code>Export-Csv</code> determines columns from the <strong>first object's</strong> properties by
+default (or the union across all input objects if you pass
+<code>-UseCulture</code>/certain module-specific variants handle heterogeneous
+objects differently) — feeding it objects with inconsistent property sets
+without accounting for this is a common bug source, since later objects'
+extra properties can be silently dropped rather than added as new columns.</p>
+<p>The <code>ImportExcel</code> module works without any Excel installation or COM
+interop at all because it manipulates the <code>.xlsx</code> <strong>Open XML format</strong>
+directly — an <code>.xlsx</code> file is a ZIP archive of XML parts (worksheet data,
+shared strings, styles), and the module reads/writes those XML parts
+programmatically, which is also why it can run on Linux/macOS where no
+Excel application exists to automate.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a CSV <code>inventory.csv</code> with columns <code>Item</code>, <code>Quantity</code>, <code>UnitPrice</code>
 (a handful of rows, values as plain numbers). Write a script that imports

@@ -1019,6 +1019,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2455,6 +2477,33 @@ in depth in Level 3).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Importing a module is not "running a script" in the way dot-sourcing is —
+<code>Import-Module</code> creates a <strong>child session state</strong> (a nested scope with its
+own function/variable/alias tables) and executes the module's script
+inside that child state, then selectively <strong>exports</strong> a subset of its
+members back into your caller's session as <code>FunctionInfo</code>/<code>AliasInfo</code>
+objects registered against the module. This is the actual mechanism
+behind module encapsulation: a helper function you don't <code>Export-
+ModuleMember</code> genuinely doesn't exist outside the module's own scope —
+it's not hidden by convention, it's unreachable because it lives in a
+session state your current scope has no reference to.</p>
+<p><strong>Dot-sourcing</strong> (<code>. .\script.ps1</code>) is the opposite: it runs the script's
+code directly in the <em>caller's own current scope</em>, no child session state
+created at all, so every variable and function the script defines lands
+straight into your session as if you'd typed it yourself — that's exactly
+why dot-sourced helper scripts can accidentally clobber your existing
+variables, while an imported module's internals can't.</p>
+<p>Module discovery walks <code>$env:PSModulePath</code>, a semicolon/colon-separated
+list of directories, checking each for a subfolder matching the module
+name containing either a <code>.psd1</code> manifest or a same-named <code>.psm1</code>/<code>.dll</code>.
+The manifest (<code>.psd1</code>) isn't code — it's a restricted-mode hashtable
+literal (<code>RootModule</code>, <code>ModuleVersion</code>, <code>RequiredModules</code>,
+<code>FunctionsToExport</code>, ...) that the module loader parses in a
+constrained-language context before deciding <em>how</em> to load the module,
+which is how PowerShell can validate compatibility (<code>PowerShellVersion</code>,
+<code>CompatiblePSEditions</code>) and pre-declare exports without ever executing the
+module's actual code.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Create a <code>StringHelpers.psm1</code> module with two functions —
 <code>ConvertTo-TitleCaseWords</code> (splits a sentence into words and title-cases

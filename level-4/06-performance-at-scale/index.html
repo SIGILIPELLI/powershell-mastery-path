@@ -2041,6 +2041,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2261,6 +2272,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2438,6 +2460,40 @@ or .NET upgrade rather than assuming last year's optimization still holds.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Runspace pools (<code>[runspacefactory]::CreateRunspacePool()</code>) are the
+lower-level primitive <code>ForEach-Object -Parallel</code>/<code>ThreadJob</code> build on top
+of — a pool pre-allocates a fixed number of <code>Runspace</code> objects (each with
+its own session state, but sharing the host process) and hands out an
+idle one to each queued <code>PowerShell</code> instance's <code>.Invoke()</code>/
+<code>.BeginInvoke()</code> call, reusing runspaces across work items instead of
+paying runspace-construction cost per task. Because runspace creation
+itself has real, measurable overhead (initializing a session state, the
+type/format data tables, module auto-loading state), a pool sized to
+match available CPU cores amortizes that cost across potentially
+thousands of work items — which is why hand-rolled runspace-pool code
+still shows up in performance-critical PowerShell despite <code>-Parallel</code>
+existing: it gives direct control over pool size, queuing, and result
+collection that the higher-level cmdlet abstracts away.</p>
+<p>"Yesterday's benchmark" going stale is mechanically explained by the
+CLR's <strong>tiered JIT compilation</strong>: a method is initially JITted quickly
+into unoptimized machine code, and only after it's called enough times
+does the runtime recompile it with the optimizing tier — this means a
+<code>Measure-Command</code> run against cold code (first invocation in a fresh
+<code>pwsh</code> process) measures JIT-compilation-included, unoptimized-tier
+performance, while the same code measured after warm-up (or in a
+long-running scheduled job that's been executing the same function
+repeatedly) can be meaningfully faster purely from JIT tier promotion,
+independent of any change to the script itself.</p>
+<p>Memory-related slowdowns at scale often trace to <strong>generational garbage
+collection</strong> pressure: large numbers of short-lived <code>PSObject</code> wrappers
+(every pipeline object gets one) are Gen 0 allocations, and a script
+producing millions of intermediate wrapped objects can trigger enough Gen
+0/Gen 1 collections to show up as real wall-clock cost — this is the
+underlying reason patterns that reduce object-wrapping overhead (using
+<code>.NET</code> collections/methods directly instead of pipelining through
+multiple cmdlets for very large datasets) measurably help at scale in a
+way that's invisible on small test data.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Take a script that processes a 200,000-line CSV log file line-by-line
 with <code>Get-Content</code>, checking each row's ID against a list of 5,000

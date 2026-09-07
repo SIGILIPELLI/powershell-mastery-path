@@ -2136,6 +2136,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2276,6 +2287,17 @@
     <span class="md-ellipsis">
       
         Cheat sheet
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
       
     </span>
   </a>
@@ -2481,6 +2503,37 @@ doing. Batch it instead: accumulate entries in an array and write once.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>PowerShell's built-in logging streams (<code>Write-Verbose</code>, <code>Write-Debug</code>,
+<code>Write-Information</code>) aren't just conditionally-printed text — each is a
+genuinely distinct <strong>pipeline stream</strong> (verbose is stream 4, debug is
+stream 5, information is stream 6, alongside output=1, error=2, warning=3)
+that the host can redirect independently with stream-specific redirection
+operators (<code>4&gt;</code>, <code>5&gt;</code>, <code>6&gt;</code>), exactly like <code>2&gt;</code> redirects the error stream.
+This is why <code>Write-Verbose</code> output can be silently captured to a log file
+via <code>4&gt; verbose.log</code> without touching normal pipeline output at all —
+they're structurally separate channels the engine maintains all the way
+from the writing cmdlet to the host, not string-tagged output filtered
+after the fact.</p>
+<p><code>$VerbosePreference</code>/<code>-Verbose</code> gates whether <code>Write-Verbose</code> actually
+emits anything by checking the current preference variable (or the bound
+common parameter for this invocation) <em>before</em> doing any work to format
+the message — well-written logging code checks this explicitly (<code>if
+($VerbosePreference -ne 'SilentlyContinue') { ... expensive string
+building ... }</code>) precisely because a tight loop calling <code>Write-Verbose</code>
+with a string built via costly interpolation pays that formatting cost on
+every iteration regardless of whether verbose output is even enabled,
+since the cmdlet itself still has to receive and evaluate the
+already-constructed argument before it can decide to discard it.</p>
+<p>Structured logging (writing JSON lines instead of formatted text) exists
+because <code>Write-Verbose</code>/<code>Write-Information</code>'s default host rendering goes
+through the same formatting subsystem covered in Module 07's file-writing
+mechanics — human-readable but not reliably machine-parseable across
+PowerShell versions/hosts. Emitting <code>ConvertTo-Json -Compress</code> lines to a
+dedicated log sink instead sidesteps the formatter entirely, giving log-
+aggregation tooling (which typically parses each line as an independent
+JSON document) a stable, versioned schema instead of a display format
+that PowerShell itself doesn't guarantee as a parsing contract.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a <code>Write-Log</code> function to the <code>AdminToolkit</code> module from Level 3's
 project. Wrap each of its existing public functions' bodies in

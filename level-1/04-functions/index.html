@@ -879,6 +879,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2506,6 +2528,40 @@ functions meant to accept piped input (more in Level 2).</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A PowerShell function is compiled into a <code>FunctionInfo</code>/<code>ScriptBlock</code>
+pair stored in the session's function provider drive (<code>function:</code>) — which
+is why you can literally do <code>Get-Item function:Get-Foo</code> or delete a
+function with <code>Remove-Item function:Get-Foo</code>; functions live in the same
+provider-drive abstraction as files.</p>
+<p>Parameter binding is the part with real machinery behind it: when you call
+a function, the engine's <strong>parameter binder</strong> does not just match
+positional order. It runs a multi-pass algorithm — first binding all named
+parameters, then binding remaining positional arguments to remaining
+parameters in declared position order, then attempting to bind leftover
+arguments via pipeline input (<code>ByValue</code>, then <code>ByPropertyName</code>) if the
+function declares pipeline-aware parameters. This is the same binder
+cmdlets use, so <code>param()</code> blocks with <code>[Parameter()]</code> attributes get
+<em>identical</em> treatment to compiled cmdlet parameters — mandatory-parameter
+prompting, <code>ValidateSet</code>/<code>ValidateRange</code> checks, and type coercion all run
+during this binding phase, before your function body executes a single
+line.</p>
+<p><code>[CmdletBinding()]</code> upgrades a function from a "simple function" to an
+<strong>advanced function</strong>, which changes execution shape: the engine now calls
+optional <code>Begin</code>/<code>Process</code>/<code>End</code> blocks the way it calls a compiled
+cmdlet's <code>BeginProcessing</code>/<code>ProcessRecord</code>/<code>EndProcessing</code> — <code>Process</code> runs
+once per pipeline input object, which is the actual mechanism behind
+"pipeline input" rather than a documentation convention. Without
+<code>CmdletBinding</code>, a function has no <code>Process</code> block semantics and pipeline
+input just accumulates into <code>$input</code> for a single pass.</p>
+<p>Return values are not built with a <code>return</code> keyword pushing one value onto
+a stack — <strong>anything not captured, suppressed, or redirected inside a
+function body is written to the pipeline's output stream automatically</strong>.
+<code>return $x</code> is sugar for <code>Write-Output $x</code> followed by an early exit, which
+is exactly why an unassigned <code>Get-ChildItem</code> call buried in the middle of
+a function silently leaks extra objects into your function's output: the
+engine has no concept of "the value the function produced" separate from
+"everything the function's pipeline emitted."</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>Get-BMI.ps1</code> containing a function <code>Get-BMI</code> that takes mandatory
 <code>-WeightKg</code> and <code>-HeightM</code> parameters (both <code>[double]</code>), computes

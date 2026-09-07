@@ -1754,6 +1754,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2513,6 +2535,38 @@ accounts instead of the right 12.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>The ActiveDirectory module's cmdlets are a PowerShell-native layer over
+<strong>ADSI (Active Directory Service Interfaces)</strong> and, underneath that, the
+<strong>LDAP protocol</strong> — <code>Get-ADUser -Filter {...}</code> compiles your PowerShell
+expression syntax filter into an actual LDAP search filter string
+(parenthesized prefix-notation boolean expressions like
+<code>(&amp;(objectClass=user)(sAMAccountName=jdoe))</code>) before sending it to the
+domain controller; this is why AD filter syntax has quirks that don't
+match normal PowerShell semantics (certain operators are unsupported, and
+some property comparisons require <code>-LDAPFilter</code> directly when the
+translated filter can't express what you need) — you're not filtering an
+in-memory PowerShell collection, you're generating a query the directory
+server executes and only the matching results cross the wire.</p>
+<p>Directory objects are returned as <code>Microsoft.ActiveDirectory.Management.
+ADAccount</code>/<code>ADUser</code>/<code>ADObject</code> types that lazily hydrate: by default,
+<code>Get-ADUser</code> returns only a small default property set, and accessing a
+property outside that set (say, <code>MemberOf</code> without having requested it
+via <code>-Properties</code>) returns <code>$null</code> even though the attribute has a real
+value in the directory — this isn't a bug, it's ADSI's cost-control
+design, since AD schema objects can carry hundreds of attributes and
+fetching all of them for every result would be expensive at directory-
+server scale; <code>-Properties *</code> or explicit property names are how you tell
+the underlying LDAP query to actually retrieve those attributes.</p>
+<p>Bulk operations without <code>-WhatIf</code> are dangerous specifically because AD
+write operations are near-<strong>immediately replicated</strong>: a change committed
+to one domain controller propagates to others via AD's multi-master
+replication topology on its own schedule (seconds to minutes depending on
+site links), so a mistaken bulk <code>Remove-ADUser</code> isn't a local, easily
+reverted action — by the time you notice, the deletion may already have
+replicated to other DCs, which is exactly the scenario <code>-WhatIf</code>'s
+<code>ShouldProcess</code> gate (built on the same mechanism from Module 02's cmdlet
+design) is meant to prevent you from reaching irreversibly.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>On a real (or lab/test) AD environment: write a script that finds all
 disabled user accounts in a given OU, exports them to CSV with

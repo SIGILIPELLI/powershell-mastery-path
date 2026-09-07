@@ -834,6 +834,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2536,6 +2558,36 @@ explicitly use <code>$script:</code> or <code>$global:</code>.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A PowerShell variable is not a text label pointing at a string — it's an
+entry in a <code>SessionStateScope</code>'s variable table, stored as a <code>PSVariable</code>
+object that wraps a live reference to a boxed .NET object on the CLR heap.
+When you write <code>$x = 5</code>, the engine doesn't store "5"; it creates a boxed
+<code>System.Int32</code>, wraps it in a <code>PSObject</code> (PowerShell's universal object
+envelope, which is how every value — even primitives — carries an
+<code>ExtendedTypeSystem</code> layer of adapted properties/methods), and stores a
+reference to that <code>PSObject</code> in <code>$x</code>'s <code>PSVariable.Value</code> slot.</p>
+<p>Type coercion at assignment time (<code>[int]$x = "5"</code>) goes through the
+<strong>LanguagePrimitives.ConvertTo</strong> pipeline, a chain of converters tried in
+order: an explicit <code>IConvertible</code>/parse method on the target type, a
+registered <code>PSTypeConverter</code>, then a last-resort reflection-based property
+match. This is why <code>[datetime]"2026-01-01"</code> works (a registered converter
+calls <code>DateTime.Parse</code> with culture-aware parsing) while converting to an
+unrelated custom type throws <code>PSInvalidCastException</code> — there's no
+converter in the chain that knows how to bridge the two types.</p>
+<p><code>$null</code> is its own singleton instance of <code>AutomationNull</code>/<code>NullVariable</code>
+under the hood, not literally CLR <code>null</code> in most contexts — comparisons
+like <code>$null -eq $x</code> are engine-special-cased so array-unwrapping semantics
+(<code>-eq</code> against a collection returns matching elements, not a boolean)
+don't accidentally swallow null checks, which is also why PowerShell style
+guides insist on <code>$null -eq $x</code> rather than <code>$x -eq $null</code>.</p>
+<p>Variable <strong>scope</strong> is implemented as a linked list of <code>SessionStateScope</code>
+objects, one per function call frame, script block, or module boundary.
+Reading a variable walks up the parent-scope chain until it finds a match
+(dynamic-like lookup), but <em>writing</em> a bare <code>$x = ...</code> always creates or
+updates it in the <strong>current</strong> scope only — <code>$script:</code>, <code>$global:</code>, and
+<code>$using:</code> are explicit scope-modifier prefixes that redirect the write
+target to a specific scope object instead of the default local one.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>convert.ps1</code> that declares a string variable holding <code>"123"</code>, casts it
 to <code>[int]</code>, adds <code>27</code> to it, and prints a sentence using string interpolation

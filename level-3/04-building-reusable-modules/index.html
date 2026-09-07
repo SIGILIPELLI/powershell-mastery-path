@@ -1631,6 +1631,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2516,6 +2538,37 @@ renamed or deleted a function and want to confirm it's actually gone.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A multi-file module (a <code>.psm1</code> that dot-sources or <code>Import</code>s several
+<code>Private</code>/<code>Public</code> <code>.ps1</code> files) still ends up as <strong>one flat child session
+state</strong> — every function defined by every dot-sourced file lands in the
+same module-scoped function table, which is why the common "loop over
+<code>Public/*.ps1</code> and <code>Private/*.ps1</code>, dot-source each" pattern works: dot-
+sourcing inside the module's own script runs each file's code directly in
+the module's session state (not a further nested child state), so
+functions defined in <code>Private/Helper.ps1</code> are immediately visible to code
+in <code>Public/DoThing.ps1</code>, exactly as if they'd all been typed into one
+<code>.psm1</code> file — the file split is purely an authoring convenience with no
+runtime scoping consequence.</p>
+<p>What actually enforces "public vs. private" is <code>Export-ModuleMember</code>
+(or the manifest's <code>FunctionsToExport</code>), which controls what the module's
+<strong>exported command table</strong> — a separate list the engine attaches to the
+<code>PSModuleInfo</code> object — exposes to the <em>importing</em> session's global scope.
+Everything not listed there stays reachable from other functions <em>inside</em>
+the module (since they share session state) but is absent from the
+caller's command table entirely, which is why calling an unexported
+helper from outside the module fails with <code>CommandNotFoundException</code>
+rather than an access-denied error — as far as the caller's scope is
+concerned, the command simply doesn't exist.</p>
+<p><code>Remove-Module</code> followed by <code>Import-Module -Force</code> (rather than just
+<code>-Force</code> alone) matters because <code>-Force</code> re-runs the module script but
+doesn't necessarily start from a completely clean session state if
+stale script-scoped variables or event subscriptions from the previous
+load are still referenced elsewhere (e.g., registered <code>Register-
+ObjectEvent</code> handlers) — <code>Remove-Module</code> explicitly runs the module's
+<code>OnRemove</code> script block and tears down its session state object before
+the next import builds a fresh one, which is the more reliable way to get
+a truly clean reload during iterative development.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Build a <code>MathToolkit</code> module with the same Public/Private split: a public
 <code>Get-Statistics</code> function that returns min/max/mean/median for an array of

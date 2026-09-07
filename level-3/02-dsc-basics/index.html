@@ -1564,6 +1564,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2487,6 +2509,35 @@ people coming from imperative scripting.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A DSC configuration block looks like a function call but compiles to
+something categorically different: <code>Configuration Foo { Node 'x' {
+WindowsFeature ... } }</code> is parsed by a special <strong>configuration keyword</strong>
+handler that, instead of executing resource blocks as statements, builds a
+declarative document — a <strong>MOF (Managed Object Format) file</strong>, the same
+CIM/WMI schema format used across DMTF-standard system management. Running
+the configuration function doesn't apply anything; it <em>compiles</em> your
+declarative intent into <code>.mof</code> files (one per targeted node), which is
+exactly why DSC configurations feel non-imperative — the block's body
+describes desired end-state data, not a sequence of actions to run in
+order.</p>
+<p>Applying that MOF is a separate step (<code>Start-DscConfiguration</code>) that hands
+the compiled document to the <strong>Local Configuration Manager (LCM)</strong>, a
+component that runs as a scheduled/background engine on the target and is
+responsible for the actual reconciliation loop: for each resource entry in
+the MOF, the LCM calls that DSC resource's <code>Test-TargetResource</code> function
+first — if it reports the system already matches desired state, the LCM
+skips straight to the next resource; only on a mismatch does it call
+<code>Set-TargetResource</code> to make the change. This test-then-set pattern is
+the real mechanism behind DSC's idempotency guarantee — resources are
+required to implement <code>Get</code>/<code>Test</code>/<code>Set</code> precisely so the engine never
+needs to guess whether a change is necessary.</p>
+<p>Because the LCM itself keeps running (in <code>ApplyAndMonitor</code>/
+<code>ApplyAndAutoCorrect</code> modes) on a periodic pull/push schedule, DSC
+provides genuine configuration drift detection and correction — a change
+made outside DSC's control (someone manually disabling the feature you
+declared) gets detected and reverted on the LCM's next consistency pass,
+something a one-shot imperative script has no built-in mechanism to do.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a <code>configuration</code> block named <code>DevBoxSetup</code> that ensures: a
 directory <code>C:\DevTools</code> exists (<code>File</code> resource with

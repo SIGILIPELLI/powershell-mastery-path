@@ -1979,6 +1979,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2305,6 +2316,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2483,6 +2505,40 @@ directly rather than <code>ls</code>, <code>dir</code>, or any alias whose targe
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>pwsh</code> achieves genuine cross-platform behavior because the engine itself
+— parser, AST interpreter, object pipeline, type system — is written
+entirely in managed .NET code with no Windows API dependency; the parts
+that <em>do</em> differ by OS (file system semantics, path separators, process
+launching) are isolated behind .NET's own cross-platform abstraction
+layer (<code>System.IO</code>, <code>System.Diagnostics.Process</code>), not reimplemented per
+platform inside PowerShell itself. This is why the core language behaves
+identically everywhere, while a comparatively small set of cmdlets
+(<code>Get-WmiObject</code>, <code>Get-EventLog</code>, most of <code>ActiveDirectory</code>) are
+Windows-only: they wrap Windows-specific COM/WMI/registry APIs that
+simply have no equivalent surface on macOS/Linux, not because the engine
+treats those platforms as second-class.</p>
+<p>Aliases that "only exist on some platforms" are a direct consequence of
+<code>pwsh</code>'s <strong>compatibility aliasing</strong> for interactive convenience: on
+Windows, <code>ls</code>, <code>cp</code>, <code>rm</code>, <code>cat</code> are PowerShell aliases pointing at
+<code>Get-ChildItem</code>/<code>Copy-Item</code>/<code>Remove-Item</code>/<code>Get-Content</code> — but on Linux/
+macOS, <code>pwsh</code> deliberately <strong>does not</strong> register some of these aliases
+(<code>ls</code>, <code>cat</code>, etc.) at startup specifically because a real Unix binary
+of the same name already exists on <code>PATH</code>, and shadowing it would be
+surprising for users mixing PowerShell with native shell tools. This
+means a script relying on the alias <code>ls</code> behaves differently by platform
+not due to any semantic difference in PowerShell itself, but due to a
+startup-profile decision about which aliases to pre-register — using the
+full cmdlet name sidesteps the whole issue.</p>
+<p>Path handling differences (<code>/</code> vs <code>\</code>, case sensitivity) trace back to the
+underlying filesystem's own semantics exposed through .NET's <code>Path</code>/
+<code>FileSystemInfo</code> APIs — NTFS is case-preserving-but-insensitive by
+default while ext4/APFS (in typical configurations) are case-sensitive,
+so <code>Test-Path './Foo.txt'</code> and <code>Test-Path './foo.txt'</code> can genuinely
+return different answers on Linux for files that would be indistinguishable
+on Windows; <code>Join-Path</code>/<code>[System.IO.Path]::Combine</code> normalizing separators
+correctly for the current platform is what lets script logic stay
+platform-agnostic despite this.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Take a script that assumes Windows (uses <code>$env:USERPROFILE</code>, backslash
 paths, and <code>dir</code> for listing files) and rewrite it to run identically on

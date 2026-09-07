@@ -1333,6 +1333,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2349,6 +2360,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2624,6 +2646,38 @@ tests.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>Pester's <code>Describe</code>/<code>Context</code>/<code>It</code> blocks aren't plain function calls
+executed top to bottom — they run in <strong>two passes</strong>. The first (discovery)
+pass executes only the <code>Describe</code>/<code>Context</code> container script blocks
+themselves, walking the tree to build up the full set of <code>It</code> blocks that
+exist, without running any <code>It</code> body yet; this is why code placed directly
+inside a <code>Describe</code> block but outside <code>BeforeAll</code>/<code>It</code> runs once at
+discovery time regardless of how many tests are inside it, and why Pester
+explicitly warns against doing real work (like calling the function under
+test) at that level. The second (run) pass then actually executes each
+discovered <code>It</code> block's body, along with the <code>BeforeEach</code>/<code>AfterEach</code>
+hooks scoped to it.</p>
+<p><code>Mock</code> works by runtime-replacing the target command's entry in the
+current session's command table — inside the mock's scope, calling
+<code>Get-Content</code> doesn't resolve to the real cmdlet at all; Pester's mock
+infrastructure has swapped in a proxy function under that name, so any
+code path (yours or a dependency's) that calls <code>Get-Content</code> by name
+gets intercepted, which is also why mocking only works reliably when the
+code under test calls commands <em>by name</em> rather than holding a
+pre-resolved reference to them.</p>
+<p><code>Should</code> assertions build a structured <strong>assertion failure object</strong>
+(pattern, actual value, expected value) rather than just throwing a
+generic string exception — this is what lets Pester's test-result
+exporter (<code>-PassThru</code>/NUnit XML output for CI) show rich diffs, because
+the failure carries the comparison metadata rather than a rendered
+message string that would need to be re-parsed.</p>
+<p><code>-ForEach</code> data-driven tests expand at <strong>discovery time</strong>: each element of
+the array you pass becomes a separate, independently-named <code>It</code> block
+instantiated from the same script-block template, with <code>$_</code>/named
+properties bound per iteration — this is why a failure in one <code>-ForEach</code>
+case reports as its own distinct test in results rather than a single
+test that failed partway through a manual loop.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Add a function <code>Test-PasswordStrength</code> to a module that returns <code>$true</code> if
 a password is at least 8 characters and contains at least one digit,

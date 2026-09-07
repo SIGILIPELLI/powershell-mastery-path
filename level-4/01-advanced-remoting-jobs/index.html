@@ -1912,6 +1912,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2495,6 +2517,40 @@ adjustable with <code>-ThrottleLimit</code>) and returns all results tagged with
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>Start-Job</code> creates a genuinely separate child <strong>process</strong>
+(<code>wsmprovhost</code>/a background <code>pwsh</code> host, depending on job type), not a
+thread inside your current session — this is the actual reason job
+results have to be <em>serialized</em> out and deserialized back via
+<code>Receive-Job</code>, exactly like the CLIXML round-trip covered for remoting in
+Module 05: a background job's <code>$using:</code>-captured variables and its
+returned objects both cross a process boundary, so live .NET handles
+(open file streams, COM objects) don't survive the trip, only their
+serialized snapshot does.</p>
+<p><code>Start-ThreadJob</code> (from the <code>ThreadJob</code> module) exists specifically to
+avoid that overhead for CPU-light, I/O-bound parallel work: it runs your
+script block on a separate <strong>thread within the same process</strong>, sharing
+the same AppDomain and object heap, so no serialization boundary exists
+between the job and your session at all — this is why <code>ThreadJob</code> starts
+dramatically faster than <code>Start-Job</code> (no new process/runspace-host
+startup cost) and why its results can, in principle, share references
+with the caller, though the module still copies data through job
+result queues for consistency with the <code>Job</code> API surface.</p>
+<p><code>ForEach-Object -Parallel</code> (PowerShell 7+) is built on <code>ThreadJob</code>-style
+runspaces under the hood but manages a <strong>pool</strong> of them explicitly: it
+creates up to <code>-ThrottleLimit</code> runspaces up front and feeds pipeline
+input into whichever is free, which is exactly why each parallel
+iteration's script block runs in <em>its own isolated runspace</em> with its own
+session state — this is the real reason <code>$using:</code> is mandatory to reach
+variables from the enclosing scope inside a <code>-Parallel</code> block: without
+it, the parallel runspace has no natural path to your caller's variable
+table at all, since it's not the same runspace and there's no scope chain
+connecting them the way nested script-block scopes normally work.</p>
+<p>Multi-machine <code>Invoke-Command -ComputerName @(...)</code> runs each target's
+WSMan session <strong>concurrently</strong>, not sequentially — the cmdlet opens one
+WinRM shell resource per target machine in parallel and manages
+<code>-ThrottleLimit</code> simultaneous connections, waiting for and collecting
+results as each remote runspace's SOAP response returns.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write a script that takes a list of URLs and, using <code>ForEach-Object
 -Parallel</code> with <code>-ThrottleLimit 5</code>, checks each with <code>Invoke-WebRequest</code>

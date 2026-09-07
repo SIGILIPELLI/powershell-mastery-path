@@ -946,6 +946,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2327,6 +2338,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2520,6 +2542,36 @@ Use <code>[ordered]@{}</code> when insertion order matters:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p>A PowerShell array literal (<code>@(1,2,3)</code> or the comma operator's implicit
+array-building) creates a fixed-size <code>System.Object[]</code> under the hood —
+this is why "appending" with <code>$arr += $x</code> is not appending at all: it
+allocates a <strong>brand-new array</strong> one element larger, copies every existing
+element into it, and rebinds <code>$arr</code> to the new array. For an
+<code>N</code>-iteration loop doing <code>+=</code>, that's O(N²) total copying, which is the
+actual mechanical reason the docs steer you toward <code>[System.Collections.
+Generic.List[T]]</code> or an output-collecting pipeline instead — <code>List[T]</code>
+uses amortized-doubling internal storage so <code>.Add()</code> is O(1) amortized.</p>
+<p>Hashtables (<code>@{}</code>) are PowerShell-literal syntax for
+<code>System.Collections.Hashtable</code>, a classic open-addressing/bucket hash
+table keyed by <code>GetHashCode()</code>/<code>Equals()</code> — by default case-insensitive
+for string keys because PowerShell's hashtable literal uses an
+<code>IEqualityComparer</code> (<code>StringComparer.OrdinalIgnoreCase</code>)-backed comparer
+rather than .NET's normal case-sensitive default, matching PowerShell's
+general case-insensitivity elsewhere. <code>[ordered]@{}</code> swaps the backing
+type to <code>System.Collections.Specialized.OrderedDictionary</code>, which
+maintains an internal parallel array tracking insertion order alongside
+the hash buckets — enumeration order is a property of that extra
+structure, not an accident of bucket layout the way plain <code>Hashtable</code>
+enumeration order (implementation-defined, and <em>not</em> guaranteed stable
+across .NET versions) can appear to be.</p>
+<p>Iterating a hashtable with <code>foreach ($kv in $table)</code> yields
+<code>DictionaryEntry</code> structs (a <code>Key</code>/<code>Value</code> pair struct), while
+<code>$table.GetEnumerator()</code> explicitly requests the same enumerator the
+<code>foreach</code> statement uses implicitly — this is why <code>$table.Keys | ForEach-
+Object { $table[$_] }</code> and <code>foreach ($kv in $table) { $kv.Value }</code> produce
+the same values through two different enumeration paths (one walks keys
+and re-indexes, the other walks entries directly).</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write <code>inventory.ps1</code> that builds a hashtable mapping item names to
 quantities (e.g. <code>apples = 12</code>, <code>bananas = 7</code>, <code>oranges = 20</code>), prints each

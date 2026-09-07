@@ -1536,6 +1536,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2283,6 +2294,17 @@
 </li>
       
         <li class="md-nav__item">
+  <a href="#how-it-actually-works" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        How It Actually Works
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
   <a href="#exercise" class="md-nav__link">
     <span class="md-ellipsis">
       
@@ -2578,6 +2600,35 @@ source.</p>
 </tr>
 </tbody>
 </table>
+<h2 id="how-it-actually-works">How It Actually Works<a class="headerlink" href="#how-it-actually-works" title="Permanent link">&para;</a></h2>
+<p><code>DynamicParam</code> blocks exist because PowerShell's parameter binder needs
+the <em>complete</em> parameter set before it can bind anything, but some
+parameters (like a tab-completable list of Azure resource groups) can
+only be known by querying something at runtime. The engine handles this
+by calling your <code>DynamicParam</code> block <strong>before</strong> the normal binding pass,
+collecting whatever <code>RuntimeDefinedParameter</code> objects it returns, and
+merging them into the parameter set for <em>this specific invocation</em> —
+which is why dynamic parameters can vary in name and validation rules
+from call to call in a way <code>param()</code>-declared ones never can, and also
+why they're invisible to static tooling (like <code>Get-Help -Parameter *</code>)
+that doesn't actually execute your function to discover them.</p>
+<p>Comment-based help isn't parsed by a lightweight regex scanning for <code>.SYNOPSIS</code>-style
+tags at display time — <code>Get-Help</code> locates the comment block by walking the
+function's AST for a comment token positioned immediately before (or, for
+some layouts, inside) the function body, then runs a dedicated
+help-comment parser that recognizes the <code>.KEYWORD</code> tag grammar. This
+AST-based approach is why comment-based help must be contiguous and
+correctly positioned relative to the <code>function</code> keyword — a blank line or
+unrelated comment breaking the block can cause <code>Get-Help</code> to silently
+fall back to auto-generated (parameter-list-only) help instead of your
+authored content.</p>
+<p>Custom <code>[ValidateScript()]</code> blocks run inside the parameter binder's
+validation phase with <code>$_</code> bound to the candidate value — critically,
+<strong>before</strong> the parameter's default or coerced value is assigned to the
+actual variable in your function's scope, which is why a <code>ValidateScript</code>
+that throws prevents the function body from running at all, exactly like
+a type-mismatch error would, rather than merely logging a warning and
+proceeding with a bad value.</p>
 <h2 id="exercise">Exercise<a class="headerlink" href="#exercise" title="Permanent link">&para;</a></h2>
 <p>Write an advanced function <code>New-InventoryItem</code> with <code>[CmdletBinding()]</code>,
 pipeline support (<code>ValueFromPipelineByPropertyName</code>), and validation on at
