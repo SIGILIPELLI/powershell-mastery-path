@@ -174,6 +174,41 @@ $entries | ConvertTo-Json -Compress | Set-Content -Path './loop.log'
 | Find where an error happened | `$_.InvocationInfo.ScriptLineNumber` |
 | Avoid the tight-loop logging trap | batch entries, write once instead of per-iteration |
 
+## How It Actually Works
+
+PowerShell's built-in logging streams (`Write-Verbose`, `Write-Debug`,
+`Write-Information`) aren't just conditionally-printed text — each is a
+genuinely distinct **pipeline stream** (verbose is stream 4, debug is
+stream 5, information is stream 6, alongside output=1, error=2, warning=3)
+that the host can redirect independently with stream-specific redirection
+operators (`4>`, `5>`, `6>`), exactly like `2>` redirects the error stream.
+This is why `Write-Verbose` output can be silently captured to a log file
+via `4> verbose.log` without touching normal pipeline output at all —
+they're structurally separate channels the engine maintains all the way
+from the writing cmdlet to the host, not string-tagged output filtered
+after the fact.
+
+`$VerbosePreference`/`-Verbose` gates whether `Write-Verbose` actually
+emits anything by checking the current preference variable (or the bound
+common parameter for this invocation) *before* doing any work to format
+the message — well-written logging code checks this explicitly (`if
+($VerbosePreference -ne 'SilentlyContinue') { ... expensive string
+building ... }`) precisely because a tight loop calling `Write-Verbose`
+with a string built via costly interpolation pays that formatting cost on
+every iteration regardless of whether verbose output is even enabled,
+since the cmdlet itself still has to receive and evaluate the
+already-constructed argument before it can decide to discard it.
+
+Structured logging (writing JSON lines instead of formatted text) exists
+because `Write-Verbose`/`Write-Information`'s default host rendering goes
+through the same formatting subsystem covered in Module 07's file-writing
+mechanics — human-readable but not reliably machine-parseable across
+PowerShell versions/hosts. Emitting `ConvertTo-Json -Compress` lines to a
+dedicated log sink instead sidesteps the formatter entirely, giving log-
+aggregation tooling (which typically parses each line as an independent
+JSON document) a stable, versioned schema instead of a display format
+that PowerShell itself doesn't guarantee as a parsing contract.
+
 ## Exercise
 
 Add a `Write-Log` function to the `AdminToolkit` module from Level 3's

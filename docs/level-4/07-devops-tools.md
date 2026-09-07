@@ -185,6 +185,41 @@ that can't ask it questions — a few conventions make that much smoother:
 | `-DryRun` / `-WhatIf` | let callers verify intent before committing |
 | `-Verbose` for detail, quiet default output | serves both interactive and CI use |
 
+## How It Actually Works
+
+DevOps-facing PowerShell tools that wrap other CLIs (`az`, `kubectl`,
+`docker`) work by invoking them as **native external commands** — when the
+engine's command resolver can't find a matching function, alias, or
+cmdlet, it falls through to searching `PATH` for an executable, then
+launches it as a genuine child process via `System.Diagnostics.Process`
+with the remaining tokens passed as raw argument strings. This is the
+mechanical reason argument quoting for native commands is fragile in a
+way cmdlet parameters aren't: cmdlet parameter binding understands
+PowerShell's own type system, but a native executable only ever receives
+a flat array of strings assembled by the OS's process-creation API, so
+values containing spaces, quotes, or the ampersand need platform-specific
+escaping (`--%` batch-parsing-stop-mode existing specifically to hand off
+raw, unescaped argument text when PowerShell's own tokenizer would
+otherwise interfere).
+
+Output captured from these native tools (`kubectl get pods -o json |
+ConvertFrom-Json`) has none of the ETS-object richness native cmdlets
+provide — it's plain text on stdout, so any structure a DevOps tool
+built around it has to explicitly re-establish, either by requesting
+JSON output from the CLI itself and parsing it, or by regex-parsing
+formatted table output (fragile, since a CLI's human-readable table
+format is not a stable contract the way its JSON schema usually is).
+
+`$LASTEXITCODE` and stderr are the only structured signal a wrapped
+native tool provides back to PowerShell — unlike cmdlets, whose failures
+integrate into `$Error`/`-ErrorAction`, a failing native command doesn't
+throw a terminating error PowerShell recognizes on its own (with `pwsh`
+defaults) unless you explicitly check `$LASTEXITCODE` after the call,
+which is why "designing for the caller" in a DevOps wrapper function
+means translating that raw exit-code/stderr contract into PowerShell's
+richer error model (`throw`/`Write-Error` with proper `ErrorRecord`s)
+rather than leaking the native tool's flat signal straight through.
+
 ## Exercise
 
 Build a `db-tool.ps1` with three parameter sets — `Backup` (requires

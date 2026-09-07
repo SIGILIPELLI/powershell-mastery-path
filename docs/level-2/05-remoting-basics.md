@@ -194,6 +194,42 @@ infrastructure instead of needing a separate protocol like SCP or SMB.
 | `-ThrottleLimit` | cap how many remote connections run in parallel |
 | `Copy-Item -ToSession` / `-FromSession` | transfer files over an existing session |
 
+## How It Actually Works
+
+PowerShell Remoting runs over **WS-Management (WSMan/WinRM)**, a
+SOAP-over-HTTP(S) protocol standardized for remote system management —
+`Enter-PSSession`/`Invoke-Command` don't open a raw socket and stream
+script text; they establish a WinRM **shell resource** on the remote
+machine (an actual server-side object tracked by the WinRM service,
+listable with `winrm enumerate winrm/config/shell` or, in PowerShell
+terms, visible via `Get-PSSession`/`Get-WSManInstance`), then exchange
+SOAP-enveloped XML messages that carry serialized command invocations and
+their results.
+
+The critical mechanical detail is **serialization depth**: objects
+crossing a remoting boundary are not the live .NET objects you'd get
+locally — the remote runspace serializes each result via the same CLIXML
+format used by `Export-Clixml`, walking properties down to a fixed depth
+(typically 1-3 levels), then deserializes it locally into a
+`Deserialized.<TypeName>` object. That deserialized object keeps the
+original property *values* as static data but loses the original type's
+*methods* — this is exactly why `Invoke-Command { Get-Process } | Stop-
+Process` fails or behaves unexpectedly: `Stop-Process` needs a live
+process handle or PID from a real `Process` object, but what came back
+over the wire is an inert snapshot, `Deserialized.System.Diagnostics.
+Process`, with no attached `.Kill()` machinery.
+
+A `PSSession` created with `New-PSSession` is a **persistent** WinRM
+shell resource — variables and state survive between separate
+`Invoke-Command -Session $s` calls because the remote runspace keeps
+running between invocations, whereas `Invoke-Command -ComputerName ...`
+without a saved session opens and tears down a fresh transient runspace
+per call. `Enter-PSSession` behaves like an interactive shell but is
+mechanically identical to `New-PSSession` plus attaching your local host's
+input/output loop to that remote runspace's streams — it's not a
+different remoting mode, just a different UI over the same WSMan
+transport.
+
 ## Exercise
 
 Assuming you have two machines reachable over remoting (or use

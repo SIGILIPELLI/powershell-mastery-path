@@ -246,6 +246,35 @@ pre-merge, the same split covered earlier in this level.
 | Tagged Pester tests, `Unit` vs `Integration` | Testing at Scale & CI (Level 4, module 05) |
 | Cross-platform `Get-PSDrive` | Cross-Platform PowerShell (Level 4, module 03) |
 
+## How It Actually Works
+
+This capstone's shape — manifest-declared module, `Public`/`Private`
+loader, `SupportsShouldProcess` on anything destructive, structured
+stream-based logging, and a tagged Pester suite runnable in CI — is every
+mechanism from this whole path composed together, and the composition
+only holds because each layer respects the boundary the next one depends
+on. The manifest's `FunctionsToExport` list is what makes the module's
+private helpers genuinely unreachable from the outside (Module 04's
+shared-session-state model), which is exactly why `InModuleScope` is
+needed for the tests that exercise those helpers directly rather than
+only through the public surface (Module 05's mocking-across-boundaries
+mechanics).
+
+Every destructive public function's `$PSCmdlet.ShouldProcess()` call
+still gates on the same `ConfirmPreference`/`$WhatIfPreference` chain
+covered in Module 02 — bundled into one toolkit doesn't change that the
+guard has to be present at *each* individual side-effecting call site,
+since `SupportsShouldProcess` only grants the capability, it doesn't
+retroactively make unguarded code inside the function safe.
+
+The CI pipeline wired up for this project depends on the exit-code
+contract from Module 02's CI mechanics (`pwsh` exits 0 regardless of
+internal PowerShell errors unless the script explicitly translates a
+caught terminating error into a non-zero `exit`) combined with Pester's
+NUnit/JUnit XML output — the same two mechanisms, not new ones, are what
+let a CI platform correctly report both "did the module's own logic
+throw" and "which specific tests passed or failed" from one pipeline run.
+
 ## Stretch goals
 
 - Add a `Send-AuditAlert` function that only fires (e.g. writes an

@@ -251,6 +251,44 @@ readable about exactly which statements are being guarded.
 | `Write-Error` | non-terminating; reports and continues |
 | `trap { }` | older scope-wide error handler; prefer `try/catch` in new code |
 
+## How It Actually Works
+
+`trap` predates `try/catch` in PowerShell's design and works on an
+entirely different mechanism: it's not a block scoped to a specific
+statement, it's a **handler registered against the enclosing scope**
+(script, function, or block) that the engine consults whenever a
+terminating error propagates through that scope, regardless of which
+statement in the scope raised it. This is why `trap` can feel "spooky
+action at a distance" — it fires for an error thrown on line 40 even
+though the `trap` statement is declared on line 3, because it's not
+control flow, it's an error-dispatch registration on the scope object
+itself.
+
+`$_`/`$PSItem` inside a `catch` block is bound to the actual
+`ErrorRecord` that terminated the `try`, retrieved from the engine's
+current-error context at the moment the `catch` handler is entered — this
+is distinct from `$Error[0]`, which is whatever the *last* error appended
+to the session-wide `$Error` queue was; they usually agree but can
+diverge if other code (a nested `-ErrorAction SilentlyContinue` call, for
+instance) appended to `$Error` between the throw and your catch.
+
+Typed `catch` blocks (`catch [System.IO.FileNotFoundException] {...}`)
+work through .NET's normal exception-type matching — the runtime walks
+your listed `catch` clauses top to bottom and uses `is`-style
+assignability checks (a caught `IOException` matches a `catch
+[System.Exception]` clause too, since it's a subtype), so **order
+matters**: a broad `catch [System.Exception]` placed before a specific
+`catch [System.IO.FileNotFoundException]` will swallow everything and the
+specific clause becomes dead code, exactly as in C#/Java exception
+ordering.
+
+`finally` is guaranteed to run via the CLR's own structured exception
+handling — it executes whether the `try` completed normally, threw, or
+even if a `catch` block that ran the value threw again while handling the
+first exception, because it's compiled to sit in the `finally` clause of
+the actual IL-level `try/catch/finally` the script block's execution is
+wrapped in, not reimplemented as script-level bookkeeping.
+
 ## Exercise
 
 Create a class `ValidationException` (inheriting `System.Exception`) with an

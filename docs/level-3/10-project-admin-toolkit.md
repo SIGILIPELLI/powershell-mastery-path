@@ -277,6 +277,40 @@ Describing New-AdminReport
 Tests Passed: 5, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 ```
 
+## How It Actually Works
+
+The loader pattern this toolkit uses — dot-sourcing every file under
+`Private/` and `Public/` from the `.psm1`, then `Export-ModuleMember`ing
+only the `Public` function names — relies entirely on the shared-session-
+state mechanics from Module 04: dot-sourcing inside a module's own script
+runs each file's code directly in the module's session state rather than
+creating a further nested scope, so every private helper becomes visible
+to every public function as if the whole toolkit were one file, while the
+manifest/`Export-ModuleMember` boundary is the only thing that keeps
+private helpers unreachable from a consumer's scope.
+
+Testing across that module boundary is where Pester's scope-based `Mock`
+mechanics (Module 05) get exercised for real: a test that imports the
+toolkit module and mocks one of its *unexported* private functions has to
+do so from a scope Pester can actually inject the mock into — typically by
+running the mock and the test's `It` block inside `InModuleScope
+ToolkitModuleName { ... }`, which temporarily re-parents the test's
+execution into the module's own session state so the function-table
+shadowing Mock relies on actually intercepts calls the public functions
+make to their private helpers. Without `InModuleScope`, a `Mock` declared
+from the caller's normal test scope can't see (or override) a private
+function the module never exported, because the mock's shadowing function
+would be injected into the wrong session state entirely.
+
+The `-WhatIf`/`ShouldProcess` gating on any destructive public function in
+this toolkit works because `[CmdletBinding(SupportsShouldProcess)]`
+propagates `$WhatIfPreference` down through `$PSCmdlet.ShouldProcess()`
+calls exactly as covered in Module 02 — bundling several admin actions
+behind one public function doesn't change that mechanism at all, it just
+means every risky operation inside the function body needs its own
+`ShouldProcess` guard, since the attribute enables the *capability* per
+function, not an automatic wrap around everything the function does.
+
 ## Stretch goals
 
 - Add a `Get-ServiceStatusReport` public function checking a list of

@@ -284,6 +284,44 @@ languages who expect `return` to exit the enclosing function.
 | `ValueFromPipelineByPropertyName` | binds a same-named property to a parameter |
 | `return` inside `ForEach-Object` | exits only the current object's block call |
 
+## How It Actually Works
+
+The `Begin`/`Process`/`End` blocks you write in an advanced function map
+directly onto the three virtual methods the pipeline processor calls on
+every cmdlet instance: `BeginProcessing()` once before any input arrives,
+`ProcessRecord()` once per pipeline object, and `EndProcessing()` once
+after the upstream command signals it's done. This isn't an abstraction
+PowerShell invented for script functions — it's the same `Cmdlet` base
+class contract compiled C# cmdlets implement, which is why a script
+function with `[CmdletBinding()]` genuinely behaves like a compiled cmdlet
+in the pipeline, including streaming output per object rather than
+buffering.
+
+`Where-Object`/`ForEach-Object`'s `-Begin`/`-Process`/`-End` script-block
+parameters exist for the same reason: without them, the script block you
+pass runs once per object with no way to accumulate state across calls
+(each invocation gets a fresh child scope), so `-Begin { $total = 0 }`
+paired with `-Process { $total += $_.Size }` works only because both
+blocks close over the *same* enclosing scope variable, not because
+`ForEach-Object` does anything special with `$total`.
+
+`continue` inside a `ForEach-Object` script block behaves differently from
+`continue` inside a real `foreach` loop for a mechanical reason: a script
+block is its own scope, and `continue`/`break` are resolved against the
+nearest *enclosing loop construct* at parse time, not against the
+"logical iteration" of the pipeline — inside `ForEach-Object`, there is no
+enclosing loop AST node, so `continue` there just exits the current
+script block invocation early (equivalent to `return`), while inside an
+actual `foreach (...)` statement, `continue` unwinds via the interpreter's
+`ContinueException` straight back to the loop's re-evaluation point.
+
+`$PSCmdlet.WriteObject()` versus a bare pipeline-emitting expression
+matters at the C# API level too: `WriteObject($obj, $true)` explicitly
+enumerates a collection and emits each element separately, while
+`WriteObject($obj, $false)` emits the collection as one object — this is
+the actual switch behind PowerShell's usually-automatic array unrolling in
+pipeline output, exposed for the rare case you want to suppress it.
+
 ## Exercise
 
 Write a function `Get-WordStats` with `[CmdletBinding()]` and a

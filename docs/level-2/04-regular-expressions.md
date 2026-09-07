@@ -180,6 +180,41 @@ one string, when it will only ever report one.
 | `[regex]::Matches($s, $p)` | get **every** match, not just the first |
 | `[regex]::Escape($s)` | treat a string as a literal pattern, not regex syntax |
 
+## How It Actually Works
+
+PowerShell's regex operators (`-match`, `-replace`, `-split` in regex
+mode) are thin wrappers over .NET's `System.Text.RegularExpressions.Regex`
+engine, which is a **backtracking NFA (nondeterministic finite automaton)
+simulator**, not a linear-time DFA matcher like `grep -E`'s engine.
+Concretely: the engine walks the pattern's compiled instruction tree
+against the input, and whenever a branch fails to continue matching, it
+backtracks to the last choice point and tries the next alternative. This
+is why "catastrophic backtracking" is a real, reproducible performance
+bug in PowerShell regexes — a pattern like `(a+)+b` against a long string
+of `a`s with no trailing `b` causes exponential blowup in the number of
+backtracking states explored, and it's the exact same failure mode Perl,
+Java, and JavaScript regex engines share, because they're all
+backtracking engines too.
+
+`-match` sets the automatic `$Matches` variable as a side effect of a
+successful match — it's populated from the `Regex.Match()` call's
+`GroupCollection`, keyed by group number for unnamed captures and by name
+for `(?<name>...)` named groups, which is why `$Matches.name` works
+directly as a hashtable lookup rather than needing index arithmetic.
+`-replace` with a script-block-like substitution isn't supported directly
+in the operator form, but the underlying `[regex]::Replace()` with a
+`MatchEvaluator` delegate (available when you drop to the .NET type
+directly) is how you can substitute based on per-match computed logic
+that the simple `-replace 'pattern', 'replacement'` string-template form
+can't express.
+
+`-split` in regex mode compiles the delimiter pattern once and calls
+`Regex.Split()`, which — unlike simple string `.Split()` — evaluates the
+pattern against the whole input in one pass and additionally captures any
+parenthesized delimiter groups *into* the result array positions between
+elements, a detail that surprises people expecting only the non-delimiter
+segments back.
+
 ## Exercise
 
 Write a script that takes an array of log lines like

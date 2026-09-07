@@ -237,6 +237,48 @@ rereading its body.
 | `SupportsShouldProcess` + `$PSCmdlet.ShouldProcess(...)` | enables `-WhatIf`/`-Confirm` |
 | `[OutputType(...)]` | documents the return type for tooling |
 
+## How It Actually Works
+
+Parameter sets are resolved through a real constraint-satisfaction pass,
+not a simple "which parameters did you type" match. When you invoke a
+function with multiple `[Parameter(ParameterSetName=...)]` groups, the
+binder builds the set of candidate parameter sets that are consistent
+with every named argument you supplied, then eliminates candidates whose
+mandatory parameters weren't satisfied. If more than one candidate
+survives, PowerShell tries to disambiguate using `DefaultParameterSetName`
+(declared on `[CmdletBinding()]`); if that still doesn't resolve to
+exactly one, you get `ParameterBindingException: Parameter set cannot be
+resolved` — the same error a compiled cmdlet throws, because both paths
+run through `System.Management.Automation.CommandProcessorBase`'s shared
+parameter-binding pipeline.
+
+`ValidateSet`, `ValidateRange`, `ValidateScript`, and friends are not
+convention-based checks the function body has to remember to call —
+they're `ValidateArgumentsAttribute` subclasses whose `Validate()` method
+the binder invokes automatically, immediately after type coercion and
+before your function body runs at all. This ordering is why a
+`ValidateScript` block can throw a validation error before a single line
+of your function executes, and why validation attributes stack: multiple
+`[Validate*]` attributes on one parameter all run, in declaration order,
+and the first failure wins.
+
+`SupportsShouldProcess` wires `-WhatIf`/`-Confirm` into the same
+`$PSCmdlet.ShouldProcess()` call compiled cmdlets use — calling it
+consults the current `ConfirmPreference` and any `-WhatIf`/`-Confirm`
+switch bound for this invocation, and if `-WhatIf` is in effect, it
+**returns `$false` without running your side-effecting code at all**;
+this is why the well-known pattern `if ($PSCmdlet.ShouldProcess(...)) {
+<risky work> }` is not just good style — skipping the `if` guard means
+`-WhatIf` has no effect, since the destructive work isn't actually gated
+on anything.
+
+Cmdlet/function naming (`Verb-Noun`) is enforced at the module-analysis
+level: `Get-Verb` reflects the engine's approved-verb table, and importing
+a module with unapproved verbs triggers a non-fatal warning (not an
+error) because the check happens in `Import-Module`'s post-load
+validation pass over exported command names, purely for discoverability
+— it has no effect on whether the function actually runs.
+
 ## Exercise
 
 Write a function `New-Ticket` with `[CmdletBinding(SupportsShouldProcess =

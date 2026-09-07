@@ -138,6 +138,37 @@ the suite grows:
 | Command coverage ≠ scenario coverage | 100% coverage can still miss edge cases |
 | Split suites by tag (`Unit` vs `Slow`/`Integration`) | keep fast feedback fast |
 
+## How It Actually Works
+
+Pester's two-pass discovery/run model (from Module 06's mechanics) is
+exactly what makes large-suite performance tuning possible in the first
+place: because discovery runs *every* `Describe`/`Context` container body
+before any `It` executes, a suite with hundreds of test files pays a
+discovery-time cost proportional to total container script complexity
+before a single assertion runs — this is why heavy setup logic
+accidentally placed at container level (outside `BeforeAll`) silently
+multiplies: it re-runs once per discovery pass across the whole suite
+scan, not once per actual test execution.
+
+`-Parallel`/tag-based suite splitting for CI relies on Pester's tests
+being genuinely independent processes or runspaces (via `Start-Job`/
+`ForEach-Object -Parallel`, covered in Module 01) rather than a built-in
+parallel test runner sharing one session — each split invokes its own
+`Invoke-Pester` inside its own runspace/process, meaning global state
+(`$env:`, a shared temp file, a module already imported with side
+effects) genuinely isn't shared between splits, which is both why
+parallelizing Pester is safe against most global-state leakage and why a
+suite that secretly depends on tests running in a specific order will
+break the moment you split and parallelize it.
+
+`-Tag`/`-ExcludeTag` filtering happens at the discovery pass, not the run
+pass — Pester builds the *complete* test tree first, then filters which
+discovered `It` blocks actually execute, which is why tag filtering can't
+skip expensive discovery-time work (heavy `Describe`-level setup still
+runs for excluded tests) but can skip the potentially much larger cost of
+actually running slow integration-tagged tests during a fast
+unit-test-only CI stage.
+
 ## Exercise
 
 Take the `AdminToolkit` module from Level 3's project, tag its existing

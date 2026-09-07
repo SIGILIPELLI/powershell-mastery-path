@@ -179,6 +179,43 @@ foreach ($n in 1..10) {
 | `ForEach-Object` | iterate piped pipeline input |
 | `break` / `continue` | exit loop / skip to next iteration |
 
+## How It Actually Works
+
+Every `if`, `switch`, and loop keyword in PowerShell compiles down through
+the same AST node types — `IfStatementAst`, `SwitchStatementAst`,
+`PipelineAst` inside `WhileStatementAst`, and so on — that the parser
+builds from your script text before a single instruction runs. This
+two-phase design (parse fully, then execute) is why a syntax error deep
+inside an `if` branch that never runs is still caught immediately: the
+whole AST has to be valid before execution starts, unlike a naive
+line-by-line interpreter.
+
+`switch` is more than sugar for `if/elseif` chains — its default mode
+evaluates **every** case top to bottom against the subject (falling
+through unless you `break`), and each case label is itself a full
+expression, not just a literal: `switch ($x) { {$_ -gt 10} {...} }`
+compiles the `{...}` script block as a predicate and calls it with `$_`
+bound to the subject via `$PSItem`/`$_` — this is how `-Regex`, `-Wildcard`,
+and script-block cases can all coexist in one construct. Internally the
+switch statement evaluator tries, per case in order: exact/type match,
+wildcard match (if `-Wildcard`), regex match (if `-Regex`, compiling a
+`System.Text.RegularExpressions.Regex` per case), or script-block
+invocation, short-circuiting to the next case only when the current one
+returns `$false`.
+
+Loops (`foreach`, `while`, `for`, `do/while`) each lower to a
+`LoopStatementAst` with a condition pipeline and body script block; the
+runtime re-enters the body's own child scope on every iteration for
+`foreach`, which is why a `function` or `$using:` closure captured inside
+a loop body captures the *current* iteration's binding, not a shared one —
+PowerShell doesn't have the "closures share the loop variable" trap that
+some C-family languages have with `var`. `break` and `continue` are
+implemented as special control-flow exceptions (`BreakException`,
+`ContinueException`) that unwind the call stack until caught by the
+nearest enclosing loop or labeled block — which is exactly why labeled
+`break Outer` works across nested loops: it's a targeted exception with a
+label match, not a jump instruction.
+
 ## Exercise
 
 Write `fizzbuzz.ps1` that loops from 1 to 30 using a `for` loop and, for each

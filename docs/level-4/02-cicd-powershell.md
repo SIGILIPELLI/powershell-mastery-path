@@ -160,6 +160,40 @@ for instance) that also needs to fail the pipeline correctly.
 | Case-sensitive paths on Linux CI | common source of "works on my machine" |
 | `exit 1` on any caught error | explicit pipeline failure signal beyond Pester's own |
 
+## How It Actually Works
+
+CI runners invoke `pwsh -File script.ps1` (or `-Command`) as a plain
+child process and, after it exits, inspect the OS-level **process exit
+code** — this is the entire contract between PowerShell and any CI
+system, and it's a narrower contract than PowerShell's own rich error
+model. An uncaught terminating exception inside a script does *not*
+automatically produce a non-zero exit code the way it would in many other
+languages; `pwsh` by default exits 0 unless the script explicitly calls
+`exit <n>` with a non-zero value, or unless `$ErrorActionPreference =
+'Stop'` combined with an uncaught error reaches the top of the script and
+`pwsh` is invoked with `-NonInteractive`, which changes how an unhandled
+terminating error is surfaced. This mismatch — rich structured errors
+internally, one flat integer externally — is exactly why CI-oriented
+PowerShell scripts wrap their body in `try { ... } catch { Write-Error
+$_; exit 1 }` rather than relying on natural error propagation.
+
+Pester's CI integration works because `Invoke-Pester` can emit results in
+**NUnit/JUnit XML** (`-OutputFormat NUnitXml`/`-CI`), a format every major
+CI system (Azure DevOps, GitHub Actions, Jenkins) already knows how to
+parse for its test-results UI — the test runner itself doesn't talk to CI
+APIs directly; it writes a standard file, and the CI platform's own
+XML-consuming step does the reporting integration, which is why the same
+Pester output format works unmodified across different CI providers.
+
+`$LASTEXITCODE` versus PowerShell's own error state are two entirely
+separate signals that CI scripts often need to reconcile manually:
+`$LASTEXITCODE` is set only after invoking a **native external
+executable** (reflecting that process's own exit code), while a failed
+*cmdlet* call sets `$?` to `$false` and appends to `$Error` — neither
+mechanism updates the other, which is why a script calling both native
+tools and cmdlets needs explicit checks against both signals to correctly
+detect and propagate failure to the calling CI job's exit code.
+
 ## Exercise
 
 Add a `Lint` task to `build.ps1` that runs `Invoke-ScriptAnalyzer`

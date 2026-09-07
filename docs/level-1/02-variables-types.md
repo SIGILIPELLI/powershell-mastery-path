@@ -147,6 +147,41 @@ Write-Output $counter   # 1
 | `$null -eq $x` | safe null check |
 | `$script:x` | reference script scope explicitly |
 
+## How It Actually Works
+
+A PowerShell variable is not a text label pointing at a string — it's an
+entry in a `SessionStateScope`'s variable table, stored as a `PSVariable`
+object that wraps a live reference to a boxed .NET object on the CLR heap.
+When you write `$x = 5`, the engine doesn't store "5"; it creates a boxed
+`System.Int32`, wraps it in a `PSObject` (PowerShell's universal object
+envelope, which is how every value — even primitives — carries an
+`ExtendedTypeSystem` layer of adapted properties/methods), and stores a
+reference to that `PSObject` in `$x`'s `PSVariable.Value` slot.
+
+Type coercion at assignment time (`[int]$x = "5"`) goes through the
+**LanguagePrimitives.ConvertTo** pipeline, a chain of converters tried in
+order: an explicit `IConvertible`/parse method on the target type, a
+registered `PSTypeConverter`, then a last-resort reflection-based property
+match. This is why `[datetime]"2026-01-01"` works (a registered converter
+calls `DateTime.Parse` with culture-aware parsing) while converting to an
+unrelated custom type throws `PSInvalidCastException` — there's no
+converter in the chain that knows how to bridge the two types.
+
+`$null` is its own singleton instance of `AutomationNull`/`NullVariable`
+under the hood, not literally CLR `null` in most contexts — comparisons
+like `$null -eq $x` are engine-special-cased so array-unwrapping semantics
+(`-eq` against a collection returns matching elements, not a boolean)
+don't accidentally swallow null checks, which is also why PowerShell style
+guides insist on `$null -eq $x` rather than `$x -eq $null`.
+
+Variable **scope** is implemented as a linked list of `SessionStateScope`
+objects, one per function call frame, script block, or module boundary.
+Reading a variable walks up the parent-scope chain until it finds a match
+(dynamic-like lookup), but *writing* a bare `$x = ...` always creates or
+updates it in the **current** scope only — `$script:`, `$global:`, and
+`$using:` are explicit scope-modifier prefixes that redirect the write
+target to a specific scope object instead of the default local one.
+
 ## Exercise
 
 Write `convert.ps1` that declares a string variable holding `"123"`, casts it

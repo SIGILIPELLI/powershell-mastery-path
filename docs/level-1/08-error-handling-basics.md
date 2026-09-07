@@ -159,6 +159,44 @@ if ($null -eq $config) {
 | `$Error` | session-wide list of past errors, most recent first |
 | `-ErrorAction Stop/SilentlyContinue/Continue/Inquire` | control how non-terminating errors behave |
 
+## How It Actually Works
+
+PowerShell has two genuinely different error mechanisms sharing one
+vocabulary, and confusing them is the single biggest source of "my
+try/catch didn't catch it" bugs. A **terminating error** unwinds the call
+stack as a real CLR exception (`RuntimeException` subclasses like
+`RuntimeException`, `CommandNotFoundException`, or your own `throw`'d
+object wrapped in `RuntimeException`) — this is what `try/catch` is built
+to intercept, because `catch` is compiled to an actual CLR `catch` block
+around the `try` script block's execution. A **non-terminating error**,
+by contrast, is a cmdlet calling `WriteError()` on its internal
+`Cmdlet` API — it appends an `ErrorRecord` to the error stream and the
+cmdlet's `ProcessRecord` *keeps running*; no exception is thrown, so a
+bare `try/catch` around it does nothing at all, which is exactly why
+`Get-ChildItem BadPath -ErrorAction Stop` (forcing the non-terminating
+error to escalate into a terminating one) or checking `-ErrorVariable`
+afterward are the two real ways to handle it.
+
+Every error, terminating or not, materializes as an `ErrorRecord` — a
+structured object holding the `Exception`, a `CategoryInfo` (a coarse
+classification like `ObjectNotFound` or `PermissionDenied` used for
+`-ErrorAction`/filtering), a `FullyQualifiedErrorId` (a stable string
+identifier meant for programmatic matching, unlike the free-text message),
+and `InvocationInfo` (line number, script path, offending command) — this
+structured shape is why `catch { $_.Exception.Message }` and
+`catch { $_.CategoryInfo.Reason }` are both meaningful on the same caught
+object: `$_` in a catch block is the `ErrorRecord`, not the raw exception.
+
+`-ErrorAction` is implemented as a **common parameter** injected into
+every cmdlet's parameter set by the engine (not opted into per-cmdlet), and
+it works by wrapping the cmdlet's calls to `WriteError` — `Stop` makes
+`WriteError` throw instead of append, `SilentlyContinue` makes it a no-op,
+`Continue` (the default) appends to `$Error`/the error stream and
+displays it. `$Error` itself is a fixed-capacity queue
+(`$Error.Count` capped by `$MaximumErrorCount`, default 256) maintained by
+the engine on every error of either kind, which is why it accumulates
+across an entire session, not just the current statement.
+
 ## Exercise
 
 Write `safe-divide.ps1` containing a function `Invoke-SafeDivide` that takes

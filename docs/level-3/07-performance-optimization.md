@@ -145,6 +145,45 @@ profiler modules (e.g. `PSProfiler` from the gallery) go deeper than
 | `Format-*`, `Out-GridView` inside a loop | avoid — format once, after the loop |
 | `Measure-Command { }` | compare two implementations directly, run several times |
 
+## How It Actually Works
+
+`Measure-Command` works by capturing a `System.Diagnostics.Stopwatch`
+timestamp immediately before and after invoking your script block as a
+single pipeline execution — it reports **wall-clock elapsed time**, not
+CPU time, which is why I/O-bound code (network calls, disk reads) shows
+large `Measure-Command` numbers that don't reflect CPU cost, and why
+comparing two approaches fairly usually means running each multiple times
+and looking at the distribution, not trusting one sample against JIT
+warm-up variance.
+
+The `+=` array anti-pattern's actual cost is allocation, not iteration:
+each `$arr += $x` calls into the array-building AST node, which allocates
+a new `System.Object[]` sized `N+1`, calls `Array.Copy` to move all `N`
+existing elements, then appends the new one — the copy cost grows
+linearly with array size, so total cost across a loop of `N` iterations is
+the sum `1+2+...+N`, which is O(N²). `[System.Collections.Generic.
+List[T]].Add()` avoids this because `List<T>` maintains spare backing-
+array capacity and only reallocates (typically doubling) when that
+capacity is exhausted, making amortized per-`Add()` cost O(1).
+
+`ForEach-Object` script-block iteration is measurably slower per element
+than a native `foreach` statement for the same reason `Where-Object`'s
+simplified syntax beats its script-block form: each `ForEach-Object`
+invocation calls into the cmdlet's `ProcessRecord`, invokes your script
+block as a genuine nested scope creation and pipeline dispatch through the
+full cmdlet-calling machinery, while `foreach ($x in $collection) { }` is
+a language-level loop construct executed directly by the AST interpreter
+with no per-element cmdlet-call or child-scope overhead — for large
+in-memory collections where you don't need streaming, that per-element
+overhead is exactly what accumulates into a real, measurable difference.
+
+The `Where-Object`/`.Where()` method distinction is similar:
+`$collection.Where({...})` is a native collection method added to arrays
+by PowerShell's own type extension, evaluated without going through the
+pipeline's object-by-object streaming machinery at all — it can be faster
+for in-memory filtering precisely because it skips pipeline dispatch
+overhead entirely, operating as a single method call over the whole array.
+
 ## Exercise
 
 Take a script that builds a report by looping over 50,000 numbers,

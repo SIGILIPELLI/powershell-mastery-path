@@ -159,6 +159,42 @@ accounts instead of the right 12.
 | `New-ADOrganizationalUnit -ProtectedFromAccidentalDeletion $true` | create OU with delete protection |
 | `-WhatIf` | dry-run any state-changing AD cmdlet before running for real |
 
+## How It Actually Works
+
+The ActiveDirectory module's cmdlets are a PowerShell-native layer over
+**ADSI (Active Directory Service Interfaces)** and, underneath that, the
+**LDAP protocol** — `Get-ADUser -Filter {...}` compiles your PowerShell
+expression syntax filter into an actual LDAP search filter string
+(parenthesized prefix-notation boolean expressions like
+`(&(objectClass=user)(sAMAccountName=jdoe))`) before sending it to the
+domain controller; this is why AD filter syntax has quirks that don't
+match normal PowerShell semantics (certain operators are unsupported, and
+some property comparisons require `-LDAPFilter` directly when the
+translated filter can't express what you need) — you're not filtering an
+in-memory PowerShell collection, you're generating a query the directory
+server executes and only the matching results cross the wire.
+
+Directory objects are returned as `Microsoft.ActiveDirectory.Management.
+ADAccount`/`ADUser`/`ADObject` types that lazily hydrate: by default,
+`Get-ADUser` returns only a small default property set, and accessing a
+property outside that set (say, `MemberOf` without having requested it
+via `-Properties`) returns `$null` even though the attribute has a real
+value in the directory — this isn't a bug, it's ADSI's cost-control
+design, since AD schema objects can carry hundreds of attributes and
+fetching all of them for every result would be expensive at directory-
+server scale; `-Properties *` or explicit property names are how you tell
+the underlying LDAP query to actually retrieve those attributes.
+
+Bulk operations without `-WhatIf` are dangerous specifically because AD
+write operations are near-**immediately replicated**: a change committed
+to one domain controller propagates to others via AD's multi-master
+replication topology on its own schedule (seconds to minutes depending on
+site links), so a mistaken bulk `Remove-ADUser` isn't a local, easily
+reverted action — by the time you notice, the deletion may already have
+replicated to other DCs, which is exactly the scenario `-WhatIf`'s
+`ShouldProcess` gate (built on the same mechanism from Module 02's cmdlet
+design) is meant to prevent you from reaching irreversibly.
+
 ## Exercise
 
 On a real (or lab/test) AD environment: write a script that finds all

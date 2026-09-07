@@ -161,6 +161,44 @@ directly rather than `ls`, `dir`, or any alias whose target varies.
 | `ls`, `dir`, other aliases | call `Get-ChildItem` directly in portable scripts |
 | Environment variables | `$env:PATH` uses `[System.IO.Path]::PathSeparator` to split (`:` vs `;`) |
 
+## How It Actually Works
+
+`pwsh` achieves genuine cross-platform behavior because the engine itself
+— parser, AST interpreter, object pipeline, type system — is written
+entirely in managed .NET code with no Windows API dependency; the parts
+that *do* differ by OS (file system semantics, path separators, process
+launching) are isolated behind .NET's own cross-platform abstraction
+layer (`System.IO`, `System.Diagnostics.Process`), not reimplemented per
+platform inside PowerShell itself. This is why the core language behaves
+identically everywhere, while a comparatively small set of cmdlets
+(`Get-WmiObject`, `Get-EventLog`, most of `ActiveDirectory`) are
+Windows-only: they wrap Windows-specific COM/WMI/registry APIs that
+simply have no equivalent surface on macOS/Linux, not because the engine
+treats those platforms as second-class.
+
+Aliases that "only exist on some platforms" are a direct consequence of
+`pwsh`'s **compatibility aliasing** for interactive convenience: on
+Windows, `ls`, `cp`, `rm`, `cat` are PowerShell aliases pointing at
+`Get-ChildItem`/`Copy-Item`/`Remove-Item`/`Get-Content` — but on Linux/
+macOS, `pwsh` deliberately **does not** register some of these aliases
+(`ls`, `cat`, etc.) at startup specifically because a real Unix binary
+of the same name already exists on `PATH`, and shadowing it would be
+surprising for users mixing PowerShell with native shell tools. This
+means a script relying on the alias `ls` behaves differently by platform
+not due to any semantic difference in PowerShell itself, but due to a
+startup-profile decision about which aliases to pre-register — using the
+full cmdlet name sidesteps the whole issue.
+
+Path handling differences (`/` vs `\`, case sensitivity) trace back to the
+underlying filesystem's own semantics exposed through .NET's `Path`/
+`FileSystemInfo` APIs — NTFS is case-preserving-but-insensitive by
+default while ext4/APFS (in typical configurations) are case-sensitive,
+so `Test-Path './Foo.txt'` and `Test-Path './foo.txt'` can genuinely
+return different answers on Linux for files that would be indistinguishable
+on Windows; `Join-Path`/`[System.IO.Path]::Combine` normalizing separators
+correctly for the current platform is what lets script logic stay
+platform-agnostic despite this.
+
 ## Exercise
 
 Take a script that assumes Windows (uses `$env:USERPROFILE`, backslash

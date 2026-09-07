@@ -177,6 +177,39 @@ determined attacker. Don't design a security model that depends on it.
 | `Select-String -Pattern 'password\|apikey\|secret'` | quick pre-commit secret sweep |
 | `ExecutionPolicy` | accident prevention, not an attacker-facing security boundary |
 
+## How It Actually Works
+
+Script signing verification runs through the same **Authenticode**
+mechanism Windows uses for executables: a signed `.ps1` has a base64
+PKCS#7 signature block appended as a trailing comment
+(`# SIG # Begin signature block`), and `Get-AuthenticodeSignature`/the
+engine's execution-policy check reads that block, extracts the signer's
+certificate chain, and validates it against the trusted root/publisher
+certificate stores using standard X.509 chain-building and revocation
+checking (CRL/OCSP, if reachable) — this is why moving or re-saving a
+signed script with a different line-ending style can invalidate its
+signature: the signature covers the *exact byte content* of the script up
+to the signature block, so even a whitespace change makes the hash no
+longer match.
+
+Execution policy itself is enforced by the **engine's script-invocation
+gate**, checked once when a `.ps1` file is about to run (not per-line, and
+not for code typed directly at an interactive prompt or passed via
+`-Command`) — this asymmetry is the actual mechanical reason execution
+policy is explicitly documented as a safety rail, not a security boundary:
+anyone with the ability to type PowerShell commands interactively, or to
+invoke `powershell -EncodedCommand`, bypasses the file-based check
+entirely because there's no file for the gate to inspect.
+
+**Constrained Language Mode** and **JEA (Just Enough Administration)**
+are the actual security boundaries the docs point toward instead: CLM is
+enforced by the runspace's `LanguageMode` property, which the engine
+consults before allowing certain AST node types (arbitrary .NET type
+instantiation, `Add-Type`, COM object creation) to execute at all —
+under CLM those constructs throw `PSSecurityException` at parse-adjacent
+validation time, not merely as policy advice, because the interpreter
+itself refuses to build/execute those AST nodes when the mode is active.
+
 ## Exercise
 
 Write a function `Test-SecretExposure` that scans a directory of `.ps1`

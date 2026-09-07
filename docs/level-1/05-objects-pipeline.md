@@ -166,6 +166,42 @@ own property names and types.
 | `Format-Table` / `Format-List` | control display (not the underlying data) |
 | `$_` | the current object in the pipeline |
 
+## How It Actually Works
+
+PowerShell's pipeline is not a byte stream between processes the way a
+Unix pipe is — it's a sequence of live .NET object references passed
+one-at-a-time between cmdlets running on the *same thread* inside the
+*same runspace*, with no serialization in between (serialization only
+happens crossing a remoting boundary). Every value in the pipeline is
+wrapped in a `PSObject`, which carries two layers: the underlying .NET
+object (`BaseObject`) and an **adapted member set** — properties, script
+methods, and note properties attached by `Update-TypeData`,
+`ETS` (Extended Type System) rules in `*.types.ps1xml`, or ad hoc via
+`Add-Member`. This is why `Get-Process | Select-Object Name, WS` can show
+a `WS` property that isn't a real field on `System.Diagnostics.Process` —
+it's an ETS alias property defined in PowerShell's own type data.
+
+Cmdlet chaining (`Get-Process | Where-Object ... | Sort-Object ...`)
+executes with **streaming, per-object semantics**, not batch-then-forward:
+each cmdlet in the pipe is instantiated once, and the pipeline processor
+calls the first cmdlet's `ProcessRecord` once, then immediately calls the
+next cmdlet's `ProcessRecord` with that single object, all the way down
+the chain, before returning for the next object. This is why a badly
+ordered pipeline (`Sort-Object` before a slow filter) is slower — sorting
+requires buffering the *entire* stream (it must see every object before
+it can emit the first one), which breaks the streaming model and forces a
+synchronous barrier, unlike a pure filter like `Where-Object` that can
+pass objects through one at a time.
+
+`Where-Object` and `ForEach-Object` predicates run as compiled
+`ScriptBlock` delegates invoked once per pipeline object with `$_`
+(`$PSItem`) bound in a fresh child scope — the "simplified syntax" forms
+(`Where-Object Status -eq 'Running'`) bypass script-block compilation
+entirely and instead build a comparison directly against the named
+property via reflection/ETS lookup, which is marginally faster and also
+why that syntax can't express compound conditions the way a script block
+predicate can.
+
 ## Exercise
 
 Write `top-processes.ps1` that gets all running processes, filters to those

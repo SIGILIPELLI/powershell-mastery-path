@@ -192,6 +192,41 @@ renamed or deleted a function and want to confirm it's actually gone.
 | `Get-Command -Module Name` | confirm exactly what's exported |
 | Dot-sourcing outside `.psm1` | anti-pattern — bypasses the whole module boundary |
 
+## How It Actually Works
+
+A multi-file module (a `.psm1` that dot-sources or `Import`s several
+`Private`/`Public` `.ps1` files) still ends up as **one flat child session
+state** — every function defined by every dot-sourced file lands in the
+same module-scoped function table, which is why the common "loop over
+`Public/*.ps1` and `Private/*.ps1`, dot-source each" pattern works: dot-
+sourcing inside the module's own script runs each file's code directly in
+the module's session state (not a further nested child state), so
+functions defined in `Private/Helper.ps1` are immediately visible to code
+in `Public/DoThing.ps1`, exactly as if they'd all been typed into one
+`.psm1` file — the file split is purely an authoring convenience with no
+runtime scoping consequence.
+
+What actually enforces "public vs. private" is `Export-ModuleMember`
+(or the manifest's `FunctionsToExport`), which controls what the module's
+**exported command table** — a separate list the engine attaches to the
+`PSModuleInfo` object — exposes to the *importing* session's global scope.
+Everything not listed there stays reachable from other functions *inside*
+the module (since they share session state) but is absent from the
+caller's command table entirely, which is why calling an unexported
+helper from outside the module fails with `CommandNotFoundException`
+rather than an access-denied error — as far as the caller's scope is
+concerned, the command simply doesn't exist.
+
+`Remove-Module` followed by `Import-Module -Force` (rather than just
+`-Force` alone) matters because `-Force` re-runs the module script but
+doesn't necessarily start from a completely clean session state if
+stale script-scoped variables or event subscriptions from the previous
+load are still referenced elsewhere (e.g., registered `Register-
+ObjectEvent` handlers) — `Remove-Module` explicitly runs the module's
+`OnRemove` script block and tears down its session state object before
+the next import builds a fresh one, which is the more reliable way to get
+a truly clean reload during iterative development.
+
 ## Exercise
 
 Build a `MathToolkit` module with the same Public/Private split: a public

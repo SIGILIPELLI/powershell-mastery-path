@@ -161,6 +161,38 @@ into a clean folder before calling `Publish-Module` on that.
 | Declare PowerShell/module dependencies | `#Requires`, `RequiredModules` in manifest |
 | Keep the publish folder clean | scope `-Path` to only real module content |
 
+## How It Actually Works
+
+`Publish-Module` doesn't upload your working directory as-is — it first
+runs the same manifest validation `Test-ModuleManifest` performs (parsing
+the `.psd1` in restricted language mode, as covered in Module 08's
+manifest mechanics), then packages the module folder into a **NuGet
+package** (`.nupkg`, a renamed ZIP with a NuGet-specific manifest
+generated from your `.psd1` fields), because the PowerShell Gallery is
+built on NuGet's hosting/versioning infrastructure under the hood —
+`Find-Module`/`Install-Module` are PowerShell-shaped clients over what is
+functionally a NuGet feed, which is why module versions follow strict
+semantic-version parsing rules (NuGet's own `NuGetVersion` type) and why
+a malformed version string in your manifest fails publishing with a NuGet-
+level error rather than a PowerShell-specific one.
+
+Because the entire module folder becomes the package payload, "local/test
+artifacts still in the folder" (a `bin/Debug` build output, a stray
+`.git` directory, local test-data fixtures) get packaged and published
+verbatim — there's no build step that prunes non-essential files unless
+you explicitly maintain a separate build/staging folder and publish
+*that*, which is exactly why real-world module projects keep source
+layout separate from the folder actually passed to `Publish-Module`.
+
+Version immutability on the Gallery (you can't overwrite `1.2.0` once
+published, only publish a new version) mirrors NuGet's own immutable-
+package-version guarantee — this exists specifically so that anyone who
+already resolved a dependency against `1.2.0` keeps getting the exact
+bytes they tested against, which is the same reasoning behind
+`RequiredVersion`/`ModuleVersion` semantics in `RequiredModules` from
+Module 08: the whole dependency-resolution model assumes a given
+version string always refers to identical, unchanging content.
+
 ## Exercise
 
 Take the `AdminToolkit` module from Level 3's project. Generate its

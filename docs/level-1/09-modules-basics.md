@@ -128,6 +128,37 @@ in depth in Level 3).
 | `Remove-Module` | unload a module from the session |
 | `. ./script.ps1` | dot-source a script into the current scope |
 
+## How It Actually Works
+
+Importing a module is not "running a script" in the way dot-sourcing is —
+`Import-Module` creates a **child session state** (a nested scope with its
+own function/variable/alias tables) and executes the module's script
+inside that child state, then selectively **exports** a subset of its
+members back into your caller's session as `FunctionInfo`/`AliasInfo`
+objects registered against the module. This is the actual mechanism
+behind module encapsulation: a helper function you don't `Export-
+ModuleMember` genuinely doesn't exist outside the module's own scope —
+it's not hidden by convention, it's unreachable because it lives in a
+session state your current scope has no reference to.
+
+**Dot-sourcing** (`. .\script.ps1`) is the opposite: it runs the script's
+code directly in the *caller's own current scope*, no child session state
+created at all, so every variable and function the script defines lands
+straight into your session as if you'd typed it yourself — that's exactly
+why dot-sourced helper scripts can accidentally clobber your existing
+variables, while an imported module's internals can't.
+
+Module discovery walks `$env:PSModulePath`, a semicolon/colon-separated
+list of directories, checking each for a subfolder matching the module
+name containing either a `.psd1` manifest or a same-named `.psm1`/`.dll`.
+The manifest (`.psd1`) isn't code — it's a restricted-mode hashtable
+literal (`RootModule`, `ModuleVersion`, `RequiredModules`,
+`FunctionsToExport`, ...) that the module loader parses in a
+constrained-language context before deciding *how* to load the module,
+which is how PowerShell can validate compatibility (`PowerShellVersion`,
+`CompatiblePSEditions`) and pre-declare exports without ever executing the
+module's actual code.
+
 ## Exercise
 
 Create a `StringHelpers.psm1` module with two functions —

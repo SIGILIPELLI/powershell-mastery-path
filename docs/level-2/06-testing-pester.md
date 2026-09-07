@@ -245,6 +245,43 @@ tests.
 | `-ForEach @(...)` | run one `It` block once per data row |
 | `Invoke-Pester -Path ... -Output Detailed` | run tests from the command line |
 
+## How It Actually Works
+
+Pester's `Describe`/`Context`/`It` blocks aren't plain function calls
+executed top to bottom — they run in **two passes**. The first (discovery)
+pass executes only the `Describe`/`Context` container script blocks
+themselves, walking the tree to build up the full set of `It` blocks that
+exist, without running any `It` body yet; this is why code placed directly
+inside a `Describe` block but outside `BeforeAll`/`It` runs once at
+discovery time regardless of how many tests are inside it, and why Pester
+explicitly warns against doing real work (like calling the function under
+test) at that level. The second (run) pass then actually executes each
+discovered `It` block's body, along with the `BeforeEach`/`AfterEach`
+hooks scoped to it.
+
+`Mock` works by runtime-replacing the target command's entry in the
+current session's command table — inside the mock's scope, calling
+`Get-Content` doesn't resolve to the real cmdlet at all; Pester's mock
+infrastructure has swapped in a proxy function under that name, so any
+code path (yours or a dependency's) that calls `Get-Content` by name
+gets intercepted, which is also why mocking only works reliably when the
+code under test calls commands *by name* rather than holding a
+pre-resolved reference to them.
+
+`Should` assertions build a structured **assertion failure object**
+(pattern, actual value, expected value) rather than just throwing a
+generic string exception — this is what lets Pester's test-result
+exporter (`-PassThru`/NUnit XML output for CI) show rich diffs, because
+the failure carries the comparison metadata rather than a rendered
+message string that would need to be re-parsed.
+
+`-ForEach` data-driven tests expand at **discovery time**: each element of
+the array you pass becomes a separate, independently-named `It` block
+instantiated from the same script-block template, with `$_`/named
+properties bound per iteration — this is why a failure in one `-ForEach`
+case reports as its own distinct test in results rather than a single
+test that failed partway through a manual loop.
+
 ## Exercise
 
 Add a function `Test-PasswordStrength` to a module that returns `$true` if

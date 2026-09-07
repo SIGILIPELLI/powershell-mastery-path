@@ -172,6 +172,48 @@ past this point" to anyone depending on the module.
 | `RequiredModules` | fail fast if a dependency is missing |
 | `Import-Module <folder>` | loads via the manifest automatically |
 
+## How It Actually Works
+
+A module manifest (`.psd1`) is parsed in the engine's **restricted
+language mode** — it's evaluated as a data-literal hashtable, not as
+general PowerShell script, so it can only contain literal values,
+arrays, and nested hashtables, never a function call or a variable
+reference to anything outside the file. This restriction is deliberate:
+`Test-ModuleManifest` and `Import-Module` both need to read manifest
+metadata *without executing arbitrary code*, which is why manifests can
+be safely inspected by tooling (the PowerShell Gallery, `Find-Module`)
+without ever running the module itself.
+
+`FunctionsToExport`/`CmdletsToExport`/`AliasesToExport` set explicitly (as
+literal name lists, not `'*'`) rather than relying on the module script's
+own `Export-ModuleMember` calls has a real performance and tooling
+consequence: `Import-Module` can populate the module's exported-command
+table straight from manifest data without loading and running the
+module's script body at all when only inspecting available commands
+(`Get-Command -Module Foo` in some scenarios can use manifest-only
+data) — wildcard exports (`'*'`, the default when unspecified) force the
+engine to actually load the module to discover what it exports, which is
+slower and also why the Gallery's static analysis penalizes wildcard
+exports.
+
+`RequiredModules` in the manifest is enforced *before* your module's own
+code runs: `Import-Module` walks the dependency list first, recursively
+resolving and importing each one (checking `ModuleVersion`/`RequiredVersion`
+compatibility against what's already loaded in the session), and fails
+the whole import with a clear dependency error if a required module can't
+be found — this pre-check is what prevents your module's script body from
+partially executing and leaving the session in an inconsistent state when
+a dependency is missing.
+
+Semantic version comparisons (`ModuleVersion '2.1.0'` vs. a consumer's
+`RequiredModules @{ModuleName='Foo'; ModuleVersion='2.0.0'}`) use .NET's
+`System.Version`/`SemanticVersion` comparison operators under the hood —
+`ModuleVersion` in a dependency declaration is actually a **minimum**
+version constraint (satisfied by anything greater-or-equal), while
+`RequiredVersion` demands an exact match; the manifest system doesn't do
+its own numeric parsing, it hands the version strings straight to these
+.NET comparison types.
+
 ## Exercise
 
 Turn the `MathHelpers.psm1` module from Level 1's module exercise (or write

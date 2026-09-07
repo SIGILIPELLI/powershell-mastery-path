@@ -204,6 +204,46 @@ code for branching logic (retry on 503, fail fast on 401, etc.).
 | `-ResponseHeadersVariable` / `-StatusCodeVariable` | capture headers/status alongside the parsed body |
 | `-ErrorAction Stop` | required for `try/catch` to catch a non-2xx response |
 
+## How It Actually Works
+
+`Invoke-RestMethod` is not `Invoke-WebRequest` with automatic parsing
+bolted on for convenience — it inspects the response's `Content-Type`
+header and dispatches to a format-specific deserializer (JSON via
+`System.Text.Json`/`JavaScriptSerializer`, XML via `XmlDocument`, RSS/Atom
+via feed parsing) and hands back **already-materialized PowerShell
+objects**, whereas `Invoke-WebRequest` always gives you the raw
+`HttpResponseMessage` wrapper with `.Content` as a byte/string payload you
+must parse yourself. This is the real distinction, not "REST vs. web" as
+the names suggest — you can call a JSON API with `Invoke-WebRequest` and
+manually pipe `.Content` through `ConvertFrom-Json`, but `Invoke-
+RestMethod` does that content-negotiation step for you.
+
+`ConvertFrom-Json` parses text into either `PSCustomObject` (default) or,
+with `-AsHashtable`, a `Hashtable`/`OrderedDictionary` tree — the default
+`PSCustomObject` path matters because JSON objects have no fixed .NET
+type, so each JSON object becomes a synthetic ETS-only object with
+note properties for each JSON key, recursively, all the way down; property
+*names* that aren't valid PowerShell identifiers still work via
+`$obj.'weird-name'` because ETS property access doesn't require identifier
+syntax, only dot-or-quote member access.
+
+Authentication headers and body serialization both hinge on the same
+content-negotiation logic: `-Body` combined with `-ContentType
+'application/json'` sends the string as-is, but passing a hashtable to
+`-Body` without JSON conversion sends it as `application/x-www-form-
+urlencoded` key/value pairs instead — the cmdlet infers encoding from
+what you hand it and the declared content type, not from any deep
+inspection of your data's shape, which is the actual reason
+`-Body (ConvertTo-Json $obj)` is written explicitly rather than relying on
+implicit conversion.
+
+Non-2xx responses throw a **terminating** `HttpResponseException`/
+`WebException` from `Invoke-RestMethod`, unlike a plain socket call which
+would just hand you the error body — this is why `try/catch` around API
+calls is idiomatic here specifically, and why the error response body
+(often containing the API's own error JSON) has to be extracted from
+`$_.Exception.Response` rather than from a normal successful return value.
+
 ## Exercise
 
 Write a function `Get-RandomJoke` that calls `https://official-joke-api.appspot.com/random_joke`,

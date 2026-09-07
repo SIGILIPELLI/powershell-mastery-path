@@ -173,6 +173,39 @@ people coming from imperative scripting.
 | `DependsOn = "[Type]Name"` | force one resource to apply after another |
 | `Get-DscConfiguration` | show current state as last applied |
 
+## How It Actually Works
+
+A DSC configuration block looks like a function call but compiles to
+something categorically different: `Configuration Foo { Node 'x' {
+WindowsFeature ... } }` is parsed by a special **configuration keyword**
+handler that, instead of executing resource blocks as statements, builds a
+declarative document — a **MOF (Managed Object Format) file**, the same
+CIM/WMI schema format used across DMTF-standard system management. Running
+the configuration function doesn't apply anything; it *compiles* your
+declarative intent into `.mof` files (one per targeted node), which is
+exactly why DSC configurations feel non-imperative — the block's body
+describes desired end-state data, not a sequence of actions to run in
+order.
+
+Applying that MOF is a separate step (`Start-DscConfiguration`) that hands
+the compiled document to the **Local Configuration Manager (LCM)**, a
+component that runs as a scheduled/background engine on the target and is
+responsible for the actual reconciliation loop: for each resource entry in
+the MOF, the LCM calls that DSC resource's `Test-TargetResource` function
+first — if it reports the system already matches desired state, the LCM
+skips straight to the next resource; only on a mismatch does it call
+`Set-TargetResource` to make the change. This test-then-set pattern is
+the real mechanism behind DSC's idempotency guarantee — resources are
+required to implement `Get`/`Test`/`Set` precisely so the engine never
+needs to guess whether a change is necessary.
+
+Because the LCM itself keeps running (in `ApplyAndMonitor`/
+`ApplyAndAutoCorrect` modes) on a periodic pull/push schedule, DSC
+provides genuine configuration drift detection and correction — a change
+made outside DSC's control (someone manually disabling the feature you
+declared) gets detected and reverted on the LCM's next consistency pass,
+something a one-shot imperative script has no built-in mechanism to do.
+
 ## Exercise
 
 Write a `configuration` block named `DevBoxSetup` that ensures: a

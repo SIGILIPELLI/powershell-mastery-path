@@ -170,6 +170,45 @@ New-Greeting @params    # Hi, Ada!   <- @ instead of $ "splats" the hashtable as
 | `process { }` | per-item block for pipeline input |
 | `@params` | splat a hashtable as named arguments |
 
+## How It Actually Works
+
+A PowerShell function is compiled into a `FunctionInfo`/`ScriptBlock`
+pair stored in the session's function provider drive (`function:`) — which
+is why you can literally do `Get-Item function:Get-Foo` or delete a
+function with `Remove-Item function:Get-Foo`; functions live in the same
+provider-drive abstraction as files.
+
+Parameter binding is the part with real machinery behind it: when you call
+a function, the engine's **parameter binder** does not just match
+positional order. It runs a multi-pass algorithm — first binding all named
+parameters, then binding remaining positional arguments to remaining
+parameters in declared position order, then attempting to bind leftover
+arguments via pipeline input (`ByValue`, then `ByPropertyName`) if the
+function declares pipeline-aware parameters. This is the same binder
+cmdlets use, so `param()` blocks with `[Parameter()]` attributes get
+*identical* treatment to compiled cmdlet parameters — mandatory-parameter
+prompting, `ValidateSet`/`ValidateRange` checks, and type coercion all run
+during this binding phase, before your function body executes a single
+line.
+
+`[CmdletBinding()]` upgrades a function from a "simple function" to an
+**advanced function**, which changes execution shape: the engine now calls
+optional `Begin`/`Process`/`End` blocks the way it calls a compiled
+cmdlet's `BeginProcessing`/`ProcessRecord`/`EndProcessing` — `Process` runs
+once per pipeline input object, which is the actual mechanism behind
+"pipeline input" rather than a documentation convention. Without
+`CmdletBinding`, a function has no `Process` block semantics and pipeline
+input just accumulates into `$input` for a single pass.
+
+Return values are not built with a `return` keyword pushing one value onto
+a stack — **anything not captured, suppressed, or redirected inside a
+function body is written to the pipeline's output stream automatically**.
+`return $x` is sugar for `Write-Output $x` followed by an early exit, which
+is exactly why an unassigned `Get-ChildItem` call buried in the middle of
+a function silently leaks extra objects into your function's output: the
+engine has no concept of "the value the function produced" separate from
+"everything the function's pipeline emitted."
+
 ## Exercise
 
 Write `Get-BMI.ps1` containing a function `Get-BMI` that takes mandatory

@@ -155,6 +155,42 @@ restricted session from the inside.
 | `Register-PSSessionConfiguration` | activates the endpoint (Windows/WinRM) |
 | Testing as the restricted role | the only real verification of what's actually exposed |
 
+## How It Actually Works
+
+JEA works by registering a **session configuration** (`Register-
+PSSessionConfiguration -Path Role.pssc`) with WinRM that WSMan consults
+when establishing a remoting connection targeting that specific
+endpoint — this is the same WSMan/WinRM transport from Module 05's
+remoting basics, but instead of connecting to the default shell resource
+(a full, unrestricted PowerShell session), the client connects to a named
+endpoint whose session configuration file declares a **restricted
+runspace**: a `RoleDefinitions` mapping from security-group membership to
+a specific set of visible cmdlets/functions, run under a **virtual
+account** or a configured gMSA rather than the connecting user's own
+credentials.
+
+The privilege boundary is enforced at two layers simultaneously, which is
+why it's meaningfully different from just hiding a menu in a UI: the
+session's `LanguageMode` is forced to `NoLanguage`/`ConstrainedLanguage`
+(so arbitrary script execution, `Add-Type`, or .NET type instantiation
+outside the allow-listed surface is refused by the interpreter itself,
+not just by convention), and the visible command table only contains
+`VisibleCmdlets`/`VisibleFunctions` explicitly whitelisted in the role
+capability file — a command not on that list isn't merely hidden from
+tab-completion, it genuinely isn't registered in that restricted
+runspace's command table, so `Invoke-Expression "Remove-Item ..."` fails
+with `CommandNotFoundException` exactly like calling a truly nonexistent
+cmdlet, because as far as that runspace is concerned, it is one.
+
+The reason testing must happen *as the restricted role* rather than as an
+administrator connecting normally is structural: an admin's ordinary
+`Enter-PSSession` doesn't route through the JEA endpoint's session
+configuration at all unless you explicitly target it with
+`-ConfigurationName`, so testing without specifying that endpoint
+silently exercises the full unrestricted session and tells you nothing
+about whether the role capability file's whitelist actually permits the
+workflow you designed it for.
+
 ## Exercise
 
 Design (as `.psrc`/`.pssc` files, without needing a live WinRM endpoint to

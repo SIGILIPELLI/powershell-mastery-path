@@ -178,6 +178,45 @@ adjustable with `-ThrottleLimit`) and returns all results tagged with
 | `Invoke-Command -ComputerName @(...)` | parallel fan-out, per-machine | one-off command across many machines |
 | `-ThrottleLimit` | caps concurrency | always set deliberately, don't rely on the default |
 
+## How It Actually Works
+
+`Start-Job` creates a genuinely separate child **process**
+(`wsmprovhost`/a background `pwsh` host, depending on job type), not a
+thread inside your current session — this is the actual reason job
+results have to be *serialized* out and deserialized back via
+`Receive-Job`, exactly like the CLIXML round-trip covered for remoting in
+Module 05: a background job's `$using:`-captured variables and its
+returned objects both cross a process boundary, so live .NET handles
+(open file streams, COM objects) don't survive the trip, only their
+serialized snapshot does.
+
+`Start-ThreadJob` (from the `ThreadJob` module) exists specifically to
+avoid that overhead for CPU-light, I/O-bound parallel work: it runs your
+script block on a separate **thread within the same process**, sharing
+the same AppDomain and object heap, so no serialization boundary exists
+between the job and your session at all — this is why `ThreadJob` starts
+dramatically faster than `Start-Job` (no new process/runspace-host
+startup cost) and why its results can, in principle, share references
+with the caller, though the module still copies data through job
+result queues for consistency with the `Job` API surface.
+
+`ForEach-Object -Parallel` (PowerShell 7+) is built on `ThreadJob`-style
+runspaces under the hood but manages a **pool** of them explicitly: it
+creates up to `-ThrottleLimit` runspaces up front and feeds pipeline
+input into whichever is free, which is exactly why each parallel
+iteration's script block runs in *its own isolated runspace* with its own
+session state — this is the real reason `$using:` is mandatory to reach
+variables from the enclosing scope inside a `-Parallel` block: without
+it, the parallel runspace has no natural path to your caller's variable
+table at all, since it's not the same runspace and there's no scope chain
+connecting them the way nested script-block scopes normally work.
+
+Multi-machine `Invoke-Command -ComputerName @(...)` runs each target's
+WSMan session **concurrently**, not sequentially — the cmdlet opens one
+WinRM shell resource per target machine in parallel and manages
+`-ThrottleLimit` simultaneous connections, waiting for and collecting
+results as each remote runspace's SOAP response returns.
+
 ## Exercise
 
 Write a script that takes a list of URLs and, using `ForEach-Object

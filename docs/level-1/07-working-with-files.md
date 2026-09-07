@@ -137,6 +137,39 @@ $errorLines | ForEach-Object { Write-Output " - $_" }
 | `Get-Item` | get metadata about a file/directory |
 | `Split-Path` / `Join-Path` | decompose / build file paths |
 
+## How It Actually Works
+
+File cmdlets in PowerShell don't talk to the filesystem directly — they go
+through the **PSProvider/PSDrive abstraction**. `Get-ChildItem`,
+`Get-Content`, `Set-Content`, `Test-Path`, and friends are all
+*provider-agnostic* cmdlets; the actual work is delegated to whichever
+`CmdletProvider` owns the drive the path resolves to. `C:\`, `/home/user`,
+and a mapped network share all route through the built-in `FileSystem`
+provider, but the exact same cmdlets also work unmodified against the
+`Registry:`, `Cert:`, `Env:`, `Function:`, and `Variable:` providers —
+`Get-ChildItem Env:` and `Get-ChildItem C:\Temp` are literally the same
+cmdlet dispatching to two different provider implementations of
+`GetChildItems`. This is why PowerShell calls filesystem locations
+"drives" even when there's no physical drive involved.
+
+`Get-Content` reads the whole file's encoding-aware text by default and
+returns it as an **array of strings, one per line** (or one giant string
+with `-Raw`), because internally it wraps a `StreamReader` and calls
+`ReadLine()` in a loop, emitting each line as a separate pipeline object —
+this is exactly why `(Get-Content file.txt).Count` gives you a line count
+for free and why piping `Get-Content` into `Where-Object` filters
+line-by-line rather than needing manual splitting.
+
+`Out-File`/`Set-Content` differ in more than convenience: `Set-Content`
+writes strings as strings via the provider's content-writer interface
+with `Encoding` control and is optimized as a straight write; `Out-File`
+first pushes every object through the formatting subsystem (the same
+`Format-*` engine behind console output) producing formatted display text
+*before* writing — which is why redirecting complex objects with `>` /
+`Out-File` can silently truncate columns to console width while
+`ConvertTo-Json | Set-Content` preserves full structure: one path goes
+through the formatter, the other doesn't.
+
 ## Exercise
 
 Write `word-count.ps1` that reads a text file path from a parameter, checks

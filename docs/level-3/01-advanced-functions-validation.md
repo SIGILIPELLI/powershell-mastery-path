@@ -251,6 +251,39 @@ source.
 | `$_` / `$PSItem` | current item inside an active pipeline context only |
 | Comment-based help (`<# .SYNOPSIS ... #>`) | powers `Get-Help` for your own functions |
 
+## How It Actually Works
+
+`DynamicParam` blocks exist because PowerShell's parameter binder needs
+the *complete* parameter set before it can bind anything, but some
+parameters (like a tab-completable list of Azure resource groups) can
+only be known by querying something at runtime. The engine handles this
+by calling your `DynamicParam` block **before** the normal binding pass,
+collecting whatever `RuntimeDefinedParameter` objects it returns, and
+merging them into the parameter set for *this specific invocation* —
+which is why dynamic parameters can vary in name and validation rules
+from call to call in a way `param()`-declared ones never can, and also
+why they're invisible to static tooling (like `Get-Help -Parameter *`)
+that doesn't actually execute your function to discover them.
+
+Comment-based help isn't parsed by a lightweight regex scanning for `.SYNOPSIS`-style
+tags at display time — `Get-Help` locates the comment block by walking the
+function's AST for a comment token positioned immediately before (or, for
+some layouts, inside) the function body, then runs a dedicated
+help-comment parser that recognizes the `.KEYWORD` tag grammar. This
+AST-based approach is why comment-based help must be contiguous and
+correctly positioned relative to the `function` keyword — a blank line or
+unrelated comment breaking the block can cause `Get-Help` to silently
+fall back to auto-generated (parameter-list-only) help instead of your
+authored content.
+
+Custom `[ValidateScript()]` blocks run inside the parameter binder's
+validation phase with `$_` bound to the candidate value — critically,
+**before** the parameter's default or coerced value is assigned to the
+actual variable in your function's scope, which is why a `ValidateScript`
+that throws prevents the function body from running at all, exactly like
+a type-mismatch error would, rather than merely logging a warning and
+proceeding with a bad value.
+
 ## Exercise
 
 Write an advanced function `New-InventoryItem` with `[CmdletBinding()]`,

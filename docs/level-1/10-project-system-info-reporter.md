@@ -176,6 +176,38 @@ GeneratedAt    : 2026-07-20T09:15:03
 - Add Pester tests for `Get-BasicSystemInfo` and `Get-TopMemoryProcesses`
   (Level 2's testing module).
 
+## How It Actually Works
+
+This project stitches together the two abstractions the whole level has
+been building toward: the module system's child-session-state isolation,
+and the object pipeline's ability to carry structured .NET data all the
+way to serialization. When `SystemReport.ps1` calls
+`Get-SystemInfo`, it isn't receiving text — it's receiving a live
+`PSCustomObject` (built by `[PSCustomObject]@{...}`, which the engine
+compiles into an ordered-property `PSObject` with no backing .NET type of
+its own, purely an ETS-defined shape) that still carries full type
+fidelity: nested hashtables, numbers as numbers, dates as `DateTime`
+instances.
+
+That fidelity is exactly what makes `ConvertTo-Json` meaningful rather
+than a glorified string formatter: it walks the object graph via
+reflection/ETS member enumeration, recursing into properties up to
+`-Depth` levels, and serializes each .NET primitive to its correct JSON
+type (`DateTime` becomes an ISO-8601 string, `bool` becomes `true`/
+`false`, nested `PSCustomObject`/hashtable becomes a nested JSON object).
+Contrast this with `Out-File`, which would have routed the same object
+through the *formatting* subsystem instead and produced a column-truncated
+text table — the reporter works because it stays on the "structured
+object" side of the pipeline until the very last step, converting to text
+only at genuine output time.
+
+Sourcing the logic from a `.psm1` rather than inlining it in the script
+also means the module's internal helper functions (anything not
+`Export-ModuleMember`'d) are invisible to `SystemReport.ps1`'s own scope —
+the entry-point script can only see the deliberately exported surface,
+which is the module boundary doing real isolation work, not just
+organizational tidiness.
+
 ## Exercise
 
 Extend `SystemInfo.psm1` with a new function `Get-DiskSummary` that uses

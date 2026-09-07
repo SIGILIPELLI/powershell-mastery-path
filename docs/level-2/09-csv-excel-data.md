@@ -187,6 +187,43 @@ values.
 | `Measure-Object -Sum` | one of the few cmdlets that auto-coerces numeric strings |
 | `Export-Excel` / `Import-Excel` (ImportExcel module) | real `.xlsx` files with proper types |
 
+## How It Actually Works
+
+`Import-Csv` doesn't parse CSV with a naive `.Split(',')` — it uses a
+proper RFC 4180-aware tokenizer (`Microsoft.PowerShell.Commands.
+ImportCsvCommand`, backed by a `CsvParser`) that correctly handles quoted
+fields containing embedded commas, escaped quotes (`""`), and multi-line
+quoted values. It reads the first non-comment line as the header row and,
+for every subsequent row, builds a `PSCustomObject` whose property names
+come from that header — this is why every row from `Import-Csv` is a
+genuine PowerShell object you can pipe into `Where-Object`/`Sort-Object`
+immediately, unlike a raw text split which would give you plain string
+arrays with no property names attached.
+
+Every value coming out of `Import-Csv`, though, is a **string** — CSV as a
+format has no type system, so `$row.Age -gt 30` silently works only
+because PowerShell's `-gt` operator itself does implicit type coercion at
+comparison time (converting the string to a number to match the other
+operand), not because `Import-Csv` inferred a numeric type. This is the
+actual mechanical reason CSV round-tripping loses type fidelity — export a
+`[datetime]` property with `Export-Csv` and re-import it, and you get back
+a string that merely *looks* like a date, requiring an explicit
+`[datetime]::Parse()` or `-as [datetime]` cast to use it as one again.
+
+`Export-Csv` determines columns from the **first object's** properties by
+default (or the union across all input objects if you pass
+`-UseCulture`/certain module-specific variants handle heterogeneous
+objects differently) — feeding it objects with inconsistent property sets
+without accounting for this is a common bug source, since later objects'
+extra properties can be silently dropped rather than added as new columns.
+
+The `ImportExcel` module works without any Excel installation or COM
+interop at all because it manipulates the `.xlsx` **Open XML format**
+directly — an `.xlsx` file is a ZIP archive of XML parts (worksheet data,
+shared strings, styles), and the module reads/writes those XML parts
+programmatically, which is also why it can run on Linux/macOS where no
+Excel application exists to automate.
+
 ## Exercise
 
 Create a CSV `inventory.csv` with columns `Item`, `Quantity`, `UnitPrice`

@@ -194,6 +194,39 @@ exception occurred (`FormatException`, `ArgumentOutOfRangeException`,
 | `$_.Exception.GetType().Name` | the specific .NET exception type in a `catch` |
 | `class` with a wrapped .NET member | compose .NET behavior you can't subclass directly |
 
+## How It Actually Works
+
+When you write `[System.IO.File]::ReadAllText($path)`, PowerShell's parser
+recognizes the `[Type]::Member` syntax as a **static member expression**
+node in the AST and resolves it through .NET reflection at runtime,
+looking up the type by name against loaded assemblies (using the type
+resolution/`using namespace` search list you've declared) and then
+binding to the best-matching overload of `ReadAllText` based on your
+argument types and count — the same overload-resolution algorithm the C#
+compiler uses, just performed dynamically instead of at compile time,
+which is why passing the wrong argument type produces a runtime
+`MethodException` rather than a compile error.
+
+Instantiating a .NET type with `New-Object System.Collections.Generic.
+List[int]` or the newer `[System.Collections.Generic.List[int]]::new()`
+both ultimately call the CLR's `Activator.CreateInstance`-equivalent
+constructor-invocation path — the bracket-and-`::new()` form is generally
+preferred because it goes through the same static-member-resolution
+machinery as any other `::` call (supporting generic type parameters and
+constructor overload selection cleanly), while `New-Object` has to parse
+its `-ArgumentList` array and match it against constructors via a
+separate, older binding path.
+
+Exceptions thrown by .NET methods you call directly (not through a
+cmdlet) surface as **raw CLR exceptions**, not `ErrorRecord`-wrapped
+non-terminating errors — there's no `Cmdlet.WriteError` layer between you
+and the .NET call, so `catch [System.IO.FileNotFoundException]` here is
+catching the literal exception type .NET itself throws, with none of
+PowerShell's `ErrorRecord`/`CategoryInfo` enrichment layered on top; this
+is the actual reason .NET interop code needs typed `catch` blocks that
+mirror the target framework's own exception hierarchy rather than
+PowerShell-specific error handling idioms.
+
 ## Exercise
 
 Write a function `Measure-TextStats` that takes a block of text, uses

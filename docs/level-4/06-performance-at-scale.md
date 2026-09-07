@@ -141,6 +141,44 @@ or .NET upgrade rather than assuming last year's optimization still holds.
 | Need only the first N results (or first match) | keep it in the pipeline, use `-First`/short-circuit `Where-Object` |
 | Any performance claim | verify with `Measure-Command` on your actual data, don't assume |
 
+## How It Actually Works
+
+Runspace pools (`[runspacefactory]::CreateRunspacePool()`) are the
+lower-level primitive `ForEach-Object -Parallel`/`ThreadJob` build on top
+of — a pool pre-allocates a fixed number of `Runspace` objects (each with
+its own session state, but sharing the host process) and hands out an
+idle one to each queued `PowerShell` instance's `.Invoke()`/
+`.BeginInvoke()` call, reusing runspaces across work items instead of
+paying runspace-construction cost per task. Because runspace creation
+itself has real, measurable overhead (initializing a session state, the
+type/format data tables, module auto-loading state), a pool sized to
+match available CPU cores amortizes that cost across potentially
+thousands of work items — which is why hand-rolled runspace-pool code
+still shows up in performance-critical PowerShell despite `-Parallel`
+existing: it gives direct control over pool size, queuing, and result
+collection that the higher-level cmdlet abstracts away.
+
+"Yesterday's benchmark" going stale is mechanically explained by the
+CLR's **tiered JIT compilation**: a method is initially JITted quickly
+into unoptimized machine code, and only after it's called enough times
+does the runtime recompile it with the optimizing tier — this means a
+`Measure-Command` run against cold code (first invocation in a fresh
+`pwsh` process) measures JIT-compilation-included, unoptimized-tier
+performance, while the same code measured after warm-up (or in a
+long-running scheduled job that's been executing the same function
+repeatedly) can be meaningfully faster purely from JIT tier promotion,
+independent of any change to the script itself.
+
+Memory-related slowdowns at scale often trace to **generational garbage
+collection** pressure: large numbers of short-lived `PSObject` wrappers
+(every pipeline object gets one) are Gen 0 allocations, and a script
+producing millions of intermediate wrapped objects can trigger enough Gen
+0/Gen 1 collections to show up as real wall-clock cost — this is the
+underlying reason patterns that reduce object-wrapping overhead (using
+`.NET` collections/methods directly instead of pipelining through
+multiple cmdlets for very large datasets) measurably help at scale in a
+way that's invisible on small test data.
+
 ## Exercise
 
 Take a script that processes a 200,000-line CSV log file line-by-line

@@ -150,6 +150,45 @@ Cmdlet          Stop-Process            7.0.0.0    Microsoft.PowerShell.Manageme
 | `Get-Help <cmdlet>` | show documentation for a cmdlet |
 | `Get-Command -Noun <thing>` | find cmdlets related to a noun |
 
+## How It Actually Works
+
+`pwsh` is not "the Windows console with new commands" — it's a hosted .NET
+process. When you launch it, the executable spins up a **runspace**: a CLR
+`AppDomain`-hosted environment containing a session state (variables,
+functions, aliases, drives) and an engine that parses and executes commands
+against it. Every PowerShell host — the console, the ISE, VS Code's
+terminal, a remote session — is just a different front end creating and
+talking to a runspace through the same `System.Management.Automation` API.
+
+When you type a line and press Enter, three distinct stages run before
+anything happens on screen:
+
+1. **Tokenizing/parsing** — the engine's parser (not a shell-style word
+   splitter) builds an **Abstract Syntax Tree (AST)** from the line, using
+   PowerShell's actual grammar: pipelines, statements, expressions,
+   command-parameter-argument triples. This is why `Get-Process | Stop-` +
+   half a cmdlet name gives you a real parse error, not a "command not
+   found" from a shell.
+2. **Command resolution** — the parser hands each command element to the
+   engine's command discovery service, which searches, in order: functions
+   in the current session state, aliases, cmdlets registered by loaded
+   modules, then external executables on `PATH`. This ordering is why you
+   can define a function named `ls` that silently wins over the built-in
+   alias.
+3. **Execution** — the AST is compiled (in PowerShell 5+/7, actually
+   JIT-compiled via expression trees for hot code, not purely
+   tree-walked) and run. Cmdlets are .NET classes implementing
+   `Cmdlet`/`PSCmdlet` with `BeginProcessing`/`ProcessRecord`/`EndProcessing`
+   methods called by the pipeline processor — this is why every cmdlet
+   supports the pipeline uniformly, unlike shell tools that only understand
+   text streams.
+
+Cross-platform `pwsh` (built on .NET, formerly .NET Core) achieves the same
+behavior on macOS/Linux/Windows by shipping the whole engine as managed
+code rather than shelling out to OS-specific APIs — the handful of
+Windows-only cmdlets (like `Get-WmiObject`) are the exceptions that rely on
+Windows-specific COM/WMI interop unavailable on other platforms.
+
 ## Exercise
 
 Write `greet.ps1` that uses `Write-Output` to print a greeting, then calls

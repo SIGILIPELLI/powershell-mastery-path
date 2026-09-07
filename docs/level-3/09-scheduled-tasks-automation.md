@@ -201,6 +201,45 @@ scheduler running it:
 | Retry-with-backoff pattern | cross-platform | survive transient failures unattended |
 | `$PSScriptRoot` for all paths | cross-platform | scheduler working directory isn't guaranteed |
 
+## How It Actually Works
+
+The `ScheduledTasks` module's `Register-ScheduledTask` doesn't create a
+lightweight cron-style entry — it builds an XML **task definition**
+document (the same schema Task Scheduler's GUI produces, visible if you
+export a task with `Export-ScheduledTask`) describing triggers, actions,
+principal (the run-as identity and its logon type/privilege level), and
+settings, then hands that document to the Task Scheduler service (a
+Windows service running independently of any user session) via its COM/
+RPC API. This is exactly why a "task that works interactively but not
+unattended" is a real, common category of bug: interactively, your script
+runs inside *your* logged-in desktop session with your loaded user
+profile, mapped drives, and interactive-window-station access, while a
+task registered to run whether-or-not-the-user-is-logged-on executes
+under Task Scheduler's own session — typically Session 0, the
+non-interactive service session — with no desktop, no mapped drives
+(those are established at interactive logon, not by the mere user
+identity), and often a different or minimal environment-variable set.
+
+`-Principal`'s `LogonType` setting determines *how* Task Scheduler
+authenticates the run-as account at trigger time: `Interactive`
+requires the account to already be logged on (the task effectively piggy-
+backs on an existing session and inherits its environment), while
+`ServiceAccount`/`Password` logon types cause Task Scheduler to perform
+its own logon using cached credentials via LSA, producing a genuinely
+different, more minimal session than an interactive one — this
+credential-and-session distinction, not anything about the script's code,
+is the actual root cause behind most "works when I test it, fails when
+scheduled" reports.
+
+`Get-ScheduledTaskInfo` reads execution history (`LastRunTime`,
+`LastTaskResult`) from the Task Scheduler service's own operational event
+log and history store, not from anything your script itself writes —
+`LastTaskResult` is the raw exit code Task Scheduler observed from the
+launched process, which is why scripts intended for scheduling should
+`exit` with a meaningful non-zero code on failure: it's the only signal
+that reliably survives all the way to that history record regardless of
+what the script's own logging did.
+
 ## Exercise
 
 Write a script `Invoke-ScheduledSync.ps1` meant to run under cron/Task

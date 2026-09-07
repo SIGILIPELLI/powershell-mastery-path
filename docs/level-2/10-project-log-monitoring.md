@@ -375,6 +375,36 @@ Describing Get-RecentErrors
 Tests Passed: 6, Failed: 0, Skipped: 0, Inconclusive: 0, NotRun: 0
 ```
 
+## How It Actually Works
+
+This project's `Get-LogEntries` function is a good example of the
+pipeline's **streaming contract** actually mattering for a real workload:
+because it's built as an advanced function with a `Process` block reading
+via `Get-Content -ReadCount 0` or line-by-line, each parsed log line can
+flow immediately into `Where-Object`/`Group-Object` downstream without
+the whole file being held in memory as one array first — the regex match
+against each line happens inside `ProcessRecord`, called once per line by
+the pipeline processor exactly as described in Module 01's advanced
+pipeline mechanics, which is what lets this scale to log files far larger
+than available RAM as long as nothing downstream deliberately buffers
+(like `Sort-Object`, which must see everything before emitting the first
+result).
+
+The manifest-driven module structure means `Watch-Logs.ps1` only ever
+sees the functions `LogMonitor.psd1` explicitly lists in
+`FunctionsToExport` — the regex-parsing internals, if kept unexported,
+are genuinely inaccessible from the entry-point script's scope, not just
+conventionally private, which is the same child-session-state isolation
+covered in Module 09 applied to a real multi-file layout.
+
+The Pester tests here exercise `Mock` against `Get-Content` specifically
+because it decouples the test from real files on disk — since `Mock`
+works by replacing the command's binding in the session's command table
+for the scope under test, the test can simulate arbitrary file contents
+(including malformed lines or simulated I/O failures) without ever
+touching the filesystem, making the suite fast and deterministic
+regardless of what's actually present in `Tests/`.
+
 ## Where to take it from here
 
 - Add a `-Since <datetime>` parameter to filter entries before summarizing,

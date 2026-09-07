@@ -161,6 +161,40 @@ quick     1
 | `$h.GetEnumerator()` | iterate key/value pairs |
 | `[ordered]@{}` | hashtable that preserves insertion order |
 
+## How It Actually Works
+
+A PowerShell array literal (`@(1,2,3)` or the comma operator's implicit
+array-building) creates a fixed-size `System.Object[]` under the hood —
+this is why "appending" with `$arr += $x` is not appending at all: it
+allocates a **brand-new array** one element larger, copies every existing
+element into it, and rebinds `$arr` to the new array. For an
+`N`-iteration loop doing `+=`, that's O(N²) total copying, which is the
+actual mechanical reason the docs steer you toward `[System.Collections.
+Generic.List[T]]` or an output-collecting pipeline instead — `List[T]`
+uses amortized-doubling internal storage so `.Add()` is O(1) amortized.
+
+Hashtables (`@{}`) are PowerShell-literal syntax for
+`System.Collections.Hashtable`, a classic open-addressing/bucket hash
+table keyed by `GetHashCode()`/`Equals()` — by default case-insensitive
+for string keys because PowerShell's hashtable literal uses an
+`IEqualityComparer` (`StringComparer.OrdinalIgnoreCase`)-backed comparer
+rather than .NET's normal case-sensitive default, matching PowerShell's
+general case-insensitivity elsewhere. `[ordered]@{}` swaps the backing
+type to `System.Collections.Specialized.OrderedDictionary`, which
+maintains an internal parallel array tracking insertion order alongside
+the hash buckets — enumeration order is a property of that extra
+structure, not an accident of bucket layout the way plain `Hashtable`
+enumeration order (implementation-defined, and *not* guaranteed stable
+across .NET versions) can appear to be.
+
+Iterating a hashtable with `foreach ($kv in $table)` yields
+`DictionaryEntry` structs (a `Key`/`Value` pair struct), while
+`$table.GetEnumerator()` explicitly requests the same enumerator the
+`foreach` statement uses implicitly — this is why `$table.Keys | ForEach-
+Object { $table[$_] }` and `foreach ($kv in $table) { $kv.Value }` produce
+the same values through two different enumeration paths (one walks keys
+and re-indexes, the other walks entries directly).
+
 ## Exercise
 
 Write `inventory.ps1` that builds a hashtable mapping item names to

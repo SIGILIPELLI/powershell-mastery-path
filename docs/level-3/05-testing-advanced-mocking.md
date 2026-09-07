@@ -200,6 +200,39 @@ no unwanted copy happened.
 | `BeforeEach { Mock ... }` | fresh, reset mocks for every `It` |
 | `-Throw "*substring*"` | assert an exception message contains specific text |
 
+## How It Actually Works
+
+Pester's `Mock` doesn't monkey-patch the original command object — it
+creates a new function with the mocked name and injects it into the
+**current test's scope's command table**, at a higher precedence than the
+real command would normally resolve to, using the same function-shadowing
+mechanism a user-defined function uses to override a built-in cmdlet
+(covered back in the setup module's command-resolution order: function
+before cmdlet). This is exactly why a mock only applies within the scope
+it was declared in (and child scopes) — it's ordinary scope-based
+shadowing, not a global monkey-patch, so a mock set inside one `Describe`
+block doesn't leak into a sibling one.
+
+`-ParameterFilter` on a mock is evaluated as a script-block predicate
+against the **actual arguments the calling code passed**, checked every
+time the mocked command is invoked — Pester's mock proxy captures the
+call's bound parameters and runs each registered mock definition's filter
+in order, using the first one whose filter returns `$true` (or has no
+filter) as the implementation to execute. This lets you register multiple
+mocks for the same command name with different behaviors per input, and
+it's also the mechanism `Should -Invoke -ParameterFilter` uses to verify
+not just "was this called" but "was this called with these specific
+arguments" — both features query the same recorded call-history structure
+Pester's mock maintains internally.
+
+`Should -Invoke -Times 0` asserting a command was *not* called relies on
+that same call-history ledger existing regardless of whether the mock's
+filter ever matched: Pester records every attempted invocation of a
+mocked command name during the test, so proving zero calls happened is a
+direct query against an empty recorded-calls list, not an inferred
+absence — which is why it can reliably distinguish "never called" from
+"called but with arguments that didn't match your filter."
+
 ## Exercise
 
 Extend `Deploy.psm1` with a `Send-DeployNotification` function that
