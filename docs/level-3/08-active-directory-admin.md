@@ -1,3 +1,7 @@
+---
+description: "Active Directory & System Admin Cmdlets — Active Directory administration is one of PowerShell's original reasons for existing — most of what a Windows AD…"
+---
+
 # 08 · Active Directory & System Admin Cmdlets
 
 !!! warning "Manual review only — not executed"

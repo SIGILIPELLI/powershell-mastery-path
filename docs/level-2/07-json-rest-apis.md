@@ -1,3 +1,7 @@
+---
+description: "Working with JSON/REST APIs — JSON is the universal data format for web APIs, config files, and inter-service communication — and PowerShell's object…"
+---
+
 # 07 · Working with JSON/REST APIs
 
 JSON is the universal data format for web APIs, config files, and

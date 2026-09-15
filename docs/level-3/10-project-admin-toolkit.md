@@ -1,3 +1,7 @@
+---
+description: "Project — Admin Toolkit Module — Time to bring Level 3 together into one real deliverable: an AdminToolkit module that reports disk space and top CPU…"
+---
+
 # 10 · Project — Admin Toolkit Module
 
 Time to bring Level 3 together into one real deliverable: an `AdminToolkit`

@@ -1,3 +1,7 @@
+---
+description: "Scheduled Tasks & Automation — A script you run by hand isn't automation yet — it's automation once something else triggers it on a schedule, without you…"
+---
+
 # 09 · Scheduled Tasks & Automation
 
 A script you run by hand isn't automation yet — it's automation once

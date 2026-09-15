@@ -1,3 +1,7 @@
+---
+description: "Advanced Pipeline — Level 1 introduced Where-Object, ForEach-Object, Sort-Object, and Group-Object as individual tools. This module goes one level deeper…"
+---
+
 # 01 · Advanced Pipeline
 
 Level 1 introduced `Where-Object`, `ForEach-Object`, `Sort-Object`, and

@@ -1,3 +1,7 @@
+---
+description: "Testing at Scale & CI — A handful of Pester tests running with Invoke-Pester -Output Detailed is fine at your desk. In a CI pipeline running hundreds of…"
+---
+
 # 05 · Testing at Scale & CI
 
 A handful of Pester tests running with `Invoke-Pester -Output Detailed`

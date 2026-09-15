@@ -1,3 +1,7 @@
+---
+description: "Logging & Observability for Scripts — Write-Host output disappears the moment a terminal scrolls past it. A script running unattended — a scheduled task…"
+---
+
 # 09 · Logging & Observability for Scripts
 
 `Write-Host` output disappears the moment a terminal scrolls past it. A

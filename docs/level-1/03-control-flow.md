@@ -1,3 +1,7 @@
+---
+description: "Control Flow — PowerShell uses named comparison operators instead of symbols like ) and pipeline syntax."
+---
+
 # 03 · Control Flow
 
 ## if / elseif / else
@@ -215,6 +219,12 @@ implemented as special control-flow exceptions (`BreakException`,
 nearest enclosing loop or labeled block — which is exactly why labeled
 `break Outer` works across nested loops: it's a targeted exception with a
 label match, not a jump instruction.
+
+## 🔀 See this in another language
+
+- [Python — Control Flow](https://sigilipelli.github.io/python-mastery-path/level-1/03-control-flow/)
+- [C# — Control Flow](https://sigilipelli.github.io/csharp-mastery-path/level-1/03-control-flow/)
+- [Kotlin — Control Flow](https://sigilipelli.github.io/kotlin-mastery-path/level-1/03-control-flow/)
 
 ## Exercise
 

@@ -1,3 +1,7 @@
+---
+description: "Advanced Remoting & Background Jobs — Level 3 introduced Start-Job for basic background execution. At scale — dozens of tasks, or genuine remote machines…"
+---
+
 # 01 · Advanced Remoting & Background Jobs
 
 Level 3 introduced `Start-Job` for basic background execution. At scale —

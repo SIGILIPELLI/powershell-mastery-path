@@ -1,3 +1,7 @@
+---
+description: "Regular Expressions in PowerShell — Wildcards (-like) can only match simple patterns like *.txt. Regular expressions let you match structure — 'three…"
+---
+
 # 04 · Regular Expressions in PowerShell
 
 Wildcards (`-like`) can only match simple patterns like `*.txt`. Regular

@@ -1,3 +1,7 @@
+---
+description: "CI/CD with PowerShell — A module isn't production-ready because it works on your machine — it's ready when a pipeline can build it, test it, and fail…"
+---
+
 # 02 · CI/CD with PowerShell
 
 A module isn't production-ready because it works on your machine — it's

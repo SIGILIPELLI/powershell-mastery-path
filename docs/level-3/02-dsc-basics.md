@@ -1,3 +1,7 @@
+---
+description: "Desired State Configuration (DSC) Basics — Everything so far has been imperative: your script says exactly how to do something, step by step. Desired…"
+---
+
 # 02 · Desired State Configuration (DSC) Basics
 
 Everything so far has been **imperative**: your script says exactly *how*

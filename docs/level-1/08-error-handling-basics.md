@@ -1,3 +1,7 @@
+---
+description: "Error Handling Basics — PowerShell has two kinds of errors. Non-terminating errors (the default for most cmdlets) print an error message but let the…"
+---
+
 # 08 · Error Handling Basics
 
 ## Terminating vs non-terminating errors
@@ -196,6 +200,12 @@ displays it. `$Error` itself is a fixed-capacity queue
 (`$Error.Count` capped by `$MaximumErrorCount`, default 256) maintained by
 the engine on every error of either kind, which is why it accumulates
 across an entire session, not just the current statement.
+
+## 🔀 See this in another language
+
+- [Python — Error Handling Basics](https://sigilipelli.github.io/python-mastery-path/level-1/08-error-handling/)
+- [C# — LINQ Basics](https://sigilipelli.github.io/csharp-mastery-path/level-1/08-linq-basics/)
+- [Kotlin — Data Classes](https://sigilipelli.github.io/kotlin-mastery-path/level-1/08-data-classes/)
 
 ## Exercise
 

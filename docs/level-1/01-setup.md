@@ -1,3 +1,7 @@
+---
+description: "Setup & First Script — PowerShell today means PowerShell 7+ (also called 'PowerShell Core'), built on .NET and run with the pwsh executable. It's open…"
+---
+
 # 01 · Setup & First Script
 
 PowerShell today means **PowerShell 7+** (also called "PowerShell Core"),
@@ -188,6 +192,12 @@ behavior on macOS/Linux/Windows by shipping the whole engine as managed
 code rather than shelling out to OS-specific APIs — the handful of
 Windows-only cmdlets (like `Get-WmiObject`) are the exceptions that rely on
 Windows-specific COM/WMI interop unavailable on other platforms.
+
+## 🔀 See this in another language
+
+- [Python — Setup & First Program](https://sigilipelli.github.io/python-mastery-path/level-1/01-setup/)
+- [C# — What Is C# & .NET?](https://sigilipelli.github.io/csharp-mastery-path/level-1/01-what-is-csharp-dotnet/)
+- [Kotlin — Setup & First Program](https://sigilipelli.github.io/kotlin-mastery-path/level-1/01-setup/)
 
 ## Exercise
 

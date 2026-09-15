@@ -1,3 +1,7 @@
+---
+description: "Modules Basics — A module is a packaged, reusable unit of PowerShell code — functions, variables, and more — that you can load with Import-Module. Every…"
+---
+
 # 09 · Modules Basics
 
 A **module** is a packaged, reusable unit of PowerShell code — functions,
@@ -158,6 +162,12 @@ constrained-language context before deciding *how* to load the module,
 which is how PowerShell can validate compatibility (`PowerShellVersion`,
 `CompatiblePSEditions`) and pre-declare exports without ever executing the
 module's actual code.
+
+## 🔀 See this in another language
+
+- [Python — Modules, Packages & pip](https://sigilipelli.github.io/python-mastery-path/level-1/09-modules-packages/)
+- [C# — File I/O & Working with Text](https://sigilipelli.github.io/csharp-mastery-path/level-1/09-file-io/)
+- [Kotlin — Extension Functions Intro](https://sigilipelli.github.io/kotlin-mastery-path/level-1/09-extension-functions/)
 
 ## Exercise
 

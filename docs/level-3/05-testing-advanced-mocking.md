@@ -1,3 +1,7 @@
+---
+description: "Testing Advanced (Pester Mocking) — Publish-Release calls Get-ServiceHealth — a function from the same module — before doing anything destructive. Testing…"
+---
+
 # 05 · Testing Advanced (Pester Mocking)
 
 Level 2's Pester module covered `Mock` for a function calling an external

@@ -1,3 +1,7 @@
+---
+description: "Error Handling Advanced — Level 1 covered try/catch/ finally and -ErrorAction. This module goes further into how PowerShell's dual error system actually…"
+---
+
 # 03 · Error Handling Advanced
 
 [Level 1](../level-1/08-error-handling-basics.md) covered `try`/`catch`/

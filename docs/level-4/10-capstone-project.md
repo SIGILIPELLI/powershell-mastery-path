@@ -1,3 +1,7 @@
+---
+description: "Capstone Project — Everything from Levels 1-4 comes together here: a real multi-file module — public/private function separation, a generated manifest…"
+---
+
 # 10 · Capstone Project
 
 Everything from Levels 1-4 comes together here: a real multi-file module

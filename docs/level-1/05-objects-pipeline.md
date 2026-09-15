@@ -1,3 +1,7 @@
+---
+description: "Working with Objects & the Pipeline — This is the single biggest thing that sets PowerShell apart from Bash and most other shells. In Bash, pipes (|) pass…"
+---
+
 # 05 · Working with Objects & the Pipeline
 
 This is the single biggest thing that sets PowerShell apart from Bash and
@@ -201,6 +205,12 @@ entirely and instead build a comparison directly against the named
 property via reflection/ETS lookup, which is marginally faster and also
 why that syntax can't express compound conditions the way a script block
 predicate can.
+
+## 🔀 See this in another language
+
+- [Python — Core Data Structures](https://sigilipelli.github.io/python-mastery-path/level-1/05-data-structures/)
+- [C# — Classes & Objects](https://sigilipelli.github.io/csharp-mastery-path/level-1/05-classes-objects/)
+- [Kotlin — Classes & Objects Basics](https://sigilipelli.github.io/kotlin-mastery-path/level-1/05-classes-objects/)
 
 ## Exercise
 

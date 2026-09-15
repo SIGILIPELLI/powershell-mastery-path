@@ -1,3 +1,7 @@
+---
+description: "Advanced Functions & Parameter Validation — Level 1 and 2 functions took whatever was handed to them and let the body sort it out — a bad value would…"
+---
+
 # 01 · Advanced Functions & Parameter Validation
 
 Level 1 and 2 functions took whatever was handed to them and let the body

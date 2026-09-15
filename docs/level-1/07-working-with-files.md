@@ -1,3 +1,7 @@
+---
+description: "Working with Files — Prefer Set-Content/Add-Content for plain text and Export-Csv/ ConvertTo-Json | Set-Content for structured data; use Out-File when you…"
+---
+
 # 07 · Working with Files
 
 ## Checking paths
@@ -169,6 +173,12 @@ first pushes every object through the formatting subsystem (the same
 `Out-File` can silently truncate columns to console width while
 `ConvertTo-Json | Set-Content` preserves full structure: one path goes
 through the formatter, the other doesn't.
+
+## 🔀 See this in another language
+
+- [Python — File I/O Basics](https://sigilipelli.github.io/python-mastery-path/level-1/07-file-io/)
+- [C# — Exception Handling](https://sigilipelli.github.io/csharp-mastery-path/level-1/07-exception-handling/)
+- [Kotlin — Collections](https://sigilipelli.github.io/kotlin-mastery-path/level-1/07-collections/)
 
 ## Exercise
 

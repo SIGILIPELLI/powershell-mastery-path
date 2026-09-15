@@ -1,3 +1,7 @@
+---
+description: "Arrays & Hashtables — Hashtables are PowerShell's key-value dictionary — similar to a Python dict or a Bash associative array, but a first-class type…"
+---
+
 # 06 · Arrays & Hashtables
 
 ## Creating arrays
@@ -194,6 +198,12 @@ Iterating a hashtable with `foreach ($kv in $table)` yields
 Object { $table[$_] }` and `foreach ($kv in $table) { $kv.Value }` produce
 the same values through two different enumeration paths (one walks keys
 and re-indexes, the other walks entries directly).
+
+## 🔀 See this in another language
+
+- [Python — Strings & Formatting](https://sigilipelli.github.io/python-mastery-path/level-1/06-strings-formatting/)
+- [C# — Collections](https://sigilipelli.github.io/csharp-mastery-path/level-1/06-collections/)
+- [Kotlin — Null Safety Basics](https://sigilipelli.github.io/kotlin-mastery-path/level-1/06-null-safety/)
 
 ## Exercise
 

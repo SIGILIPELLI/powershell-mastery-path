@@ -1,3 +1,7 @@
+---
+description: "Working with CSV/Excel Data — CSV files are everywhere in real automation work — exported reports, data dumps from other systems, input for bulk…"
+---
+
 # 09 · Working with CSV/Excel Data
 
 CSV files are everywhere in real automation work — exported reports,

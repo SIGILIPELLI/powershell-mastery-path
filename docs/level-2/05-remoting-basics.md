@@ -1,3 +1,7 @@
+---
+description: "Remoting Basics — Everything so far has run commands on the machine you're sitting at. PowerShell Remoting lets you run those same commands on another…"
+---
+
 # 05 · Remoting Basics
 
 Everything so far has run commands on the machine you're sitting at.

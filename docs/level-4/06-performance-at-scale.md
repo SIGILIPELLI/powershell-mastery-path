@@ -1,3 +1,7 @@
+---
+description: "Performance at Scale — Level 3 covered performance for in-memory collections of a few tens of thousands of items. At real scale — files with hundreds of…"
+---
+
 # 06 · Performance at Scale
 
 Level 3 covered performance for in-memory collections of a few tens of

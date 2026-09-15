@@ -1,3 +1,7 @@
+---
+description: "Building PowerShell-based DevOps Tools — Everything so far has built toward this: a script meant to be run by other people (or other pipelines) as a real…"
+---
+
 # 07 · Building PowerShell-based DevOps Tools
 
 Everything so far has built toward this: a script meant to be run by

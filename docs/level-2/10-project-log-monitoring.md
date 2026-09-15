@@ -1,3 +1,7 @@
+---
+description: "Project — Log Monitoring Script — Time to combine everything from Level 2 into one working tool: a log monitoring script that reads .log files from a…"
+---
+
 # 10 · Project — Log Monitoring Script
 
 Time to combine everything from Level 2 into one working tool: a **log

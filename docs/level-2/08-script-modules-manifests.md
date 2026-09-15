@@ -1,3 +1,7 @@
+---
+description: "Script Modules & Manifests — Level 1 covered a bare .psm1 file as a module. Once a module is meant to be shared, versioned, or depended on by other…"
+---
+
 # 08 · Script Modules & Manifests
 
 [Level 1](../level-1/09-modules-basics.md) covered a bare `.psm1` file as a

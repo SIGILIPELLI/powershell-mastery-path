@@ -1,3 +1,7 @@
+---
+description: "Cmdlet Design — Level 1 showed [CmdletBinding()] briefly for pipeline input. This module covers what it means to design a function as a proper…"
+---
+
 # 02 · Cmdlet Design
 
 Level 1 showed `[CmdletBinding()]` briefly for pipeline input. This module

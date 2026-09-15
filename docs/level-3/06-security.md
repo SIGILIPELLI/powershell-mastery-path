@@ -1,3 +1,7 @@
+---
+description: "Security — Automation scripts routinely need secrets — API keys, service account passwords, connection strings — which makes them a common place for those…"
+---
+
 # 06 · Security
 
 Automation scripts routinely need secrets — API keys, service account

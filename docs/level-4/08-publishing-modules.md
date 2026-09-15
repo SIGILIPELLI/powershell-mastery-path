@@ -1,3 +1,7 @@
+---
+description: "Publishing Modules (PowerShell Gallery) — A module that only ever lives in one repo's Import-Module -Force cycle hasn't really shipped. Publishing to the…"
+---
+
 # 08 · Publishing Modules (PowerShell Gallery)
 
 A module that only ever lives in one repo's `Import-Module -Force` cycle

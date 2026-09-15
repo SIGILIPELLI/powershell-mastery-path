@@ -1,3 +1,7 @@
+---
+description: "Working with .NET from PowerShell — Every PowerShell value is a .NET object under the hood — 'hello' is a System.String, 5 is a System.Int32, and…"
+---
+
 # 03 · Working with .NET from PowerShell
 
 Every PowerShell value is a .NET object under the hood — `"hello"` is a

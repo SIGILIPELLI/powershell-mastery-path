@@ -1,3 +1,7 @@
+---
+description: "Variables & Types — PowerShell variables are dynamically typed by default but backed by real .NET types under the hood — every value you touch is an…"
+---
+
 # 02 · Variables & Types
 
 PowerShell variables are dynamically typed by default but backed by real .NET
@@ -181,6 +185,12 @@ Reading a variable walks up the parent-scope chain until it finds a match
 updates it in the **current** scope only — `$script:`, `$global:`, and
 `$using:` are explicit scope-modifier prefixes that redirect the write
 target to a specific scope object instead of the default local one.
+
+## 🔀 See this in another language
+
+- [Python — Variables, Data Types & Operators](https://sigilipelli.github.io/python-mastery-path/level-1/02-variables-data-types/)
+- [C# — Variables & Types](https://sigilipelli.github.io/csharp-mastery-path/level-1/02-variables-types/)
+- [Kotlin — Variables & Types](https://sigilipelli.github.io/kotlin-mastery-path/level-1/02-variables-types/)
 
 ## Exercise
 

@@ -1,3 +1,7 @@
+---
+description: "Project — System Info Reporter — Time to combine everything from Level 1 — variables, control flow, functions, the object pipeline, arrays/hashtables…"
+---
+
 # 10 · Project — System Info Reporter
 
 Time to combine everything from Level 1 — variables, control flow,
@@ -207,6 +211,12 @@ also means the module's internal helper functions (anything not
 the entry-point script can only see the deliberately exported surface,
 which is the module boundary doing real isolation work, not just
 organizational tidiness.
+
+## 🔀 See this in another language
+
+- [Python — Project — CLI To-Do App](https://sigilipelli.github.io/python-mastery-path/level-1/10-project-todo-app/)
+- [C# — Project — Console Task Manager App](https://sigilipelli.github.io/csharp-mastery-path/level-1/10-project-task-manager/)
+- [Kotlin — Project — CLI To-Do App](https://sigilipelli.github.io/kotlin-mastery-path/level-1/10-project-todo-app/)
 
 ## Exercise
 

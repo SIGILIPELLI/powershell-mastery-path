@@ -1,3 +1,7 @@
+---
+description: "Functions — PowerShell function names conventionally follow Verb-Noun casing (e.g. Get-Process, New-Item) — a singular noun, and a verb from PowerShell's…"
+---
+
 # 04 · Functions
 
 ## Basic function syntax
@@ -208,6 +212,12 @@ is exactly why an unassigned `Get-ChildItem` call buried in the middle of
 a function silently leaks extra objects into your function's output: the
 engine has no concept of "the value the function produced" separate from
 "everything the function's pipeline emitted."
+
+## 🔀 See this in another language
+
+- [Python — Functions & Scope](https://sigilipelli.github.io/python-mastery-path/level-1/04-functions-scope/)
+- [C# — Methods & Functions](https://sigilipelli.github.io/csharp-mastery-path/level-1/04-methods-functions/)
+- [Kotlin — Functions](https://sigilipelli.github.io/kotlin-mastery-path/level-1/04-functions/)
 
 ## Exercise
 

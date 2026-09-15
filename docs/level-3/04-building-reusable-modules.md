@@ -1,3 +1,7 @@
+---
+description: "Building Reusable Modules — Level 2 covered a single .psm1 with a manifest. Real modules grow past one file fast — a dozen public functions, a handful of…"
+---
+
 # 04 · Building Reusable Modules
 
 Level 2 covered a single `.psm1` with a manifest. Real modules grow past

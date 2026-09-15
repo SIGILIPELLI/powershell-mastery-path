@@ -1,3 +1,7 @@
+---
+description: "Testing with Pester — Every function you've written so far has been tested by eye — run it, look at the output, decide if it's right. That doesn't scale…"
+---
+
 # 06 · Testing with Pester
 
 Every function you've written so far has been tested by eye — run it, look

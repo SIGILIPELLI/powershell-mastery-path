@@ -1,3 +1,7 @@
+---
+description: "Security Hardening (JEA) — Level 3's security module covered protecting secrets inside scripts. This module covers restricting what a remote user can do…"
+---
+
 # 04 · Security Hardening (JEA)
 
 Level 3's security module covered protecting secrets *inside* scripts.

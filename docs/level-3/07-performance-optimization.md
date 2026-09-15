@@ -1,3 +1,7 @@
+---
+description: "Performance Optimization — Scripts that process a few dozen items don't need to think about performance. Scripts that process tens of thousands do — and…"
+---
+
 # 07 · Performance Optimization
 
 Scripts that process a few dozen items don't need to think about

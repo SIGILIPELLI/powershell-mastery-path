@@ -1,3 +1,7 @@
+---
+description: "Cross-Platform PowerShell — PowerShell 7 runs on Windows, Linux, and macOS from the same executable — but 'runs everywhere' isn't the same as 'behaves…"
+---
+
 # 03 · Cross-Platform PowerShell
 
 PowerShell 7 runs on Windows, Linux, and macOS from the same executable —
