@@ -195,6 +195,10 @@ silently exercises the full unrestricted session and tells you nothing
 about whether the role capability file's whitelist actually permits the
 workflow you designed it for.
 
+## 🔀 See this in another language
+
+- [Shell/Bash — 09 · Security Hardening for Production Scripts](https://sigilipelli.github.io/shell-mastery-path/level-4/09-security-hardening/)
+
 ## Exercise
 
 Design (as `.psrc`/`.pssc` files, without needing a live WinRM endpoint to

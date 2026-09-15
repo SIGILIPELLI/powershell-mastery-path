@@ -188,6 +188,10 @@ pipeline's object-by-object streaming machinery at all — it can be faster
 for in-memory filtering precisely because it skips pipeline dispatch
 overhead entirely, operating as a single method call over the whole array.
 
+## 🔀 See this in another language
+
+- [Java — 10 · Performance Profiling & Optimization](https://sigilipelli.github.io/java-mastery-path/level-3/10-profiling-optimization/)
+
 ## Exercise
 
 Take a script that builds a report by looping over 50,000 numbers,

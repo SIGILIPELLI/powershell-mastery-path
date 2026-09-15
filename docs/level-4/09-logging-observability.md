@@ -213,6 +213,11 @@ aggregation tooling (which typically parses each line as an independent
 JSON document) a stable, versioned schema instead of a display format
 that PowerShell itself doesn't guarantee as a parsing contract.
 
+## 🔀 See this in another language
+
+- [Shell/Bash — 08 · Logging & Observability for Scripts](https://sigilipelli.github.io/shell-mastery-path/level-4/08-logging-observability/)
+- [C# — 08 · Observability (logging, tracing)](https://sigilipelli.github.io/csharp-mastery-path/level-4/08-observability/)
+
 ## Exercise
 
 Add a `Write-Log` function to the `AdminToolkit` module from Level 3's

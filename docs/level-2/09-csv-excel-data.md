@@ -228,6 +228,10 @@ shared strings, styles), and the module reads/writes those XML parts
 programmatically, which is also why it can run on Linux/macOS where no
 Excel application exists to automate.
 
+## 🔀 See this in another language
+
+- [Python — 05 · Data Formats (CSV/JSON/XML)](https://sigilipelli.github.io/python-mastery-path/level-2/05-data-formats/)
+
 ## Exercise
 
 Create a CSV `inventory.csv` with columns `Item`, `Quantity`, `UnitPrice`

@@ -219,6 +219,12 @@ parenthesized delimiter groups *into* the result array positions between
 elements, a detail that surprises people expecting only the non-delimiter
 segments back.
 
+## 🔀 See this in another language
+
+- [Python — 06 · Regular Expressions](https://sigilipelli.github.io/python-mastery-path/level-2/06-regular-expressions/)
+- [JavaScript — 06 · Regular Expressions in JS](https://sigilipelli.github.io/javascript-mastery-path/level-2/06-regular-expressions/)
+- [Shell/Bash — 03 · Regular Expressions in Bash](https://sigilipelli.github.io/shell-mastery-path/level-2/03-regular-expressions/)
+
 ## Exercise
 
 Write a script that takes an array of log lines like

@@ -293,6 +293,12 @@ first exception, because it's compiled to sit in the `finally` clause of
 the actual IL-level `try/catch/finally` the script block's execution is
 wrapped in, not reimplemented as script-level bookkeeping.
 
+## 🔀 See this in another language
+
+- [JavaScript — 07 · Error Handling Advanced](https://sigilipelli.github.io/javascript-mastery-path/level-2/07-error-handling-advanced/)
+- [C — 06 · Error Handling Conventions](https://sigilipelli.github.io/c-mastery-path/level-2/06-error-handling/)
+- [C++ — 08 · Error Handling with Exceptions](https://sigilipelli.github.io/cpp-mastery-path/level-2/08-error-handling-exceptions/)
+
 ## Exercise
 
 Create a class `ValidationException` (inheriting `System.Exception`) with an

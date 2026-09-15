@@ -221,6 +221,10 @@ WinRM shell resource per target machine in parallel and manages
 `-ThrottleLimit` simultaneous connections, waiting for and collecting
 results as each remote runspace's SOAP response returns.
 
+## 🔀 See this in another language
+
+- [Ruby — 02 · Background Jobs (Sidekiq)](https://sigilipelli.github.io/ruby-mastery-path/level-4/02-background-jobs/)
+
 ## Exercise
 
 Write a script that takes a list of URLs and, using `ForEach-Object

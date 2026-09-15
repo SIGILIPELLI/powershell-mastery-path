@@ -231,6 +231,10 @@ is the actual reason .NET interop code needs typed `catch` blocks that
 mirror the target framework's own exception hierarchy rather than
 PowerShell-specific error handling idioms.
 
+## 🔀 See this in another language
+
+- [C++ — 07 · Working with SQLite from C++](https://sigilipelli.github.io/cpp-mastery-path/level-3/07-sqlite/)
+
 ## Exercise
 
 Write a function `Measure-TextStats` that takes a block of text, uses

@@ -433,3 +433,7 @@ regardless of what's actually present in `Tests/`.
 - Add a `-Format Csv` option to `Watch-Logs.ps1` that exports the parsed
   entries (not just the summary) using `Export-Csv`, for further analysis
   in a spreadsheet.
+
+## 🔀 See this in another language
+
+- [Shell/Bash — 10 · Project — Log Monitoring Script](https://sigilipelli.github.io/shell-mastery-path/level-2/10-project-log-monitor/)

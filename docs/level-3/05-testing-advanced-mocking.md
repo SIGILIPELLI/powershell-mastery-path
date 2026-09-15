@@ -237,6 +237,10 @@ direct query against an empty recorded-calls list, not an inferred
 absence — which is why it can reliably distinguish "never called" from
 "called but with arguments that didn't match your filter."
 
+## 🔀 See this in another language
+
+- [PHP — 04 · Testing Advanced (Mocking)](https://sigilipelli.github.io/php-mastery-path/level-3/04-testing-advanced-mocking/)
+
 ## Exercise
 
 Extend `Deploy.psm1` with a `Send-DeployNotification` function that

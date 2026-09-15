@@ -248,6 +248,12 @@ calls is idiomatic here specifically, and why the error response body
 (often containing the API's own error JSON) has to be extracted from
 `$_.Exception.Response` rather than from a normal successful return value.
 
+## 🔀 See this in another language
+
+- [TypeScript — 08 · Working with JSON/APIs](https://sigilipelli.github.io/typescript-mastery-path/level-2/08-working-with-json-apis/)
+- [Ruby — 06 · Working with JSON/APIs](https://sigilipelli.github.io/ruby-mastery-path/level-2/06-json-apis/)
+- [PHP — 06 · Working with JSON/APIs](https://sigilipelli.github.io/php-mastery-path/level-2/06-json-apis/)
+
 ## Exercise
 
 Write a function `Get-RandomJoke` that calls `https://official-joke-api.appspot.com/random_joke`,

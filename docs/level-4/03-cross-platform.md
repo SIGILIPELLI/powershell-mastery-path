@@ -203,6 +203,10 @@ on Windows; `Join-Path`/`[System.IO.Path]::Combine` normalizing separators
 correctly for the current platform is what lets script logic stay
 platform-agnostic despite this.
 
+## 🔀 See this in another language
+
+- [C++ — 07 · Cross-platform Development](https://sigilipelli.github.io/cpp-mastery-path/level-4/07-cross-platform-development/)
+
 ## Exercise
 
 Take a script that assumes Windows (uses `$env:USERPROFILE`, backslash
