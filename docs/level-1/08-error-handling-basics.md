@@ -203,9 +203,9 @@ across an entire session, not just the current statement.
 
 ## 🔀 See this in another language
 
-- [Python — Error Handling Basics](https://sigilipelli.github.io/python-mastery-path/level-1/08-error-handling/)
-- [C# — LINQ Basics](https://sigilipelli.github.io/csharp-mastery-path/level-1/08-linq-basics/)
-- [Kotlin — Data Classes](https://sigilipelli.github.io/kotlin-mastery-path/level-1/08-data-classes/)
+- [Python — Error Handling Basics](https://learnmasterypath.com/python-mastery-path/level-1/08-error-handling/)
+- [C# — LINQ Basics](https://learnmasterypath.com/csharp-mastery-path/level-1/08-linq-basics/)
+- [Kotlin — Data Classes](https://learnmasterypath.com/kotlin-mastery-path/level-1/08-data-classes/)
 
 ## Exercise
 

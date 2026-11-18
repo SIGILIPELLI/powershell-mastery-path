@@ -223,7 +223,7 @@ results as each remote runspace's SOAP response returns.
 
 ## 🔀 See this in another language
 
-- [Ruby — 02 · Background Jobs (Sidekiq)](https://sigilipelli.github.io/ruby-mastery-path/level-4/02-background-jobs/)
+- [Ruby — 02 · Background Jobs (Sidekiq)](https://learnmasterypath.com/ruby-mastery-path/level-4/02-background-jobs/)
 
 ## Exercise
 

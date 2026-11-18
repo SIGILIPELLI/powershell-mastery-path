@@ -250,9 +250,9 @@ calls is idiomatic here specifically, and why the error response body
 
 ## 🔀 See this in another language
 
-- [TypeScript — 08 · Working with JSON/APIs](https://sigilipelli.github.io/typescript-mastery-path/level-2/08-working-with-json-apis/)
-- [Ruby — 06 · Working with JSON/APIs](https://sigilipelli.github.io/ruby-mastery-path/level-2/06-json-apis/)
-- [PHP — 06 · Working with JSON/APIs](https://sigilipelli.github.io/php-mastery-path/level-2/06-json-apis/)
+- [TypeScript — 08 · Working with JSON/APIs](https://learnmasterypath.com/typescript-mastery-path/level-2/08-working-with-json-apis/)
+- [Ruby — 06 · Working with JSON/APIs](https://learnmasterypath.com/ruby-mastery-path/level-2/06-json-apis/)
+- [PHP — 06 · Working with JSON/APIs](https://learnmasterypath.com/php-mastery-path/level-2/06-json-apis/)
 
 ## Exercise
 

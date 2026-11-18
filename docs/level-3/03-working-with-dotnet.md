@@ -233,7 +233,7 @@ PowerShell-specific error handling idioms.
 
 ## 🔀 See this in another language
 
-- [C++ — 07 · Working with SQLite from C++](https://sigilipelli.github.io/cpp-mastery-path/level-3/07-sqlite/)
+- [C++ — 07 · Working with SQLite from C++](https://learnmasterypath.com/cpp-mastery-path/level-3/07-sqlite/)
 
 ## Exercise
 

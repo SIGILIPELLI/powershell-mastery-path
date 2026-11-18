@@ -201,9 +201,9 @@ and re-indexes, the other walks entries directly).
 
 ## 🔀 See this in another language
 
-- [Python — Strings & Formatting](https://sigilipelli.github.io/python-mastery-path/level-1/06-strings-formatting/)
-- [C# — Collections](https://sigilipelli.github.io/csharp-mastery-path/level-1/06-collections/)
-- [Kotlin — Null Safety Basics](https://sigilipelli.github.io/kotlin-mastery-path/level-1/06-null-safety/)
+- [Python — Strings & Formatting](https://learnmasterypath.com/python-mastery-path/level-1/06-strings-formatting/)
+- [C# — Collections](https://learnmasterypath.com/csharp-mastery-path/level-1/06-collections/)
+- [Kotlin — Null Safety Basics](https://learnmasterypath.com/kotlin-mastery-path/level-1/06-null-safety/)
 
 ## Exercise
 

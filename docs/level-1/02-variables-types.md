@@ -188,9 +188,9 @@ target to a specific scope object instead of the default local one.
 
 ## 🔀 See this in another language
 
-- [Python — Variables, Data Types & Operators](https://sigilipelli.github.io/python-mastery-path/level-1/02-variables-data-types/)
-- [C# — Variables & Types](https://sigilipelli.github.io/csharp-mastery-path/level-1/02-variables-types/)
-- [Kotlin — Variables & Types](https://sigilipelli.github.io/kotlin-mastery-path/level-1/02-variables-types/)
+- [Python — Variables, Data Types & Operators](https://learnmasterypath.com/python-mastery-path/level-1/02-variables-data-types/)
+- [C# — Variables & Types](https://learnmasterypath.com/csharp-mastery-path/level-1/02-variables-types/)
+- [Kotlin — Variables & Types](https://learnmasterypath.com/kotlin-mastery-path/level-1/02-variables-types/)
 
 ## Exercise
 

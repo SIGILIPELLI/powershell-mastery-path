@@ -436,4 +436,4 @@ regardless of what's actually present in `Tests/`.
 
 ## 🔀 See this in another language
 
-- [Shell/Bash — 10 · Project — Log Monitoring Script](https://sigilipelli.github.io/shell-mastery-path/level-2/10-project-log-monitor/)
+- [Shell/Bash — 10 · Project — Log Monitoring Script](https://learnmasterypath.com/shell-mastery-path/level-2/10-project-log-monitor/)

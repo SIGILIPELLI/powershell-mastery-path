@@ -165,9 +165,9 @@ module's actual code.
 
 ## 🔀 See this in another language
 
-- [Python — Modules, Packages & pip](https://sigilipelli.github.io/python-mastery-path/level-1/09-modules-packages/)
-- [C# — File I/O & Working with Text](https://sigilipelli.github.io/csharp-mastery-path/level-1/09-file-io/)
-- [Kotlin — Extension Functions Intro](https://sigilipelli.github.io/kotlin-mastery-path/level-1/09-extension-functions/)
+- [Python — Modules, Packages & pip](https://learnmasterypath.com/python-mastery-path/level-1/09-modules-packages/)
+- [C# — File I/O & Working with Text](https://learnmasterypath.com/csharp-mastery-path/level-1/09-file-io/)
+- [Kotlin — Extension Functions Intro](https://learnmasterypath.com/kotlin-mastery-path/level-1/09-extension-functions/)
 
 ## Exercise
 

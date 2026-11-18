@@ -222,9 +222,9 @@ label match, not a jump instruction.
 
 ## 🔀 See this in another language
 
-- [Python — Control Flow](https://sigilipelli.github.io/python-mastery-path/level-1/03-control-flow/)
-- [C# — Control Flow](https://sigilipelli.github.io/csharp-mastery-path/level-1/03-control-flow/)
-- [Kotlin — Control Flow](https://sigilipelli.github.io/kotlin-mastery-path/level-1/03-control-flow/)
+- [Python — Control Flow](https://learnmasterypath.com/python-mastery-path/level-1/03-control-flow/)
+- [C# — Control Flow](https://learnmasterypath.com/csharp-mastery-path/level-1/03-control-flow/)
+- [Kotlin — Control Flow](https://learnmasterypath.com/kotlin-mastery-path/level-1/03-control-flow/)
 
 ## Exercise
 

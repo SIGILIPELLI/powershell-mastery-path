@@ -176,9 +176,9 @@ through the formatter, the other doesn't.
 
 ## 🔀 See this in another language
 
-- [Python — File I/O Basics](https://sigilipelli.github.io/python-mastery-path/level-1/07-file-io/)
-- [C# — Exception Handling](https://sigilipelli.github.io/csharp-mastery-path/level-1/07-exception-handling/)
-- [Kotlin — Collections](https://sigilipelli.github.io/kotlin-mastery-path/level-1/07-collections/)
+- [Python — File I/O Basics](https://learnmasterypath.com/python-mastery-path/level-1/07-file-io/)
+- [C# — Exception Handling](https://learnmasterypath.com/csharp-mastery-path/level-1/07-exception-handling/)
+- [Kotlin — Collections](https://learnmasterypath.com/kotlin-mastery-path/level-1/07-collections/)
 
 ## Exercise
 

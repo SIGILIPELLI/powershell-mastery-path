@@ -205,7 +205,7 @@ platform-agnostic despite this.
 
 ## 🔀 See this in another language
 
-- [C++ — 07 · Cross-platform Development](https://sigilipelli.github.io/cpp-mastery-path/level-4/07-cross-platform-development/)
+- [C++ — 07 · Cross-platform Development](https://learnmasterypath.com/cpp-mastery-path/level-4/07-cross-platform-development/)
 
 ## Exercise
 

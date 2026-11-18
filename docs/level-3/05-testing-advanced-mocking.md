@@ -239,7 +239,7 @@ absence — which is why it can reliably distinguish "never called" from
 
 ## 🔀 See this in another language
 
-- [PHP — 04 · Testing Advanced (Mocking)](https://sigilipelli.github.io/php-mastery-path/level-3/04-testing-advanced-mocking/)
+- [PHP — 04 · Testing Advanced (Mocking)](https://learnmasterypath.com/php-mastery-path/level-3/04-testing-advanced-mocking/)
 
 ## Exercise
 

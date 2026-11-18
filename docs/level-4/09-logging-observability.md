@@ -215,8 +215,8 @@ that PowerShell itself doesn't guarantee as a parsing contract.
 
 ## 🔀 See this in another language
 
-- [Shell/Bash — 08 · Logging & Observability for Scripts](https://sigilipelli.github.io/shell-mastery-path/level-4/08-logging-observability/)
-- [C# — 08 · Observability (logging, tracing)](https://sigilipelli.github.io/csharp-mastery-path/level-4/08-observability/)
+- [Shell/Bash — 08 · Logging & Observability for Scripts](https://learnmasterypath.com/shell-mastery-path/level-4/08-logging-observability/)
+- [C# — 08 · Observability (logging, tracing)](https://learnmasterypath.com/csharp-mastery-path/level-4/08-observability/)
 
 ## Exercise
 

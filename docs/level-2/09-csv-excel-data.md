@@ -230,7 +230,7 @@ Excel application exists to automate.
 
 ## 🔀 See this in another language
 
-- [Python — 05 · Data Formats (CSV/JSON/XML)](https://sigilipelli.github.io/python-mastery-path/level-2/05-data-formats/)
+- [Python — 05 · Data Formats (CSV/JSON/XML)](https://learnmasterypath.com/python-mastery-path/level-2/05-data-formats/)
 
 ## Exercise
 

@@ -215,9 +215,9 @@ engine has no concept of "the value the function produced" separate from
 
 ## 🔀 See this in another language
 
-- [Python — Functions & Scope](https://sigilipelli.github.io/python-mastery-path/level-1/04-functions-scope/)
-- [C# — Methods & Functions](https://sigilipelli.github.io/csharp-mastery-path/level-1/04-methods-functions/)
-- [Kotlin — Functions](https://sigilipelli.github.io/kotlin-mastery-path/level-1/04-functions/)
+- [Python — Functions & Scope](https://learnmasterypath.com/python-mastery-path/level-1/04-functions-scope/)
+- [C# — Methods & Functions](https://learnmasterypath.com/csharp-mastery-path/level-1/04-methods-functions/)
+- [Kotlin — Functions](https://learnmasterypath.com/kotlin-mastery-path/level-1/04-functions/)
 
 ## Exercise
 

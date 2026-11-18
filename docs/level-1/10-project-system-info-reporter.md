@@ -214,9 +214,9 @@ organizational tidiness.
 
 ## 🔀 See this in another language
 
-- [Python — Project — CLI To-Do App](https://sigilipelli.github.io/python-mastery-path/level-1/10-project-todo-app/)
-- [C# — Project — Console Task Manager App](https://sigilipelli.github.io/csharp-mastery-path/level-1/10-project-task-manager/)
-- [Kotlin — Project — CLI To-Do App](https://sigilipelli.github.io/kotlin-mastery-path/level-1/10-project-todo-app/)
+- [Python — Project — CLI To-Do App](https://learnmasterypath.com/python-mastery-path/level-1/10-project-todo-app/)
+- [C# — Project — Console Task Manager App](https://learnmasterypath.com/csharp-mastery-path/level-1/10-project-task-manager/)
+- [Kotlin — Project — CLI To-Do App](https://learnmasterypath.com/kotlin-mastery-path/level-1/10-project-todo-app/)
 
 ## Exercise
 

@@ -197,7 +197,7 @@ workflow you designed it for.
 
 ## 🔀 See this in another language
 
-- [Shell/Bash — 09 · Security Hardening for Production Scripts](https://sigilipelli.github.io/shell-mastery-path/level-4/09-security-hardening/)
+- [Shell/Bash — 09 · Security Hardening for Production Scripts](https://learnmasterypath.com/shell-mastery-path/level-4/09-security-hardening/)
 
 ## Exercise
 

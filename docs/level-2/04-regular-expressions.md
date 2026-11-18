@@ -221,9 +221,9 @@ segments back.
 
 ## 🔀 See this in another language
 
-- [Python — 06 · Regular Expressions](https://sigilipelli.github.io/python-mastery-path/level-2/06-regular-expressions/)
-- [JavaScript — 06 · Regular Expressions in JS](https://sigilipelli.github.io/javascript-mastery-path/level-2/06-regular-expressions/)
-- [Shell/Bash — 03 · Regular Expressions in Bash](https://sigilipelli.github.io/shell-mastery-path/level-2/03-regular-expressions/)
+- [Python — 06 · Regular Expressions](https://learnmasterypath.com/python-mastery-path/level-2/06-regular-expressions/)
+- [JavaScript — 06 · Regular Expressions in JS](https://learnmasterypath.com/javascript-mastery-path/level-2/06-regular-expressions/)
+- [Shell/Bash — 03 · Regular Expressions in Bash](https://learnmasterypath.com/shell-mastery-path/level-2/03-regular-expressions/)
 
 ## Exercise
 
