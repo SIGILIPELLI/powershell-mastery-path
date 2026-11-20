@@ -1,3 +1,7 @@
+---
+description: "Level 1 (Entry) of the free PowerShell Mastery Path. Get comfortable working in pwsh, understand PowerShell's object-based pipeline, and ship a small…"
+---
+
 # Level 1 · Entry <span class="level-badge">Foundations</span>
 
 Goal: get comfortable working in `pwsh`, understand PowerShell's object-based

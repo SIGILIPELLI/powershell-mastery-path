@@ -1,3 +1,7 @@
+---
+description: "Level 2 (Intermediate) of the free PowerShell Mastery Path: Advanced Pipeline, Cmdlet Design, Error Handling Advanced, Regular Expressions in PowerShell…"
+---
+
 # Level 2 · Intermediate
 
 ## Modules

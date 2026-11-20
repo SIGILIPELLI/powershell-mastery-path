@@ -1,3 +1,7 @@
+---
+description: "Level 4 (Master) of the free PowerShell Mastery Path: Advanced Remoting & Background Jobs, CI/CD with PowerShell, Cross-Platform PowerShell, Security…"
+---
+
 # Level 4 · Master
 
 ## Modules

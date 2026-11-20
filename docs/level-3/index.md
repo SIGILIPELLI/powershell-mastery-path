@@ -1,3 +1,7 @@
+---
+description: "Level 3 (Advanced) of the free PowerShell Mastery Path: Advanced Functions & Parameter Validation, Desired State Configuration (DSC) Basics, Working with…"
+---
+
 # Level 3 · Advanced
 
 ## Modules
