@@ -190,7 +190,7 @@ overhead entirely, operating as a single method call over the whole array.
 
 ## 🔀 See this in another language
 
-- [Java — 10 · Performance Profiling & Optimization](https://learnmasterypath.com/java-mastery-path/level-3/10-profiling-optimization/)
+- [Java — 10 · Performance Profiling & Optimization](https://learnmasterypath.com/java-mastery-path/level-3/09-jvm-internals-gc-profiling-optimization/#part-2-performance-profiling-optimization)
 
 ## Exercise
 
