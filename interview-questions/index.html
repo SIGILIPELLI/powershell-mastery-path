@@ -1,0 +1,4471 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="179 PowerShell interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the PowerShell Mastery Path.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/powershell-mastery-path/interview-questions/">
+      
+      
+        <link rel="prev" href="..">
+      
+      
+        <link rel="next" href="../cheat-sheet/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>PowerShell Interview Questions and Answers (179 Questions)</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="PowerShell Interview Questions and Answers (179 Questions)">
+  <meta property="og:description" content="179 PowerShell interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the PowerShell Mastery Path.">
+  <meta property="og:url" content="https://learnmasterypath.com/powershell-mastery-path/interview-questions/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PowerShell Interview Questions and Answers (179 Questions)">
+  <meta name="twitter:description" content="179 PowerShell interview questions with answers and explanations, from beginner to advanced, organised by level. Free, from the PowerShell Mastery Path.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "PowerShell Mastery Path", "item": "https://learnmasterypath.com/powershell-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Interview Questions", "item": "https://learnmasterypath.com/powershell-mastery-path/interview-questions/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "powershell-mastery-path", "name": "PowerShell Mastery Path", "repo": "https://github.com/SIGILIPELLI/powershell-mastery-path", "src": "interview-questions.md", "url": "https://learnmasterypath.com/powershell-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#powershell-interview-questions-and-answers" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PowerShell Mastery Path" class="md-header__button md-logo" aria-label="PowerShell Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PowerShell Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PowerShell Interview Questions and Answers (179 Questions)
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/powershell-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    powershell-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../cheat-sheet/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PowerShell Mastery Path" class="md-nav__button md-logo" aria-label="PowerShell Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    PowerShell Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/powershell-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    powershell-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-objects-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with Objects &amp; the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-arrays-hashtables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Arrays &amp; Hashtables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-modules-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Modules Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-system-info-reporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — System Info Reporter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cmdlet-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Cmdlet Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-regular-expressions-in-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Regular Expressions in PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-remoting-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Remoting Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-with-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing with Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-jsonrest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with JSON/REST APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-script-modules-manifests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Script Modules &amp; Manifests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-csvexcel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with CSV/Excel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-log-monitoring-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Log Monitoring Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-functions-parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Functions &amp; Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-desired-state-configuration-dsc-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Desired State Configuration (DSC) Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-net-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with .NET from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-building-reusable-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Building Reusable Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-advanced-pester-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing Advanced (Pester Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-active-directory-system-admin-cmdlets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Active Directory &amp; System Admin Cmdlets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-scheduled-tasks-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Scheduled Tasks &amp; Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-admin-toolkit-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Admin Toolkit Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-remoting-background-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Remoting &amp; Background Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cicd-with-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · CI/CD with PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-cross-platform-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Cross-Platform PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-hardening-jea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Hardening (JEA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-building-powershell-based-devops-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Building PowerShell-based DevOps Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-publishing-modules-powershell-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Publishing Modules (PowerShell Gallery)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-logging-observability-for-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Logging &amp; Observability for Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-log-parser-with-reports-and-an-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A log parser with reports and an alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-validating-pipeline-function-and-retry-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A validating pipeline function and retry helper
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../cheat-sheet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & First Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-variables-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Variables & Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Control Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-objects-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Objects & the Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-arrays-hashtables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Arrays & Hashtables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-working-with-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Working with Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-error-handling-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Error Handling Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-modules-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Modules Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-project-system-info-reporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — System Info Reporter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-advanced-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-cmdlet-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Cmdlet Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-error-handling-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Error Handling Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-regular-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Regular Expressions in PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-remoting-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Remoting Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-testing-pester/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Testing with Pester
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-json-rest-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Working with JSON/REST APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-script-modules-manifests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Script Modules & Manifests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-csv-excel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Working with CSV/Excel Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-log-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Log Monitoring Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-advanced-functions-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Functions & Parameter Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-dsc-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Desired State Configuration (DSC) Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-working-with-dotnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Working with .NET from PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-building-reusable-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Building Reusable Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-testing-advanced-mocking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing Advanced (Pester Mocking)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-performance-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Performance Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-active-directory-admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Active Directory & System Admin Cmdlets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-scheduled-tasks-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Scheduled Tasks & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-admin-toolkit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Admin Toolkit Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-advanced-remoting-jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Remoting & Background Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-cicd-powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · CI/CD with PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-cross-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Cross-Platform PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-security-hardening-jea/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Security Hardening (JEA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-testing-at-scale-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing at Scale & CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-performance-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Performance at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-devops-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Building PowerShell-based DevOps Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-publishing-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Publishing Modules (PowerShell Gallery)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-logging-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Logging & Observability for Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-objects-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with Objects &amp; the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-arrays-hashtables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Arrays &amp; Hashtables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-modules-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Modules Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-system-info-reporter" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — System Info Reporter
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cmdlet-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Cmdlet Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-regular-expressions-in-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Regular Expressions in PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-remoting-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Remoting Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-with-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing with Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-jsonrest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with JSON/REST APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-script-modules-manifests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Script Modules &amp; Manifests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-csvexcel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with CSV/Excel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-log-monitoring-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Log Monitoring Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-functions-parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Functions &amp; Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-desired-state-configuration-dsc-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Desired State Configuration (DSC) Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-net-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with .NET from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-building-reusable-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Building Reusable Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-advanced-pester-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing Advanced (Pester Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-active-directory-system-admin-cmdlets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Active Directory &amp; System Admin Cmdlets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-scheduled-tasks-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Scheduled Tasks &amp; Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-project-admin-toolkit-module" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Project — Admin Toolkit Module
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-remoting-background-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Remoting &amp; Background Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cicd-with-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · CI/CD with PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-cross-platform-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Cross-Platform PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-hardening-jea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Hardening (JEA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-building-powershell-based-devops-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Building PowerShell-based DevOps Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-publishing-modules-powershell-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Publishing Modules (PowerShell Gallery)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-logging-observability-for-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Logging &amp; Observability for Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#mixed-questions-across-all-levels" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Mixed questions across all levels
+      
+    </span>
+  </a>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#practical-coding-questions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Practical coding questions
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Practical coding questions">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#a-log-parser-with-reports-and-an-alert" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A log parser with reports and an alert
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#a-validating-pipeline-function-and-retry-helper" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        A validating pipeline function and retry helper
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="powershell-interview-questions-and-answers">PowerShell Interview Questions and Answers<a class="headerlink" href="#powershell-interview-questions-and-answers" title="Permanent link">&para;</a></h1>
+<p><strong>179 questions</strong> with the correct answer and a short explanation, organised from beginner (Level 1) to advanced (Level 4). Every question comes from a lesson in the free PowerShell Mastery Path, so you can open the lesson to go deeper.</p>
+<div class="admonition tip">
+<p class="admonition-title">Practise, don't just read</p>
+<p>Each lesson also ends with an interactive quiz, and the <a href="../quiz/">final quiz</a> tests all four levels. Try to answer each question below before reading the answer.</p>
+</div>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="01-setup-first-script"><a href="../level-1/01-setup/">01 · Setup &amp; First Script</a><a class="headerlink" href="#01-setup-first-script" title="Permanent link">&para;</a></h3>
+<p><strong>Q1.</strong> What makes PowerShell different from traditional shells?</p>
+<p><strong>Answer:</strong> Cmdlets pass .NET objects through the pipeline, not just text</p>
+<p>Objects with properties and methods.</p>
+<p><strong>Q2.</strong> What naming pattern do cmdlets follow?</p>
+<p><strong>Answer:</strong> Verb-Noun (e.g. Get-Process)</p>
+<p>Approved verbs via Get-Verb.</p>
+<p><strong>Q3.</strong> Which cmdlet helps you discover commands?</p>
+<p><strong>Answer:</strong> Get-Command (and Get-Help for usage)</p>
+<p>Update-Help first.</p>
+<p><strong>Q4.</strong> Which cmdlet shows an object's properties and methods?</p>
+<p><strong>Answer:</strong> Get-Member</p>
+<p>Inspect pipeline output.</p>
+<h3 id="02-variables-types"><a href="../level-1/02-variables-types/">02 · Variables &amp; Types</a><a class="headerlink" href="#02-variables-types" title="Permanent link">&para;</a></h3>
+<p><strong>Q5.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="nv">$a</span> <span class="p">=</span> <span class="n">5</span><span class="p">;</span> <span class="nv">$b</span> <span class="p">=</span> <span class="s2">"5"</span><span class="p">;</span> <span class="nv">$c</span> <span class="p">=</span> <span class="n">2</span><span class="p">.</span><span class="n">5</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$a</span> <span class="o">-eq</span> <span class="nv">$b</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$b</span> <span class="o">-eq</span> <span class="nv">$a</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$a</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$c</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="no">[int]</span><span class="s2">"12"</span> <span class="p">+</span> <span class="n">1</span><span class="p">)</span><span class="s2">"</span>
+</code></pre></div>
+<p><strong>Answer:</strong> True True Int32 Double 13</p>
+<p>-eq coerces the right side to the left type. Verified by running it in PowerShell 7.</p>
+<p><strong>Q6.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-1-1" name="__codelineno-1-1" href="#__codelineno-1-1"></a><span class="no">[string]</span><span class="nv">$s</span> <span class="p">=</span> <span class="n">42</span>
+<a id="__codelineno-1-2" name="__codelineno-1-2" href="#__codelineno-1-2"></a><span class="nv">$n</span> <span class="p">=</span> <span class="nv">$null</span>
+<a id="__codelineno-1-3" name="__codelineno-1-3" href="#__codelineno-1-3"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$s</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">)</span><span class="s2"> [$n] </span><span class="p">$(</span><span class="nv">$n</span> <span class="o">-eq</span> <span class="nv">$null</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="s1">'abc'</span> <span class="o">-like</span> <span class="s1">'a*'</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="s2">"Hi $s"</span><span class="p">)</span><span class="s2">"</span>
+</code></pre></div>
+<p><strong>Answer:</strong> String [] True True Hi 42</p>
+<p>Typed variables convert on assignment. Verified by running it in PowerShell 7.</p>
+<p><strong>Q7.</strong> What does <code>$null -eq $x</code> vs <code>$x -eq $null</code> matter for?</p>
+<p><strong>Answer:</strong> With arrays, put $null on the left so the comparison isn't a filter</p>
+<p>Array -eq filters.</p>
+<p><strong>Q8.</strong> Which quoting expands variables?</p>
+<p><strong>Answer:</strong> Double quotes (single quotes are literal)</p>
+<p>"$x" vs '$x'.</p>
+<h3 id="03-control-flow"><a href="../level-1/03-control-flow/">03 · Control Flow</a><a class="headerlink" href="#03-control-flow" title="Permanent link">&para;</a></h3>
+<p><strong>Q9.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-2-1" name="__codelineno-2-1" href="#__codelineno-2-1"></a><span class="nv">$out</span> <span class="p">=</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">1</span><span class="p">..</span><span class="n">6</span><span class="p">)</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$i</span> <span class="p">%</span> <span class="n">2</span><span class="p">)</span> <span class="p">{</span> <span class="k">continue</span> <span class="p">};</span> <span class="nv">$i</span> <span class="p">*</span> <span class="n">10</span> <span class="p">}</span>
+<a id="__codelineno-2-2" name="__codelineno-2-2" href="#__codelineno-2-2"></a><span class="nv">$out</span> <span class="n">-join</span> <span class="s2">","</span>
+<a id="__codelineno-2-3" name="__codelineno-2-3" href="#__codelineno-2-3"></a><span class="k">switch</span> <span class="p">(</span><span class="n">5</span><span class="p">)</span> <span class="p">{</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-gt</span> <span class="n">3</span><span class="p">}</span> <span class="p">{</span> <span class="s2">"big"</span> <span class="p">}</span> <span class="p">{</span><span class="nv">$_</span> <span class="o">-gt</span> <span class="n">1</span><span class="p">}</span> <span class="p">{</span> <span class="s2">"medium"</span> <span class="p">}</span> <span class="k">default</span> <span class="p">{</span> <span class="s2">"small"</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 20,40,60
+big
+medium</p>
+<p>switch runs every matching clause unless break. Verified by running it in PowerShell 7.</p>
+<p><strong>Q10.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-3-1" name="__codelineno-3-1" href="#__codelineno-3-1"></a><span class="nv">$i</span> <span class="p">=</span> <span class="n">0</span>
+<a id="__codelineno-3-2" name="__codelineno-3-2" href="#__codelineno-3-2"></a><span class="k">do</span> <span class="p">{</span> <span class="nv">$i</span><span class="p">++</span> <span class="p">}</span> <span class="k">while</span> <span class="p">(</span><span class="nv">$i</span> <span class="o">-lt</span> <span class="n">3</span><span class="p">)</span>
+<a id="__codelineno-3-3" name="__codelineno-3-3" href="#__codelineno-3-3"></a><span class="nv">$j</span> <span class="p">=</span> <span class="n">10</span>
+<a id="__codelineno-3-4" name="__codelineno-3-4" href="#__codelineno-3-4"></a><span class="k">while</span> <span class="p">(</span><span class="nv">$j</span> <span class="o">-gt</span> <span class="n">7</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$j</span><span class="p">--</span> <span class="p">}</span>
+<a id="__codelineno-3-5" name="__codelineno-3-5" href="#__codelineno-3-5"></a><span class="s2">"$i $j "</span> <span class="p">+</span> <span class="p">(</span><span class="nv">$true</span> <span class="p">?</span> <span class="s2">"x"</span> <span class="p">:</span> <span class="s2">"y"</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 3 7 x</p>
+<p>do/while runs at least once; the ternary needs PowerShell 7. Verified by running it in PowerShell 7.</p>
+<p><strong>Q11.</strong> Which operator is the ternary in PowerShell 7?</p>
+<p><strong>Answer:</strong> $cond ? 'a' : 'b'</p>
+<p>PS 7+.</p>
+<p><strong>Q12.</strong> What does <code>break</code> do inside switch?</p>
+<p><strong>Answer:</strong> Stops evaluating further matching clauses</p>
+<p>Otherwise all matches run.</p>
+<h3 id="04-functions"><a href="../level-1/04-functions/">04 · Functions</a><a class="headerlink" href="#04-functions" title="Permanent link">&para;</a></h3>
+<p><strong>Q13.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-4-1" name="__codelineno-4-1" href="#__codelineno-4-1"></a><span class="k">function</span> <span class="nb">Get-Area</span> <span class="p">{</span>
+<a id="__codelineno-4-2" name="__codelineno-4-2" href="#__codelineno-4-2"></a>    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+<a id="__codelineno-4-3" name="__codelineno-4-3" href="#__codelineno-4-3"></a>    <span class="k">param</span><span class="p">([</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">)]</span><span class="no">[double]</span><span class="nv">$Width</span><span class="p">,</span> <span class="no">[double]</span><span class="nv">$Height</span> <span class="p">=</span> <span class="n">2</span><span class="p">)</span>
+<a id="__codelineno-4-4" name="__codelineno-4-4" href="#__codelineno-4-4"></a>    <span class="nv">$Width</span> <span class="p">*</span> <span class="nv">$Height</span>
+<a id="__codelineno-4-5" name="__codelineno-4-5" href="#__codelineno-4-5"></a><span class="p">}</span>
+<a id="__codelineno-4-6" name="__codelineno-4-6" href="#__codelineno-4-6"></a><span class="p">(</span><span class="nb">Get-Area</span> <span class="n">-Width</span> <span class="n">3</span><span class="p">)</span> <span class="p">+</span> <span class="p">(</span><span class="nb">Get-Area</span> <span class="n">4</span> <span class="n">5</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 26</p>
+<p>Defaults and positional parameters. Verified by running it in PowerShell 7.</p>
+<p><strong>Q14.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-5-1" name="__codelineno-5-1" href="#__codelineno-5-1"></a><span class="k">function</span> <span class="n">f</span> <span class="p">{</span> <span class="k">param</span><span class="p">(</span><span class="nv">$x</span><span class="p">)</span> <span class="k">return</span> <span class="s2">"got $x"</span> <span class="p">;</span> <span class="s2">"never"</span> <span class="p">}</span>
+<a id="__codelineno-5-2" name="__codelineno-5-2" href="#__codelineno-5-2"></a><span class="n">f</span> <span class="n">7</span>
+<a id="__codelineno-5-3" name="__codelineno-5-3" href="#__codelineno-5-3"></a><span class="k">function</span> <span class="n">g</span> <span class="p">{</span> <span class="s2">"a"</span><span class="p">;</span> <span class="s2">"b"</span><span class="p">;</span> <span class="n">3</span> <span class="p">}</span>
+<a id="__codelineno-5-4" name="__codelineno-5-4" href="#__codelineno-5-4"></a><span class="p">(</span><span class="n">g</span><span class="p">).</span><span class="n">Count</span>
+</code></pre></div>
+<p><strong>Answer:</strong> got 7
+3</p>
+<p>Everything not captured is output. Verified by running it in PowerShell 7.</p>
+<p><strong>Q15.</strong> What does [CmdletBinding()] add?</p>
+<p><strong>Answer:</strong> Common parameters like -Verbose and -ErrorAction and advanced function behavior</p>
+<p>Makes it cmdlet-like.</p>
+<p><strong>Q16.</strong> What does <code>return</code> do besides emit a value?</p>
+<p><strong>Answer:</strong> Exits the function immediately</p>
+<p>Later statements don't run.</p>
+<h3 id="05-working-with-objects-the-pipeline"><a href="../level-1/05-objects-pipeline/">05 · Working with Objects &amp; the Pipeline</a><a class="headerlink" href="#05-working-with-objects-the-pipeline" title="Permanent link">&para;</a></h3>
+<p><strong>Q17.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-6-1" name="__codelineno-6-1" href="#__codelineno-6-1"></a><span class="nv">$p</span> <span class="p">=</span> <span class="no">[pscustomobject]</span><span class="p">@{</span><span class="n">Name</span><span class="p">=</span><span class="s1">'a'</span><span class="p">;</span> <span class="n">Size</span><span class="p">=</span><span class="n">30</span><span class="p">},</span> <span class="no">[pscustomobject]</span><span class="p">@{</span><span class="n">Name</span><span class="p">=</span><span class="s1">'b'</span><span class="p">;</span> <span class="n">Size</span><span class="p">=</span><span class="n">10</span><span class="p">},</span> <span class="no">[pscustomobject]</span><span class="p">@{</span><span class="n">Name</span><span class="p">=</span><span class="s1">'c'</span><span class="p">;</span> <span class="n">Size</span><span class="p">=</span><span class="n">20</span><span class="p">}</span>
+<a id="__codelineno-6-2" name="__codelineno-6-2" href="#__codelineno-6-2"></a><span class="p">(</span><span class="nv">$p</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="n">Size</span> <span class="o">-gt</span> <span class="n">15</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Size</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="n">Name</span><span class="p">)</span> <span class="n">-join</span> <span class="s2">","</span>
+<a id="__codelineno-6-3" name="__codelineno-6-3" href="#__codelineno-6-3"></a><span class="p">(</span><span class="nv">$p</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">Size</span> <span class="n">-Sum</span> <span class="n">-Average</span><span class="p">).</span><span class="n">Sum</span>
+<a id="__codelineno-6-4" name="__codelineno-6-4" href="#__codelineno-6-4"></a><span class="p">(</span><span class="nv">$p</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-First</span> <span class="n">1</span><span class="p">).</span><span class="n">Name</span>
+</code></pre></div>
+<p><strong>Answer:</strong> c,a
+60
+a</p>
+<p>Objects flow through the pipeline. Verified by running it in PowerShell 7.</p>
+<p><strong>Q18.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-7-1" name="__codelineno-7-1" href="#__codelineno-7-1"></a><span class="nv">$p</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="n">10</span> <span class="p">|</span> <span class="nb">Group-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">%</span> <span class="n">3</span> <span class="p">}</span>
+<a id="__codelineno-7-2" name="__codelineno-7-2" href="#__codelineno-7-2"></a><span class="p">(</span><span class="nv">$p</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">:</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2">"</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">" "</span>
+<a id="__codelineno-7-3" name="__codelineno-7-3" href="#__codelineno-7-3"></a><span class="p">(</span><span class="n">1</span><span class="p">..</span><span class="n">5</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-Last</span> <span class="n">2</span><span class="p">)</span> <span class="n">-join</span> <span class="s2">","</span>
+<a id="__codelineno-7-4" name="__codelineno-7-4" href="#__codelineno-7-4"></a><span class="p">(</span><span class="nb">Get-Date</span> <span class="s1">'2026-01-31'</span><span class="p">).</span><span class="n">AddMonths</span><span class="p">(</span><span class="n">1</span><span class="p">).</span><span class="n">ToString</span><span class="p">(</span><span class="s1">'yyyy-MM-dd'</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 0:3 1:4 2:3
+4,5
+2026-02-28</p>
+<p>Group-Object and date arithmetic. Verified by running it in PowerShell 7.</p>
+<p><strong>Q19.</strong> What does Select-Object -Property do?</p>
+<p><strong>Answer:</strong> Creates new objects with chosen properties (or calculated ones)</p>
+<p>Projection.</p>
+<p><strong>Q20.</strong> When prefer Where-Object -Property syntax to a script block?</p>
+<p><strong>Answer:</strong> For simple comparisons; it's concise and faster to read</p>
+<p>PS 3+ syntax.</p>
+<h3 id="06-arrays-hashtables"><a href="../level-1/06-arrays-hashtables/">06 · Arrays &amp; Hashtables</a><a class="headerlink" href="#06-arrays-hashtables" title="Permanent link">&para;</a></h3>
+<p><strong>Q21.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-8-1" name="__codelineno-8-1" href="#__codelineno-8-1"></a><span class="nv">$a</span> <span class="p">=</span> <span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span>
+<a id="__codelineno-8-2" name="__codelineno-8-2" href="#__codelineno-8-2"></a><span class="nv">$a</span> <span class="p">+=</span> <span class="n">4</span>
+<a id="__codelineno-8-3" name="__codelineno-8-3" href="#__codelineno-8-3"></a><span class="nv">$h</span> <span class="p">=</span> <span class="p">@{</span><span class="n">b</span><span class="p">=</span><span class="n">2</span><span class="p">;</span> <span class="n">a</span><span class="p">=</span><span class="n">1</span><span class="p">}</span>
+<a id="__codelineno-8-4" name="__codelineno-8-4" href="#__codelineno-8-4"></a><span class="nv">$h</span><span class="p">[</span><span class="s1">'c'</span><span class="p">]</span> <span class="p">=</span> <span class="n">3</span>
+<a id="__codelineno-8-5" name="__codelineno-8-5" href="#__codelineno-8-5"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$a</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$h</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> </span><span class="p">$((</span><span class="nv">$h</span><span class="p">.</span><span class="n">Keys</span> <span class="p">|</span> <span class="nb">Sort-Object</span><span class="p">)</span> <span class="n">-join</span> <span class="s1">''</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$a</span><span class="p">[-</span><span class="n">1</span><span class="p">])</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$h</span><span class="p">.</span><span class="n">ContainsKey</span><span class="p">(</span><span class="s1">'z'</span><span class="p">))</span><span class="s2">"</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 4 3 abc 4 False</p>
+<p>Arrays are fixed size: += creates a new array. Verified by running it in PowerShell 7.</p>
+<p><strong>Q22.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-9-1" name="__codelineno-9-1" href="#__codelineno-9-1"></a><span class="nv">$o</span> <span class="p">=</span> <span class="no">[ordered]</span><span class="p">@{</span><span class="n">x</span><span class="p">=</span><span class="n">1</span><span class="p">;</span> <span class="n">y</span><span class="p">=</span><span class="n">2</span><span class="p">}</span>
+<a id="__codelineno-9-2" name="__codelineno-9-2" href="#__codelineno-9-2"></a><span class="nv">$o</span><span class="p">.</span><span class="n">Keys</span> <span class="n">-join</span> <span class="s2">","</span>
+<a id="__codelineno-9-3" name="__codelineno-9-3" href="#__codelineno-9-3"></a><span class="nv">$s</span> <span class="p">=</span> <span class="p">@{</span><span class="n">a</span><span class="p">=</span><span class="n">1</span><span class="p">}.</span><span class="n">GetEnumerator</span><span class="p">()</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Key</span><span class="p">)</span><span class="s2">=</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Value</span><span class="p">)</span><span class="s2">"</span> <span class="p">}</span>
+<a id="__codelineno-9-4" name="__codelineno-9-4" href="#__codelineno-9-4"></a><span class="nv">$s</span>
+<a id="__codelineno-9-5" name="__codelineno-9-5" href="#__codelineno-9-5"></a><span class="p">@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span><span class="p">)[</span><span class="n">1</span><span class="p">..</span><span class="n">2</span><span class="p">]</span> <span class="n">-join</span> <span class="s2">","</span>
+</code></pre></div>
+<p><strong>Answer:</strong> x,y
+a=1
+2,3</p>
+<p>Ordered hashtables keep insertion order. Verified by running it in PowerShell 7.</p>
+<p><strong>Q23.</strong> Why use a generic List instead of += on big arrays?</p>
+<p><strong>Answer:</strong> += copies the entire array each time (O(n²))</p>
+<p>System.Collections.Generic.List.</p>
+<p><strong>Q24.</strong> How splat parameters?</p>
+<p><strong>Answer:</strong> Put them in a hashtable and pass @params</p>
+<p>Readable calls.</p>
+<h3 id="07-working-with-files"><a href="../level-1/07-working-with-files/">07 · Working with Files</a><a class="headerlink" href="#07-working-with-files" title="Permanent link">&para;</a></h3>
+<p><strong>Q25.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-10-1" name="__codelineno-10-1" href="#__codelineno-10-1"></a><span class="nv">$d</span> <span class="p">=</span> <span class="nb">Join-Path</span> <span class="p">(</span><span class="no">[IO.Path]</span><span class="p">::</span><span class="n">GetTempPath</span><span class="p">())</span> <span class="s2">"pstest</span><span class="p">$(</span><span class="nb">Get-Random</span><span class="p">)</span><span class="s2">"</span>
+<a id="__codelineno-10-2" name="__codelineno-10-2" href="#__codelineno-10-2"></a><span class="nb">New-Item</span> <span class="n">-ItemType</span> <span class="n">Directory</span> <span class="nv">$d</span> <span class="p">|</span> <span class="nb">Out-Null</span>
+<a id="__codelineno-10-3" name="__codelineno-10-3" href="#__codelineno-10-3"></a><span class="s1">'one'</span><span class="p">,</span><span class="s1">'two'</span> <span class="p">|</span> <span class="nb">Set-Content</span> <span class="s2">"$d/a.txt"</span>
+<a id="__codelineno-10-4" name="__codelineno-10-4" href="#__codelineno-10-4"></a><span class="nb">Add-Content</span> <span class="s2">"$d/a.txt"</span> <span class="s1">'three'</span>
+<a id="__codelineno-10-5" name="__codelineno-10-5" href="#__codelineno-10-5"></a><span class="p">(</span><span class="nb">Get-Content</span> <span class="s2">"$d/a.txt"</span><span class="p">).</span><span class="n">Count</span>
+<a id="__codelineno-10-6" name="__codelineno-10-6" href="#__codelineno-10-6"></a><span class="p">(</span><span class="nb">Get-Content</span> <span class="s2">"$d/a.txt"</span> <span class="n">-Raw</span><span class="p">).</span><span class="n">Length</span>
+<a id="__codelineno-10-7" name="__codelineno-10-7" href="#__codelineno-10-7"></a><span class="p">(</span><span class="nb">Get-ChildItem</span> <span class="nv">$d</span><span class="p">).</span><span class="n">Name</span>
+<a id="__codelineno-10-8" name="__codelineno-10-8" href="#__codelineno-10-8"></a><span class="nb">Remove-Item</span> <span class="nv">$d</span> <span class="n">-Recurse</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 3
+14
+a.txt</p>
+<p>Set-Content writes lines; -Raw returns one string (with newlines). Verified by running it in PowerShell 7.</p>
+<p><strong>Q26.</strong> Which parameter treats a path literally (no wildcards)?</p>
+<p><strong>Answer:</strong> -LiteralPath</p>
+<p>Brackets in names.</p>
+<p><strong>Q27.</strong> What does Test-Path return?</p>
+<p><strong>Answer:</strong> True or False for whether the path exists</p>
+<p>Guard file operations.</p>
+<p><strong>Q28.</strong> Which encoding does PowerShell 7 write by default?</p>
+<p><strong>Answer:</strong> UTF-8 without BOM</p>
+<p>Windows PowerShell 5.1 differs.</p>
+<h3 id="08-error-handling-basics"><a href="../level-1/08-error-handling-basics/">08 · Error Handling Basics</a><a class="headerlink" href="#08-error-handling-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q29.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-11-1" name="__codelineno-11-1" href="#__codelineno-11-1"></a><span class="k">try</span> <span class="p">{</span> <span class="n">1</span><span class="p">/</span><span class="n">0</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"caught: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span><span class="p">)</span><span class="s2">"</span> <span class="p">}</span> <span class="k">finally</span> <span class="p">{</span> <span class="s2">"done"</span> <span class="p">}</span>
+<a id="__codelineno-11-2" name="__codelineno-11-2" href="#__codelineno-11-2"></a><span class="k">try</span> <span class="p">{</span> <span class="nb">Get-Item</span> <span class="p">/</span><span class="n">nonexistent_zzz</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"stop: "</span> <span class="p">+</span> <span class="nv">$_</span><span class="p">.</span><span class="n">CategoryInfo</span><span class="p">.</span><span class="n">Category</span> <span class="p">}</span>
+<a id="__codelineno-11-3" name="__codelineno-11-3" href="#__codelineno-11-3"></a><span class="nb">Get-Item</span> <span class="p">/</span><span class="n">nonexistent_zzz</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<a id="__codelineno-11-4" name="__codelineno-11-4" href="#__codelineno-11-4"></a><span class="s2">"after"</span>
+</code></pre></div>
+<p><strong>Answer:</strong> caught: RuntimeException
+done
+stop: ObjectNotFound
+after</p>
+<p>Non-terminating errors need -ErrorAction Stop to be caught. Verified by running it in PowerShell 7.</p>
+<p><strong>Q30.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-12-1" name="__codelineno-12-1" href="#__codelineno-12-1"></a><span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">'Stop'</span>
+<a id="__codelineno-12-2" name="__codelineno-12-2" href="#__codelineno-12-2"></a><span class="k">try</span> <span class="p">{</span> <span class="nb">Get-Item</span> <span class="p">/</span><span class="n">nonexistent_zzz</span><span class="p">;</span> <span class="s2">"not here"</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"handled"</span> <span class="p">}</span>
+<a id="__codelineno-12-3" name="__codelineno-12-3" href="#__codelineno-12-3"></a><span class="nv">$Error</span><span class="p">.</span><span class="n">Count</span> <span class="o">-ge</span> <span class="n">1</span>
+</code></pre></div>
+<p><strong>Answer:</strong> handled
+True</p>
+<p>Preference variable affects the scope. Verified by running it in PowerShell 7.</p>
+<p><strong>Q31.</strong> What's the difference between terminating and non-terminating errors?</p>
+<p><strong>Answer:</strong> Terminating errors stop execution and are caught; non-terminating ones continue unless made terminating</p>
+<p>-ErrorAction Stop.</p>
+<p><strong>Q32.</strong> What does $? hold?</p>
+<p><strong>Answer:</strong> Whether the last command succeeded</p>
+<p>$LASTEXITCODE for native.</p>
+<h3 id="09-modules-basics"><a href="../level-1/09-modules-basics/">09 · Modules Basics</a><a class="headerlink" href="#09-modules-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q33.</strong> What does Import-Module do?</p>
+<p><strong>Answer:</strong> Loads a module's commands into the session</p>
+<p>Auto-loading often handles it.</p>
+<p><strong>Q34.</strong> Where do you find modules in the gallery?</p>
+<p><strong>Answer:</strong> Find-Module / Find-PSResource (PowerShell Gallery)</p>
+<p>Install-PSResource in newer versions.</p>
+<p><strong>Q35.</strong> What does $env:PSModulePath contain?</p>
+<p><strong>Answer:</strong> Folders searched for modules</p>
+<p>Auto-discovery.</p>
+<p><strong>Q36.</strong> Why review modules before installing?</p>
+<p><strong>Answer:</strong> They run code with your privileges; check publisher and source</p>
+<p>Supply chain.</p>
+<h3 id="10-project-system-info-reporter"><a href="../level-1/10-project-system-info-reporter/">10 · Project — System Info Reporter</a><a class="headerlink" href="#10-project-system-info-reporter" title="Permanent link">&para;</a></h3>
+<p><strong>Q37.</strong> What does the system info reporter combine?</p>
+<p><strong>Answer:</strong> Cmdlets, objects, formatting and file output</p>
+<p>Level 1 project.</p>
+<p><strong>Q38.</strong> Which cmdlet exports objects to a file as CSV?</p>
+<p><strong>Answer:</strong> Export-Csv</p>
+<p>-NoTypeInformation is default in 7.</p>
+<p><strong>Q39.</strong> Why output objects rather than formatted text from your script?</p>
+<p><strong>Answer:</strong> Callers can filter, sort and export them; format only at the end</p>
+<p>Format-* last.</p>
+<p><strong>Q40.</strong> How make the report cross-platform?</p>
+<p><strong>Answer:</strong> Use cmdlets/properties available on all OSes and test on each</p>
+<p>Check $IsWindows.</p>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-pipeline"><a href="../level-2/01-advanced-pipeline/">01 · Advanced Pipeline</a><a class="headerlink" href="#01-advanced-pipeline" title="Permanent link">&para;</a></h3>
+<p><strong>Q41.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-13-1" name="__codelineno-13-1" href="#__codelineno-13-1"></a><span class="n">1</span><span class="p">..</span><span class="n">4</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"in$_"</span><span class="p">;</span> <span class="nv">$_</span> <span class="p">}</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="k">if</span> <span class="p">(</span><span class="nv">$_</span> <span class="o">-is</span> <span class="no">[int]</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">*</span> <span class="n">2</span> <span class="p">}</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 2
+4
+6
+8</p>
+<p>Strings are filtered out by the type test; only ints are doubled. Verified by running it in PowerShell 7.</p>
+<p><strong>Q42.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-14-1" name="__codelineno-14-1" href="#__codelineno-14-1"></a><span class="nv">$r</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="n">5</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="n">-Begin</span> <span class="p">{</span> <span class="nv">$sum</span> <span class="p">=</span> <span class="n">0</span> <span class="p">}</span> <span class="n">-Process</span> <span class="p">{</span> <span class="nv">$sum</span> <span class="p">+=</span> <span class="nv">$_</span> <span class="p">}</span> <span class="n">-End</span> <span class="p">{</span> <span class="s2">"total=$sum"</span> <span class="p">}</span>
+<a id="__codelineno-14-2" name="__codelineno-14-2" href="#__codelineno-14-2"></a><span class="nv">$r</span>
+<a id="__codelineno-14-3" name="__codelineno-14-3" href="#__codelineno-14-3"></a><span class="p">(</span><span class="n">1</span><span class="p">..</span><span class="n">10</span> <span class="p">|</span> <span class="nb">Where-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">%</span> <span class="n">2</span> <span class="o">-eq</span> <span class="n">0</span> <span class="p">}</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-First</span> <span class="n">2</span><span class="p">)</span> <span class="n">-join</span> <span class="s2">","</span>
+</code></pre></div>
+<p><strong>Answer:</strong> total=15
+2,4</p>
+<p>Begin/Process/End blocks. Verified by running it in PowerShell 7.</p>
+<p><strong>Q43.</strong> Why is Select-Object -First N efficient on streams?</p>
+<p><strong>Answer:</strong> It stops the upstream pipeline once N objects arrive</p>
+<p>Early exit.</p>
+<p><strong>Q44.</strong> Which cmdlets must buffer all input?</p>
+<p><strong>Answer:</strong> Sort-Object and Group-Object</p>
+<p>Memory cost.</p>
+<h3 id="02-cmdlet-design"><a href="../level-2/02-cmdlet-design/">02 · Cmdlet Design</a><a class="headerlink" href="#02-cmdlet-design" title="Permanent link">&para;</a></h3>
+<p><strong>Q45.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-15-1" name="__codelineno-15-1" href="#__codelineno-15-1"></a><span class="k">function</span> <span class="nb">Get-Square</span> <span class="p">{</span>
+<a id="__codelineno-15-2" name="__codelineno-15-2" href="#__codelineno-15-2"></a>    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+<a id="__codelineno-15-3" name="__codelineno-15-3" href="#__codelineno-15-3"></a>    <span class="k">param</span><span class="p">([</span><span class="k">Parameter</span><span class="p">(</span><span class="k">Mandatory</span><span class="p">,</span> <span class="k">ValueFromPipeline</span><span class="p">)]</span><span class="no">[int[]]</span><span class="nv">$Number</span><span class="p">)</span>
+<a id="__codelineno-15-4" name="__codelineno-15-4" href="#__codelineno-15-4"></a>    <span class="k">process</span> <span class="p">{</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$n</span> <span class="k">in</span> <span class="nv">$Number</span><span class="p">)</span> <span class="p">{</span> <span class="no">[pscustomobject]</span><span class="p">@{</span> <span class="n">Number</span> <span class="p">=</span> <span class="nv">$n</span><span class="p">;</span> <span class="n">Square</span> <span class="p">=</span> <span class="nv">$n</span> <span class="p">*</span> <span class="nv">$n</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+<a id="__codelineno-15-5" name="__codelineno-15-5" href="#__codelineno-15-5"></a><span class="p">}</span>
+<a id="__codelineno-15-6" name="__codelineno-15-6" href="#__codelineno-15-6"></a><span class="p">(</span><span class="n">1</span><span class="p">..</span><span class="n">3</span> <span class="p">|</span> <span class="nb">Get-Square</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Number</span><span class="p">)</span><span class="s2">^2=</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Square</span><span class="p">)</span><span class="s2">"</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">" "</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 1^2=1 2^2=4 3^2=9</p>
+<p>process{} runs per pipeline input. Verified by running it in PowerShell 7.</p>
+<p><strong>Q46.</strong> Which block runs once per pipeline object?</p>
+<p><strong>Answer:</strong> process</p>
+<p>begin/process/end.</p>
+<p><strong>Q47.</strong> What does SupportsShouldProcess add?</p>
+<p><strong>Answer:</strong> -WhatIf and -Confirm support for changing commands</p>
+<p>Safety.</p>
+<p><strong>Q48.</strong> What should a cmdlet-style function emit?</p>
+<p><strong>Answer:</strong> Objects (not formatted text)</p>
+<p>Composable.</p>
+<h3 id="03-error-handling-advanced"><a href="../level-2/03-error-handling-advanced/">03 · Error Handling Advanced</a><a class="headerlink" href="#03-error-handling-advanced" title="Permanent link">&para;</a></h3>
+<p><strong>Q49.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-16-1" name="__codelineno-16-1" href="#__codelineno-16-1"></a><span class="k">try</span> <span class="p">{</span>
+<a id="__codelineno-16-2" name="__codelineno-16-2" href="#__codelineno-16-2"></a>    <span class="k">try</span> <span class="p">{</span> <span class="k">throw</span> <span class="no">[System.IO.FileNotFoundException]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="s2">"missing.txt"</span><span class="p">)</span> <span class="p">}</span>
+<a id="__codelineno-16-3" name="__codelineno-16-3" href="#__codelineno-16-3"></a>    <span class="k">catch</span> <span class="no">[System.IO.FileNotFoundException]</span> <span class="p">{</span> <span class="k">throw</span> <span class="s2">"wrapped: </span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span><span class="p">)</span><span class="s2">"</span> <span class="p">}</span>
+<a id="__codelineno-16-4" name="__codelineno-16-4" href="#__codelineno-16-4"></a><span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="nv">$_</span><span class="p">.</span><span class="n">Exception</span><span class="p">.</span><span class="n">Message</span> <span class="p">}</span>
+<a id="__codelineno-16-5" name="__codelineno-16-5" href="#__codelineno-16-5"></a><span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">'Continue'</span>
+<a id="__codelineno-16-6" name="__codelineno-16-6" href="#__codelineno-16-6"></a><span class="nv">$null</span> <span class="p">=</span> <span class="nb">Get-Item</span> <span class="p">/</span><span class="n">zzz_none</span> <span class="n">-ErrorVariable</span> <span class="n">ev</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<a id="__codelineno-16-7" name="__codelineno-16-7" href="#__codelineno-16-7"></a><span class="nv">$ev</span><span class="p">.</span><span class="n">Count</span>
+</code></pre></div>
+<p><strong>Answer:</strong> wrapped: missing.txt
+1</p>
+<p>Typed catch, rethrow, ErrorVariable. Verified by running it in PowerShell 7.</p>
+<p><strong>Q50.</strong> What does -ErrorAction SilentlyContinue do?</p>
+<p><strong>Answer:</strong> Suppresses non-terminating error display but still records it in $Error</p>
+<p>Not a try/catch.</p>
+<p><strong>Q51.</strong> What does <code>throw</code> produce?</p>
+<p><strong>Answer:</strong> A terminating error</p>
+<p>Caught by catch.</p>
+<p><strong>Q52.</strong> Why use finally?</p>
+<p><strong>Answer:</strong> Cleanup that must run whether or not an error occurred</p>
+<p>Close handles.</p>
+<h3 id="04-regular-expressions-in-powershell"><a href="../level-2/04-regular-expressions/">04 · Regular Expressions in PowerShell</a><a class="headerlink" href="#04-regular-expressions-in-powershell" title="Permanent link">&para;</a></h3>
+<p><strong>Q53.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-17-1" name="__codelineno-17-1" href="#__codelineno-17-1"></a><span class="nv">$text</span> <span class="p">=</span> <span class="s2">"Order #1234 shipped 2026-03-15 to ann@example.com"</span>
+<a id="__codelineno-17-2" name="__codelineno-17-2" href="#__codelineno-17-2"></a><span class="nv">$m</span> <span class="p">=</span> <span class="no">[regex]</span><span class="p">::</span><span class="n">Match</span><span class="p">(</span><span class="nv">$text</span><span class="p">,</span> <span class="s1">'#(?&lt;id&gt;\d+).*?(?&lt;date&gt;\d{4}-\d{2}-\d{2})'</span><span class="p">)</span>
+<a id="__codelineno-17-3" name="__codelineno-17-3" href="#__codelineno-17-3"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$m</span><span class="p">.</span><span class="n">Groups</span><span class="p">[</span><span class="s1">'id'</span><span class="p">].</span><span class="n">Value</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$m</span><span class="p">.</span><span class="n">Groups</span><span class="p">[</span><span class="s1">'date'</span><span class="p">].</span><span class="n">Value</span><span class="p">)</span><span class="s2">"</span>
+<a id="__codelineno-17-4" name="__codelineno-17-4" href="#__codelineno-17-4"></a><span class="nv">$text</span> <span class="o">-match</span> <span class="s1">'(\w+)@(\w+)\.com'</span><span class="p">;</span> <span class="nv">$Matches</span><span class="p">[</span><span class="n">1</span><span class="p">]</span> <span class="p">+</span> <span class="s2">"/"</span> <span class="p">+</span> <span class="nv">$Matches</span><span class="p">[</span><span class="n">2</span><span class="p">]</span>
+<a id="__codelineno-17-5" name="__codelineno-17-5" href="#__codelineno-17-5"></a><span class="s2">"a1b22c333"</span> <span class="o">-replace</span> <span class="s1">'\d+'</span><span class="p">,</span> <span class="s1">'#'</span>
+<a id="__codelineno-17-6" name="__codelineno-17-6" href="#__codelineno-17-6"></a><span class="p">(</span><span class="no">[regex]</span><span class="p">::</span><span class="n">Matches</span><span class="p">(</span><span class="s2">"a1b22c333"</span><span class="p">,</span> <span class="s1">'\d+'</span><span class="p">)</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="n">Value</span><span class="p">)</span> <span class="n">-join</span> <span class="s2">"|"</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 1234 2026-03-15
+True
+ann/example
+a#b#c#
+1|22|333</p>
+<p>Named groups and -replace. Verified by running it in PowerShell 7.</p>
+<p><strong>Q54.</strong> Which operator tests a regex match and fills $Matches?</p>
+<p><strong>Answer:</strong> -match</p>
+<p>Case-insensitive by default.</p>
+<p><strong>Q55.</strong> How make matching case-sensitive?</p>
+<p><strong>Answer:</strong> Use -cmatch</p>
+<p>c prefix.</p>
+<p><strong>Q56.</strong> What is the difference between -like and -match?</p>
+<p><strong>Answer:</strong> -like uses wildcards; -match uses regular expressions</p>
+<p>Choose per need.</p>
+<h3 id="05-remoting-basics"><a href="../level-2/05-remoting-basics/">05 · Remoting Basics</a><a class="headerlink" href="#05-remoting-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q57.</strong> Which cmdlet runs commands on a remote machine?</p>
+<p><strong>Answer:</strong> Invoke-Command (over WinRM or SSH)</p>
+<p>Remoting.</p>
+<p><strong>Q58.</strong> What does Enter-PSSession do?</p>
+<p><strong>Answer:</strong> Starts an interactive session on a remote computer</p>
+<p>Exit-PSSession.</p>
+<p><strong>Q59.</strong> What do remote results look like?</p>
+<p><strong>Answer:</strong> Deserialized objects (properties but no live methods)</p>
+<p>Remember when calling methods.</p>
+<p><strong>Q60.</strong> Which transport does cross-platform PowerShell 7 remoting commonly use?</p>
+<p><strong>Answer:</strong> SSH</p>
+<p>WinRM on Windows.</p>
+<h3 id="06-testing-with-pester"><a href="../level-2/06-testing-pester/">06 · Testing with Pester</a><a class="headerlink" href="#06-testing-with-pester" title="Permanent link">&para;</a></h3>
+<p><strong>Q61.</strong> What is Pester?</p>
+<p><strong>Answer:</strong> PowerShell's testing framework</p>
+<p>Describe/It/Should.</p>
+<p><strong>Q62.</strong> What does Should -Be do?</p>
+<p><strong>Answer:</strong> Asserts a value equals the expected value</p>
+<p>Assertions.</p>
+<p><strong>Q63.</strong> What does Mock do?</p>
+<p><strong>Answer:</strong> Replaces a command's behavior during a test</p>
+<p>Isolation.</p>
+<p><strong>Q64.</strong> Which command runs the tests?</p>
+<p><strong>Answer:</strong> Invoke-Pester</p>
+<p>Configuration objects.</p>
+<h3 id="07-working-with-jsonrest-apis"><a href="../level-2/07-json-rest-apis/">07 · Working with JSON/REST APIs</a><a class="headerlink" href="#07-working-with-jsonrest-apis" title="Permanent link">&para;</a></h3>
+<p><strong>Q65.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-18-1" name="__codelineno-18-1" href="#__codelineno-18-1"></a><span class="nv">$j</span> <span class="p">=</span> <span class="s1">'{"name":"Ada","tags":["a","b"],"n":{"k":1.5}}'</span>
+<a id="__codelineno-18-2" name="__codelineno-18-2" href="#__codelineno-18-2"></a><span class="nv">$o</span> <span class="p">=</span> <span class="nv">$j</span> <span class="p">|</span> <span class="nb">ConvertFrom-Json</span>
+<a id="__codelineno-18-3" name="__codelineno-18-3" href="#__codelineno-18-3"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$o</span><span class="p">.</span><span class="n">name</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$o</span><span class="p">.</span><span class="n">tags</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$o</span><span class="p">.</span><span class="n">n</span><span class="p">.</span><span class="n">k</span><span class="p">)</span><span class="s2">"</span>
+<a id="__codelineno-18-4" name="__codelineno-18-4" href="#__codelineno-18-4"></a><span class="no">[pscustomobject]</span><span class="p">@{</span><span class="n">x</span><span class="p">=</span><span class="n">1</span><span class="p">;</span> <span class="n">y</span><span class="p">=@(</span><span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">)}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Compress</span>
+<a id="__codelineno-18-5" name="__codelineno-18-5" href="#__codelineno-18-5"></a><span class="p">@{</span><span class="n">a</span><span class="p">=@{</span><span class="n">b</span><span class="p">=</span><span class="n">1</span><span class="p">}}</span> <span class="p">|</span> <span class="nb">ConvertTo-Json</span> <span class="n">-Depth</span> <span class="n">1</span> <span class="n">-Compress</span>
+</code></pre></div>
+<p><strong>Answer:</strong> Ada 2 1.5
+{"x":1,"y":[1,2]}
+{"a":{"b":1}}</p>
+<p>JSON round trip. Verified by running it in PowerShell 7.</p>
+<p><strong>Q66.</strong> Which cmdlet calls a REST API and parses JSON?</p>
+<p><strong>Answer:</strong> Invoke-RestMethod</p>
+<p>Invoke-WebRequest returns raw response.</p>
+<p><strong>Q67.</strong> What controls nested JSON output?</p>
+<p><strong>Answer:</strong> ConvertTo-Json -Depth</p>
+<p>Default depth 2.</p>
+<p><strong>Q68.</strong> How send a JSON body?</p>
+<p><strong>Answer:</strong> -Body ($obj | ConvertTo-Json) -ContentType 'application/json'</p>
+<p>Headers too.</p>
+<h3 id="08-script-modules-manifests"><a href="../level-2/08-script-modules-manifests/">08 · Script Modules &amp; Manifests</a><a class="headerlink" href="#08-script-modules-manifests" title="Permanent link">&para;</a></h3>
+<p><strong>Q69.</strong> What does a module manifest (.psd1) describe?</p>
+<p><strong>Answer:</strong> Version, author, exports and dependencies</p>
+<p>New-ModuleManifest.</p>
+<p><strong>Q70.</strong> What does Export-ModuleMember do?</p>
+<p><strong>Answer:</strong> Controls which functions are visible outside the module</p>
+<p>Public API.</p>
+<p><strong>Q71.</strong> What's the file extension of a script module?</p>
+<p><strong>Answer:</strong> *.psm1</p>
+<p>Loaded by Import-Module.</p>
+<p><strong>Q72.</strong> Why put private helpers in the module but not export them?</p>
+<p><strong>Answer:</strong> Keeps the public surface small and stable</p>
+<p>Encapsulation.</p>
+<h3 id="09-working-with-csvexcel-data"><a href="../level-2/09-csv-excel-data/">09 · Working with CSV/Excel Data</a><a class="headerlink" href="#09-working-with-csvexcel-data" title="Permanent link">&para;</a></h3>
+<p><strong>Q73.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-19-1" name="__codelineno-19-1" href="#__codelineno-19-1"></a><span class="nv">$csv</span> <span class="p">=</span> <span class="sh">@"</span>
+<a id="__codelineno-19-2" name="__codelineno-19-2" href="#__codelineno-19-2"></a><span class="sh">name,dept,salary</span>
+<a id="__codelineno-19-3" name="__codelineno-19-3" href="#__codelineno-19-3"></a><span class="sh">ann,eng,100</span>
+<a id="__codelineno-19-4" name="__codelineno-19-4" href="#__codelineno-19-4"></a><span class="sh">bob,ops,80</span>
+<a id="__codelineno-19-5" name="__codelineno-19-5" href="#__codelineno-19-5"></a><span class="sh">cy,eng,120</span>
+<a id="__codelineno-19-6" name="__codelineno-19-6" href="#__codelineno-19-6"></a><span class="sh">"@</span>
+<a id="__codelineno-19-7" name="__codelineno-19-7" href="#__codelineno-19-7"></a><span class="nv">$rows</span> <span class="p">=</span> <span class="nv">$csv</span> <span class="p">|</span> <span class="nb">ConvertFrom-Csv</span>
+<a id="__codelineno-19-8" name="__codelineno-19-8" href="#__codelineno-19-8"></a><span class="p">(</span><span class="nv">$rows</span> <span class="p">|</span> <span class="nb">Group-Object</span> <span class="n">dept</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)</span><span class="s2">=</span><span class="p">$((</span><span class="nv">$_</span><span class="p">.</span><span class="nb">Group </span><span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">salary</span> <span class="n">-Sum</span><span class="p">).</span><span class="n">Sum</span><span class="p">)</span><span class="s2">"</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">" "</span>
+<a id="__codelineno-19-9" name="__codelineno-19-9" href="#__codelineno-19-9"></a><span class="p">(</span><span class="nv">$rows</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="p">{</span> <span class="no">[int]</span><span class="nv">$_</span><span class="p">.</span><span class="n">salary</span> <span class="p">}</span> <span class="n">-Descending</span> <span class="p">|</span> <span class="nb">Select-Object</span> <span class="n">-First</span> <span class="n">1</span><span class="p">).</span><span class="n">name</span>
+<a id="__codelineno-19-10" name="__codelineno-19-10" href="#__codelineno-19-10"></a><span class="nv">$rows</span><span class="p">[</span><span class="n">0</span><span class="p">].</span><span class="n">salary</span><span class="p">.</span><span class="n">GetType</span><span class="p">().</span><span class="n">Name</span>
+</code></pre></div>
+<p><strong>Answer:</strong> eng=220 ops=80
+cy
+String</p>
+<p>CSV values are strings unless cast. Verified by running it in PowerShell 7.</p>
+<p><strong>Q74.</strong> Why not export CSV from formatted output?</p>
+<p><strong>Answer:</strong> Format-* output is for display; export the objects</p>
+<p>Format-Table breaks it.</p>
+<p><strong>Q75.</strong> How read Excel without Excel installed?</p>
+<p><strong>Answer:</strong> Use the ImportExcel module</p>
+<p>Gallery module.</p>
+<p><strong>Q76.</strong> What does Import-Csv -Delimiter do?</p>
+<p><strong>Answer:</strong> Reads files with other separators like ; or tab</p>
+<p>Locale CSVs.</p>
+<h3 id="10-project-log-monitoring-script"><a href="../level-2/10-project-log-monitoring/">10 · Project — Log Monitoring Script</a><a class="headerlink" href="#10-project-log-monitoring-script" title="Permanent link">&para;</a></h3>
+<p><strong>Q77.</strong> What does the log monitoring project combine?</p>
+<p><strong>Answer:</strong> Regex parsing, grouping, thresholds, CSV/JSON reports and tests</p>
+<p>Level 2 project.</p>
+<p><strong>Q78.</strong> How stream a big log efficiently?</p>
+<p><strong>Answer:</strong> Get-Content | Where-Object or Select-String instead of loading all lines</p>
+<p>Streaming.</p>
+<p><strong>Q79.</strong> Which cmdlet searches text files with regex?</p>
+<p><strong>Answer:</strong> Select-String</p>
+<p>-Pattern.</p>
+<p><strong>Q80.</strong> How avoid duplicate alerts?</p>
+<p><strong>Answer:</strong> Track state (e.g. last offset or timestamp) between runs</p>
+<p>Idempotence.</p>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-functions-parameter-validation"><a href="../level-3/01-advanced-functions-validation/">01 · Advanced Functions &amp; Parameter Validation</a><a class="headerlink" href="#01-advanced-functions-parameter-validation" title="Permanent link">&para;</a></h3>
+<p><strong>Q81.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-20-1" name="__codelineno-20-1" href="#__codelineno-20-1"></a><span class="k">function</span> <span class="nb">Set-Level</span> <span class="p">{</span>
+<a id="__codelineno-20-2" name="__codelineno-20-2" href="#__codelineno-20-2"></a>    <span class="p">[</span><span class="k">CmdletBinding</span><span class="p">()]</span>
+<a id="__codelineno-20-3" name="__codelineno-20-3" href="#__codelineno-20-3"></a>    <span class="k">param</span><span class="p">(</span>
+<a id="__codelineno-20-4" name="__codelineno-20-4" href="#__codelineno-20-4"></a>        <span class="p">[</span><span class="k">ValidateSet</span><span class="p">(</span><span class="s1">'low'</span><span class="p">,</span><span class="s1">'mid'</span><span class="p">,</span><span class="s1">'high'</span><span class="p">)]</span><span class="no">[string]</span><span class="nv">$Level</span> <span class="p">=</span> <span class="s1">'mid'</span><span class="p">,</span>
+<a id="__codelineno-20-5" name="__codelineno-20-5" href="#__codelineno-20-5"></a>        <span class="p">[</span><span class="k">ValidateRange</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">10</span><span class="p">)]</span><span class="no">[int]</span><span class="nv">$Count</span> <span class="p">=</span> <span class="n">1</span><span class="p">,</span>
+<a id="__codelineno-20-6" name="__codelineno-20-6" href="#__codelineno-20-6"></a>        <span class="p">[</span><span class="k">ValidatePattern</span><span class="p">(</span><span class="s1">'^[a-z]+$'</span><span class="p">)]</span><span class="no">[string]</span><span class="nv">$Name</span> <span class="p">=</span> <span class="s1">'x'</span>
+<a id="__codelineno-20-7" name="__codelineno-20-7" href="#__codelineno-20-7"></a>    <span class="p">)</span>
+<a id="__codelineno-20-8" name="__codelineno-20-8" href="#__codelineno-20-8"></a>    <span class="s2">"$Level $Count $Name"</span>
+<a id="__codelineno-20-9" name="__codelineno-20-9" href="#__codelineno-20-9"></a><span class="p">}</span>
+<a id="__codelineno-20-10" name="__codelineno-20-10" href="#__codelineno-20-10"></a><span class="nb">Set-Level</span> <span class="n">-Level</span> <span class="n">high</span> <span class="n">-Count</span> <span class="n">3</span> <span class="n">-Name</span> <span class="n">abc</span>
+<a id="__codelineno-20-11" name="__codelineno-20-11" href="#__codelineno-20-11"></a><span class="k">try</span> <span class="p">{</span> <span class="nb">Set-Level</span> <span class="n">-Count</span> <span class="n">11</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"invalid"</span> <span class="p">}</span>
+<a id="__codelineno-20-12" name="__codelineno-20-12" href="#__codelineno-20-12"></a><span class="k">try</span> <span class="p">{</span> <span class="nb">Set-Level</span> <span class="n">-Level</span> <span class="n">nope</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"invalid"</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> high 3 abc
+invalid
+invalid</p>
+<p>Validation attributes reject bad input before the body runs. Verified by running it in PowerShell 7.</p>
+<p><strong>Q82.</strong> What does ValidateNotNullOrEmpty do?</p>
+<p><strong>Answer:</strong> Rejects null or empty values</p>
+<p>Common guard.</p>
+<p><strong>Q83.</strong> What are parameter sets for?</p>
+<p><strong>Answer:</strong> Mutually exclusive groups of parameters</p>
+<p>DefaultParameterSetName.</p>
+<p><strong>Q84.</strong> Why use ValueFromPipelineByPropertyName?</p>
+<p><strong>Answer:</strong> Bind parameters from matching property names on piped objects</p>
+<p>Composable commands.</p>
+<h3 id="02-desired-state-configuration-dsc-basics"><a href="../level-3/02-dsc-basics/">02 · Desired State Configuration (DSC) Basics</a><a class="headerlink" href="#02-desired-state-configuration-dsc-basics" title="Permanent link">&para;</a></h3>
+<p><strong>Q85.</strong> What is DSC?</p>
+<p><strong>Answer:</strong> Desired State Configuration: declare the state; the engine makes it so</p>
+<p>Idempotent.</p>
+<p><strong>Q86.</strong> What is idempotence?</p>
+<p><strong>Answer:</strong> Applying a configuration repeatedly gives the same result without extra changes</p>
+<p>Key concept.</p>
+<p><strong>Q87.</strong> What does Test-DscConfiguration/Test-TargetResource do?</p>
+<p><strong>Answer:</strong> Reports whether the machine matches the desired state</p>
+<p>Check before set.</p>
+<p><strong>Q88.</strong> What's a modern alternative for cross-platform config?</p>
+<p><strong>Answer:</strong> Ansible, Azure Automanage/Guest Config, or DSC v3</p>
+<p>Choose per environment.</p>
+<h3 id="03-working-with-net-from-powershell"><a href="../level-3/03-working-with-dotnet/">03 · Working with .NET from PowerShell</a><a class="headerlink" href="#03-working-with-net-from-powershell" title="Permanent link">&para;</a></h3>
+<p><strong>Q89.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-21-1" name="__codelineno-21-1" href="#__codelineno-21-1"></a><span class="nv">$sb</span> <span class="p">=</span> <span class="no">[System.Text.StringBuilder]</span><span class="p">::</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-21-2" name="__codelineno-21-2" href="#__codelineno-21-2"></a><span class="no">[void]</span><span class="nv">$sb</span><span class="p">.</span><span class="n">Append</span><span class="p">(</span><span class="s2">"a"</span><span class="p">).</span><span class="n">Append</span><span class="p">(</span><span class="s2">"b"</span><span class="p">)</span>
+<a id="__codelineno-21-3" name="__codelineno-21-3" href="#__codelineno-21-3"></a><span class="nv">$sb</span><span class="p">.</span><span class="n">ToString</span><span class="p">()</span>
+<a id="__codelineno-21-4" name="__codelineno-21-4" href="#__codelineno-21-4"></a><span class="no">[math]</span><span class="p">::</span><span class="n">Round</span><span class="p">(</span><span class="n">2</span><span class="p">.</span><span class="n">5</span><span class="p">),</span> <span class="no">[math]</span><span class="p">::</span><span class="n">Round</span><span class="p">(</span><span class="n">3</span><span class="p">.</span><span class="n">5</span><span class="p">),</span> <span class="no">[math]</span><span class="p">::</span><span class="n">Pow</span><span class="p">(</span><span class="n">2</span><span class="p">,</span><span class="n">10</span><span class="p">),</span> <span class="no">[Math]</span><span class="p">::</span><span class="n">Floor</span><span class="p">(-</span><span class="n">1</span><span class="p">.</span><span class="n">5</span><span class="p">)</span>
+<a id="__codelineno-21-5" name="__codelineno-21-5" href="#__codelineno-21-5"></a><span class="no">[datetime]</span><span class="p">::</span><span class="n">new</span><span class="p">(</span><span class="n">2026</span><span class="p">,</span><span class="n">3</span><span class="p">,</span><span class="n">15</span><span class="p">).</span><span class="n">DayOfWeek</span>
+<a id="__codelineno-21-6" name="__codelineno-21-6" href="#__codelineno-21-6"></a><span class="no">[guid]</span><span class="p">::</span><span class="n">Empty</span><span class="p">.</span><span class="n">ToString</span><span class="p">().</span><span class="n">Length</span>
+</code></pre></div>
+<p><strong>Answer:</strong> ab
+2
+4
+1024
+-2
+Sunday
+36</p>
+<p>Banker's rounding; static .NET members. Verified by running it in PowerShell 7.</p>
+<p><strong>Q90.</strong> How call a static .NET method?</p>
+<p><strong>Answer:</strong> [Namespace.Type]::Method()</p>
+<p>Double colon.</p>
+<p><strong>Q91.</strong> How load an extra .NET assembly?</p>
+<p><strong>Answer:</strong> Add-Type (-AssemblyName or -Path)</p>
+<p>Or <code>using assembly</code>.</p>
+<p><strong>Q92.</strong> Why use .NET types sparingly?</p>
+<p><strong>Answer:</strong> Cmdlets are more discoverable and cross-platform-safe; use .NET for gaps and performance</p>
+<p>Balance.</p>
+<h3 id="04-building-reusable-modules"><a href="../level-3/04-building-reusable-modules/">04 · Building Reusable Modules</a><a class="headerlink" href="#04-building-reusable-modules" title="Permanent link">&para;</a></h3>
+<p><strong>Q93.</strong> What makes a module reusable?</p>
+<p><strong>Answer:</strong> Clear public functions, help, validation, tests and a manifest</p>
+<p>Design for others.</p>
+<p><strong>Q94.</strong> What should functions avoid?</p>
+<p><strong>Answer:</strong> Writing to the host and relying on global state</p>
+<p>Return objects.</p>
+<p><strong>Q95.</strong> What does comment-based help provide?</p>
+<p><strong>Answer:</strong> Get-Help documentation from comments above functions</p>
+<p>.SYNOPSIS/.EXAMPLE.</p>
+<p><strong>Q96.</strong> How version modules?</p>
+<p><strong>Answer:</strong> Semantic versioning in the manifest</p>
+<p>Breaking changes bump major.</p>
+<h3 id="05-testing-advanced-pester-mocking"><a href="../level-3/05-testing-advanced-mocking/">05 · Testing Advanced (Pester Mocking)</a><a class="headerlink" href="#05-testing-advanced-pester-mocking" title="Permanent link">&para;</a></h3>
+<p><strong>Q97.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-22-1" name="__codelineno-22-1" href="#__codelineno-22-1"></a><span class="nb">Remove-Module</span> <span class="n">Pester</span> <span class="n">-ErrorAction</span> <span class="n">SilentlyContinue</span>
+<a id="__codelineno-22-2" name="__codelineno-22-2" href="#__codelineno-22-2"></a><span class="k">function</span> <span class="nb">Get-Greeting</span> <span class="p">{</span> <span class="k">param</span><span class="p">(</span><span class="nv">$Name</span><span class="p">)</span> <span class="s2">"hi $Name"</span> <span class="p">}</span>
+<a id="__codelineno-22-3" name="__codelineno-22-3" href="#__codelineno-22-3"></a><span class="k">function</span> <span class="n">Say</span> <span class="p">{</span> <span class="nb">Get-Greeting</span> <span class="n">-Name</span> <span class="s1">'x'</span> <span class="p">}</span>
+<a id="__codelineno-22-4" name="__codelineno-22-4" href="#__codelineno-22-4"></a><span class="k">function</span> <span class="nb">Get-Greeting</span> <span class="p">{</span> <span class="k">param</span><span class="p">(</span><span class="nv">$Name</span><span class="p">)</span> <span class="s2">"mock $Name"</span> <span class="p">}</span>
+<a id="__codelineno-22-5" name="__codelineno-22-5" href="#__codelineno-22-5"></a><span class="n">Say</span>
+</code></pre></div>
+<p><strong>Answer:</strong> mock x</p>
+<p>Redefining a function shadows the earlier one (mocking in spirit). Verified by running it in PowerShell 7.</p>
+<p><strong>Q98.</strong> What does Should -Invoke verify?</p>
+<p><strong>Answer:</strong> That a mocked command was called (and how many times)</p>
+<p>Interaction checks.</p>
+<p><strong>Q99.</strong> What is BeforeAll/BeforeEach for?</p>
+<p><strong>Answer:</strong> Setup shared by tests (once vs per test)</p>
+<p>Fixtures.</p>
+<p><strong>Q100.</strong> What goes wrong with over-mocking?</p>
+<p><strong>Answer:</strong> Tests mirror implementation and break on refactors</p>
+<p>Mock boundaries only.</p>
+<h3 id="06-security"><a href="../level-3/06-security/">06 · Security</a><a class="headerlink" href="#06-security" title="Permanent link">&para;</a></h3>
+<p><strong>Q101.</strong> What does Set-ExecutionPolicy control?</p>
+<p><strong>Answer:</strong> Which scripts may run (a safety feature, not a security boundary)</p>
+<p>Windows.</p>
+<p><strong>Q102.</strong> How store credentials securely?</p>
+<p><strong>Answer:</strong> SecretManagement/SecretStore or a vault; never in plain text</p>
+<p>PSCredential objects.</p>
+<p><strong>Q103.</strong> What does Get-Credential return?</p>
+<p><strong>Answer:</strong> A PSCredential with the password as a SecureString</p>
+<p>Prompt.</p>
+<p><strong>Q104.</strong> What should you do with logs?</p>
+<p><strong>Answer:</strong> Avoid writing secrets or tokens</p>
+<p>Redact.</p>
+<h3 id="07-performance-optimization"><a href="../level-3/07-performance-optimization/">07 · Performance Optimization</a><a class="headerlink" href="#07-performance-optimization" title="Permanent link">&para;</a></h3>
+<p><strong>Q105.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-23-1" name="__codelineno-23-1" href="#__codelineno-23-1"></a><span class="nv">$n</span> <span class="p">=</span> <span class="n">20000</span>
+<a id="__codelineno-23-2" name="__codelineno-23-2" href="#__codelineno-23-2"></a><span class="nv">$a</span> <span class="p">=</span> <span class="n">1</span><span class="p">..</span><span class="nv">$n</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">}</span>
+<a id="__codelineno-23-3" name="__codelineno-23-3" href="#__codelineno-23-3"></a><span class="nv">$l</span> <span class="p">=</span> <span class="no">[System.Collections.Generic.List[int]]</span><span class="p">::</span><span class="n">new</span><span class="p">()</span>
+<a id="__codelineno-23-4" name="__codelineno-23-4" href="#__codelineno-23-4"></a><span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">1</span><span class="p">..</span><span class="nv">$n</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$l</span><span class="p">.</span><span class="n">Add</span><span class="p">(</span><span class="nv">$i</span><span class="p">)</span> <span class="p">}</span>
+<a id="__codelineno-23-5" name="__codelineno-23-5" href="#__codelineno-23-5"></a><span class="s2">"</span><span class="p">$(</span><span class="nv">$a</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> </span><span class="p">$(</span><span class="nv">$l</span><span class="p">.</span><span class="n">Count</span><span class="p">)</span><span class="s2"> </span><span class="p">$((</span><span class="nv">$a</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">-Sum</span><span class="p">).</span><span class="n">Sum</span> <span class="o">-eq</span> <span class="p">(</span><span class="nv">$l</span> <span class="p">|</span> <span class="nb">Measure-Object</span> <span class="n">-Sum</span><span class="p">).</span><span class="n">Sum</span><span class="p">)</span><span class="s2">"</span>
+<a id="__codelineno-23-6" name="__codelineno-23-6" href="#__codelineno-23-6"></a><span class="nv">$swa</span> <span class="p">=</span> <span class="p">(</span><span class="nb">Measure-Command</span> <span class="p">{</span> <span class="k">foreach</span> <span class="p">(</span><span class="nv">$i</span> <span class="k">in</span> <span class="n">1</span><span class="p">..</span><span class="n">1000</span><span class="p">)</span> <span class="p">{</span> <span class="nv">$null</span> <span class="p">=</span> <span class="nv">$i</span> <span class="p">*</span> <span class="n">2</span> <span class="p">}</span> <span class="p">}).</span><span class="n">TotalMilliseconds</span> <span class="o">-ge</span> <span class="n">0</span>
+<a id="__codelineno-23-7" name="__codelineno-23-7" href="#__codelineno-23-7"></a><span class="nv">$swa</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 20000 20000 True
+True</p>
+<p>Both approaches produce the same data; the List avoids array copying. Verified by running it in PowerShell 7.</p>
+<p><strong>Q106.</strong> What is the fastest way to build a large collection in a loop?</p>
+<p><strong>Answer:</strong> A generic List (Add) or assign the loop output directly</p>
+<p>Avoid += on arrays.</p>
+<p><strong>Q107.</strong> How measure code speed?</p>
+<p><strong>Answer:</strong> Measure-Command (repeat and compare)</p>
+<p>Profile.</p>
+<p><strong>Q108.</strong> Why filter left in a pipeline?</p>
+<p><strong>Answer:</strong> Reduce objects early so later stages do less work</p>
+<p>-Filter on providers.</p>
+<h3 id="08-active-directory-system-admin-cmdlets"><a href="../level-3/08-active-directory-admin/">08 · Active Directory &amp; System Admin Cmdlets</a><a class="headerlink" href="#08-active-directory-system-admin-cmdlets" title="Permanent link">&para;</a></h3>
+<p><strong>Q109.</strong> Which module manages Active Directory?</p>
+<p><strong>Answer:</strong> ActiveDirectory (RSAT) with Get-ADUser etc.</p>
+<p>Windows.</p>
+<p><strong>Q110.</strong> Why use -Filter with Get-ADUser?</p>
+<p><strong>Answer:</strong> Server-side filtering is far faster than fetching all users</p>
+<p>Don't Where-Object everything.</p>
+<p><strong>Q111.</strong> What should bulk AD changes use first?</p>
+<p><strong>Answer:</strong> -WhatIf and a pilot run</p>
+<p>Safe change.</p>
+<p><strong>Q112.</strong> How limit property retrieval?</p>
+<p><strong>Answer:</strong> -Properties with only the needed attributes</p>
+<p>Performance.</p>
+<h3 id="09-scheduled-tasks-automation"><a href="../level-3/09-scheduled-tasks-automation/">09 · Scheduled Tasks &amp; Automation</a><a class="headerlink" href="#09-scheduled-tasks-automation" title="Permanent link">&para;</a></h3>
+<p><strong>Q113.</strong> Which cmdlets register scheduled tasks on Windows?</p>
+<p><strong>Answer:</strong> Register-ScheduledTask with New-ScheduledTaskAction/Trigger</p>
+<p>Windows only.</p>
+<p><strong>Q114.</strong> What should scheduled scripts do?</p>
+<p><strong>Answer:</strong> Log, handle errors, use least privilege and be idempotent</p>
+<p>Unattended.</p>
+<p><strong>Q115.</strong> How run something on Linux on a schedule?</p>
+<p><strong>Answer:</strong> cron or systemd timers calling pwsh</p>
+<p>Cross-platform.</p>
+<p><strong>Q116.</strong> How prevent overlapping runs?</p>
+<p><strong>Answer:</strong> A lock file/mutex or checking for a running instance</p>
+<p>Reliability.</p>
+<h3 id="10-project-admin-toolkit-module"><a href="../level-3/10-project-admin-toolkit/">10 · Project — Admin Toolkit Module</a><a class="headerlink" href="#10-project-admin-toolkit-module" title="Permanent link">&para;</a></h3>
+<p><strong>Q117.</strong> What does the admin toolkit project combine?</p>
+<p><strong>Answer:</strong> Reusable module, validation, logging, tests, remoting and scheduling</p>
+<p>Level 3 project.</p>
+<p><strong>Q118.</strong> How structure the toolkit?</p>
+<p><strong>Answer:</strong> A module with public/private functions, manifest and Pester tests</p>
+<p>Maintainable.</p>
+<p><strong>Q119.</strong> How make it safe to run?</p>
+<p><strong>Answer:</strong> -WhatIf/-Confirm, validation, least privilege and logging</p>
+<p>Defence.</p>
+<p><strong>Q120.</strong> How share it?</p>
+<p><strong>Answer:</strong> Publish to a private repository/feed or the PowerShell Gallery</p>
+<p>Versioned.</p>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-remoting-background-jobs"><a href="../level-4/01-advanced-remoting-jobs/">01 · Advanced Remoting &amp; Background Jobs</a><a class="headerlink" href="#01-advanced-remoting-background-jobs" title="Permanent link">&para;</a></h3>
+<p><strong>Q121.</strong> What does Start-Job do?</p>
+<p><strong>Answer:</strong> Runs a script block in a background job</p>
+<p>Receive-Job gets output.</p>
+<p><strong>Q122.</strong> What does ForEach-Object -Parallel do (PS 7)?</p>
+<p><strong>Answer:</strong> Runs the script block for items in parallel with -ThrottleLimit</p>
+<p>Use $using: for variables.</p>
+<p><strong>Q123.</strong> When is parallelism not worth it?</p>
+<p><strong>Answer:</strong> For tiny tasks where startup overhead dominates</p>
+<p>Measure.</p>
+<p><strong>Q124.</strong> How handle remoting at scale?</p>
+<p><strong>Answer:</strong> Invoke-Command to many hosts with -ThrottleLimit and error collection</p>
+<p>Fan-out.</p>
+<h3 id="02-cicd-with-powershell"><a href="../level-4/02-cicd-powershell/">02 · CI/CD with PowerShell</a><a class="headerlink" href="#02-cicd-with-powershell" title="Permanent link">&para;</a></h3>
+<p><strong>Q125.</strong> What should a PowerShell CI pipeline run?</p>
+<p><strong>Answer:</strong> Pester tests, PSScriptAnalyzer and module build/publish steps</p>
+<p>Quality gates.</p>
+<p><strong>Q126.</strong> What does PSScriptAnalyzer do?</p>
+<p><strong>Answer:</strong> Static analysis for best-practice and style issues</p>
+<p>Invoke-ScriptAnalyzer.</p>
+<p><strong>Q127.</strong> How store pipeline secrets?</p>
+<p><strong>Answer:</strong> CI secret variables, never in the repo</p>
+<p>Security.</p>
+<p><strong>Q128.</strong> What artifacts help?</p>
+<p><strong>Answer:</strong> Test results and code coverage reports</p>
+<p>Visibility.</p>
+<h3 id="03-cross-platform-powershell"><a href="../level-4/03-cross-platform/">03 · Cross-Platform PowerShell</a><a class="headerlink" href="#03-cross-platform-powershell" title="Permanent link">&para;</a></h3>
+<p><strong>Q129.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-24-1" name="__codelineno-24-1" href="#__codelineno-24-1"></a><span class="nv">$IsWindows</span> <span class="o">-or</span> <span class="nv">$IsLinux</span> <span class="o">-or</span> <span class="nv">$IsMacOS</span>
+<a id="__codelineno-24-2" name="__codelineno-24-2" href="#__codelineno-24-2"></a><span class="no">[System.IO.Path]</span><span class="p">::</span><span class="n">DirectorySeparatorChar</span><span class="p">.</span><span class="n">ToString</span><span class="p">().</span><span class="n">Length</span>
+<a id="__codelineno-24-3" name="__codelineno-24-3" href="#__codelineno-24-3"></a><span class="nb">Join-Path</span> <span class="s1">'a'</span> <span class="s1">'b'</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="o">-replace</span> <span class="s1">'[\\/]'</span><span class="p">,</span> <span class="s1">'/'</span> <span class="p">}</span>
+<a id="__codelineno-24-4" name="__codelineno-24-4" href="#__codelineno-24-4"></a><span class="nv">$PSVersionTable</span><span class="p">.</span><span class="n">PSEdition</span>
+</code></pre></div>
+<p><strong>Answer:</strong> True
+1
+a/b
+Core</p>
+<p>PowerShell 7 is Core and cross-platform. Verified by running it in PowerShell 7.</p>
+<p><strong>Q130.</strong> Which cmdlet builds paths safely across OSes?</p>
+<p><strong>Answer:</strong> Join-Path</p>
+<p>Separators.</p>
+<p><strong>Q131.</strong> What's a cross-platform pitfall?</p>
+<p><strong>Answer:</strong> Case-sensitive file systems and Windows-only cmdlets/modules</p>
+<p>Test on each OS.</p>
+<p><strong>Q132.</strong> How check the platform?</p>
+<p><strong>Answer:</strong> $IsWindows / $IsLinux / $IsMacOS</p>
+<p>Automatic variables.</p>
+<h3 id="04-security-hardening-jea"><a href="../level-4/04-security-hardening-jea/">04 · Security Hardening (JEA)</a><a class="headerlink" href="#04-security-hardening-jea" title="Permanent link">&para;</a></h3>
+<p><strong>Q133.</strong> What is JEA?</p>
+<p><strong>Answer:</strong> Just Enough Administration: constrained remoting endpoints exposing only allowed commands</p>
+<p>Least privilege.</p>
+<p><strong>Q134.</strong> What defines a JEA endpoint?</p>
+<p><strong>Answer:</strong> A role capability file and a session configuration</p>
+<p>.psrc/.pssc.</p>
+<p><strong>Q135.</strong> What does constrained language mode do?</p>
+<p><strong>Answer:</strong> Restricts risky language features to reduce attack surface</p>
+<p>Security.</p>
+<p><strong>Q136.</strong> What logging detects abuse?</p>
+<p><strong>Answer:</strong> Script block, module and transcription logging</p>
+<p>Audit.</p>
+<h3 id="05-testing-at-scale-ci"><a href="../level-4/05-testing-at-scale-ci/">05 · Testing at Scale &amp; CI</a><a class="headerlink" href="#05-testing-at-scale-ci" title="Permanent link">&para;</a></h3>
+<p><strong>Q137.</strong> How scale test suites in CI?</p>
+<p><strong>Answer:</strong> Parallel jobs, tags and cached modules</p>
+<p>Faster feedback.</p>
+<p><strong>Q138.</strong> What should tests avoid?</p>
+<p><strong>Answer:</strong> Dependence on real servers or clocks (mock boundaries)</p>
+<p>Deterministic.</p>
+<p><strong>Q139.</strong> How report results?</p>
+<p><strong>Answer:</strong> NUnit/JUnit XML consumed by CI</p>
+<p>Dashboards.</p>
+<p><strong>Q140.</strong> What do you do with flaky tests?</p>
+<p><strong>Answer:</strong> Fix isolation/timing or quarantine with a ticket</p>
+<p>Trust.</p>
+<h3 id="06-performance-at-scale"><a href="../level-4/06-performance-at-scale/">06 · Performance at Scale</a><a class="headerlink" href="#06-performance-at-scale" title="Permanent link">&para;</a></h3>
+<p><strong>Q141.</strong> Which technique saves memory on huge inputs?</p>
+<p><strong>Answer:</strong> Stream with the pipeline or Get-Content -ReadCount instead of loading everything</p>
+<p>Batching.</p>
+<p><strong>Q142.</strong> What does -ReadCount do?</p>
+<p><strong>Answer:</strong> Sends lines to the pipeline in chunks</p>
+<p>Throughput.</p>
+<p><strong>Q143.</strong> How avoid slow string concatenation in loops?</p>
+<p><strong>Answer:</strong> StringBuilder or -join</p>
+<p>Quadratic cost.</p>
+<p><strong>Q144.</strong> What first?</p>
+<p><strong>Answer:</strong> Measure before optimizing</p>
+<p>Evidence.</p>
+<h3 id="07-building-powershell-based-devops-tools"><a href="../level-4/07-devops-tools/">07 · Building PowerShell-based DevOps Tools</a><a class="headerlink" href="#07-building-powershell-based-devops-tools" title="Permanent link">&para;</a></h3>
+<p><strong>Q145.</strong> Which tools do DevOps scripts often call?</p>
+<p><strong>Answer:</strong> git, docker, kubectl, az/aws CLIs and REST APIs</p>
+<p>Glue.</p>
+<p><strong>Q146.</strong> How check a native command's success?</p>
+<p><strong>Answer:</strong> $LASTEXITCODE (and $? for cmdlets)</p>
+<p>Native exit codes.</p>
+<p><strong>Q147.</strong> How capture native output as objects?</p>
+<p><strong>Answer:</strong> Convert text with ConvertFrom-Json or parse lines</p>
+<p>--output json.</p>
+<p><strong>Q148.</strong> Why wrap native tools in functions?</p>
+<p><strong>Answer:</strong> Consistent errors, parameters and testability</p>
+<p>Abstraction.</p>
+<h3 id="08-publishing-modules-powershell-gallery"><a href="../level-4/08-publishing-modules/">08 · Publishing Modules (PowerShell Gallery)</a><a class="headerlink" href="#08-publishing-modules-powershell-gallery" title="Permanent link">&para;</a></h3>
+<p><strong>Q149.</strong> What do you need to publish a module?</p>
+<p><strong>Answer:</strong> A manifest, tests and an API key for the gallery/feed</p>
+<p>Publish-Module/Publish-PSResource.</p>
+<p><strong>Q150.</strong> What belongs in a README/changelog?</p>
+<p><strong>Answer:</strong> Install steps, examples and version history</p>
+<p>User docs.</p>
+<p><strong>Q151.</strong> How sign scripts?</p>
+<p><strong>Answer:</strong> Authenticode certificates (Set-AuthenticodeSignature)</p>
+<p>Trust.</p>
+<p><strong>Q152.</strong> How version breaking changes?</p>
+<p><strong>Answer:</strong> Bump the major version and document migration</p>
+<p>SemVer.</p>
+<h3 id="09-logging-observability-for-scripts"><a href="../level-4/09-logging-observability/">09 · Logging &amp; Observability for Scripts</a><a class="headerlink" href="#09-logging-observability-for-scripts" title="Permanent link">&para;</a></h3>
+<p><strong>Q153.</strong> What makes logs useful?</p>
+<p><strong>Answer:</strong> Structured, levelled entries with correlation IDs and timestamps</p>
+<p>Query later.</p>
+<p><strong>Q154.</strong> Which streams exist?</p>
+<p><strong>Answer:</strong> Output, Error, Warning, Verbose, Debug, Information</p>
+<p>Redirect with 1&gt;..6&gt;.</p>
+<p><strong>Q155.</strong> What does Start-Transcript capture?</p>
+<p><strong>Answer:</strong> Console input and output to a file</p>
+<p>Audit trail.</p>
+<p><strong>Q156.</strong> How emit metrics?</p>
+<p><strong>Answer:</strong> Write structured events to a log system or counters to monitoring</p>
+<p>Observability.</p>
+<h3 id="10-capstone-project"><a href="../level-4/10-capstone-project/">10 · Capstone Project</a><a class="headerlink" href="#10-capstone-project" title="Permanent link">&para;</a></h3>
+<p><strong>Q157.</strong> What does the capstone combine?</p>
+<p><strong>Answer:</strong> A tested, secured, published module with CI, logging and docs</p>
+<p>Production-ready.</p>
+<p><strong>Q158.</strong> How prove readiness?</p>
+<p><strong>Answer:</strong> CI green on all platforms, security review and release notes</p>
+<p>Evidence.</p>
+<p><strong>Q159.</strong> What documentation helps?</p>
+<p><strong>Answer:</strong> README, examples, runbooks and a contributing guide</p>
+<p>Onboarding.</p>
+<p><strong>Q160.</strong> What sustains it?</p>
+<p><strong>Answer:</strong> Ownership, dependency updates and issue triage</p>
+<p>Maintenance.</p>
+<h2 id="mixed-questions-across-all-levels">Mixed questions across all levels<a class="headerlink" href="#mixed-questions-across-all-levels" title="Permanent link">&para;</a></h2>
+<p><strong>Q161.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-25-1" name="__codelineno-25-1" href="#__codelineno-25-1"></a><span class="nv">$a</span> <span class="p">=</span> <span class="n">1</span><span class="p">,</span><span class="n">2</span><span class="p">,</span><span class="n">3</span>
+<a id="__codelineno-25-2" name="__codelineno-25-2" href="#__codelineno-25-2"></a><span class="nv">$a</span> <span class="o">-eq</span> <span class="n">2</span>
+<a id="__codelineno-25-3" name="__codelineno-25-3" href="#__codelineno-25-3"></a><span class="nv">$a</span> <span class="o">-contains</span> <span class="n">2</span>
+<a id="__codelineno-25-4" name="__codelineno-25-4" href="#__codelineno-25-4"></a><span class="nv">$null</span> <span class="o">-eq</span> <span class="nv">$a</span>
+<a id="__codelineno-25-5" name="__codelineno-25-5" href="#__codelineno-25-5"></a><span class="p">(</span><span class="n">1</span><span class="p">..</span><span class="n">3</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="nv">$_</span> <span class="p">*</span> <span class="nv">$_</span> <span class="p">})</span> <span class="n">-join</span> <span class="s2">","</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 2
+True
+False
+1,4,9</p>
+<p>-eq on an array filters; -contains tests membership. Verified by running it in PowerShell 7.</p>
+<p><strong>Q162.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-26-1" name="__codelineno-26-1" href="#__codelineno-26-1"></a><span class="k">function</span> <span class="n">f</span> <span class="p">{</span> <span class="k">param</span><span class="p">(</span><span class="no">[int]</span><span class="nv">$n</span><span class="p">)</span> <span class="nv">$n</span> <span class="p">*</span> <span class="n">2</span> <span class="p">}</span>
+<a id="__codelineno-26-2" name="__codelineno-26-2" href="#__codelineno-26-2"></a><span class="n">f</span> <span class="s2">"21"</span>
+<a id="__codelineno-26-3" name="__codelineno-26-3" href="#__codelineno-26-3"></a><span class="k">try</span> <span class="p">{</span> <span class="n">f</span> <span class="s2">"abc"</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"bad"</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 42
+bad</p>
+<p>Typed parameters convert or throw. Verified by running it in PowerShell 7.</p>
+<p><strong>Q163.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-27-1" name="__codelineno-27-1" href="#__codelineno-27-1"></a><span class="nv">$h</span> <span class="p">=</span> <span class="p">@{</span> <span class="n">a</span> <span class="p">=</span> <span class="n">1</span><span class="p">;</span> <span class="n">b</span> <span class="p">=</span> <span class="n">2</span> <span class="p">}</span>
+<a id="__codelineno-27-2" name="__codelineno-27-2" href="#__codelineno-27-2"></a><span class="nv">$h</span><span class="p">.</span><span class="n">GetEnumerator</span><span class="p">()</span> <span class="p">|</span> <span class="nb">Sort-Object</span> <span class="n">Name</span> <span class="p">|</span> <span class="k">ForEach</span><span class="n">-Object</span> <span class="p">{</span> <span class="s2">"</span><span class="p">$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Name</span><span class="p">)$(</span><span class="nv">$_</span><span class="p">.</span><span class="n">Value</span><span class="p">)</span><span class="s2">"</span> <span class="p">}</span>
+<a id="__codelineno-27-3" name="__codelineno-27-3" href="#__codelineno-27-3"></a><span class="p">(</span><span class="nv">$h</span><span class="p">.</span><span class="n">Keys</span> <span class="p">|</span> <span class="nb">Measure-Object</span><span class="p">).</span><span class="n">Count</span>
+</code></pre></div>
+<p><strong>Answer:</strong> a1
+b2
+2</p>
+<p>Hashtable enumeration. Verified by running it in PowerShell 7.</p>
+<p><strong>Q164.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-28-1" name="__codelineno-28-1" href="#__codelineno-28-1"></a><span class="nv">$ErrorActionPreference</span> <span class="p">=</span> <span class="s1">'Continue'</span>
+<a id="__codelineno-28-2" name="__codelineno-28-2" href="#__codelineno-28-2"></a><span class="nb">Get-Item</span> <span class="p">/</span><span class="n">nope_zzz</span> <span class="n">2</span><span class="p">&gt;</span><span class="nv">$null</span>
+<a id="__codelineno-28-3" name="__codelineno-28-3" href="#__codelineno-28-3"></a><span class="s2">"next"</span>
+<a id="__codelineno-28-4" name="__codelineno-28-4" href="#__codelineno-28-4"></a><span class="k">try</span> <span class="p">{</span> <span class="nb">Get-Item</span> <span class="p">/</span><span class="n">nope_zzz</span> <span class="n">-ErrorAction</span> <span class="n">Stop</span> <span class="p">}</span> <span class="k">catch</span> <span class="p">{</span> <span class="s2">"caught"</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>Answer:</strong> next
+caught</p>
+<p>Non-terminating errors continue; -ErrorAction Stop makes them catchable. Verified by running it in PowerShell 7.</p>
+<p><strong>Q165.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-29-1" name="__codelineno-29-1" href="#__codelineno-29-1"></a><span class="s2">"{0:N1} {1:P0} {2:D3}"</span> <span class="o">-f</span> <span class="n">3</span><span class="p">.</span><span class="n">14159</span><span class="p">,</span> <span class="n">0</span><span class="p">.</span><span class="n">256</span><span class="p">,</span> <span class="n">7</span>
+<a id="__codelineno-29-2" name="__codelineno-29-2" href="#__codelineno-29-2"></a><span class="s1">'a,b,,c'</span><span class="p">.</span><span class="n">Split</span><span class="p">(</span><span class="s1">','</span><span class="p">).</span><span class="n">Count</span>
+<a id="__codelineno-29-3" name="__codelineno-29-3" href="#__codelineno-29-3"></a><span class="p">(</span><span class="s1">'x'</span> <span class="p">*</span> <span class="n">3</span><span class="p">)</span> <span class="p">+</span> <span class="s1">'y'</span>
+<a id="__codelineno-29-4" name="__codelineno-29-4" href="#__codelineno-29-4"></a><span class="s2">"Hello"</span><span class="p">.</span><span class="n">Substring</span><span class="p">(</span><span class="n">1</span><span class="p">,</span><span class="n">3</span><span class="p">)</span>
+</code></pre></div>
+<p><strong>Answer:</strong> 3.1 26% 007
+4
+xxxy
+ell</p>
+<p>Format operator and string methods. Verified by running it in PowerShell 7.</p>
+<p><strong>Q166.</strong> What does this print?</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-30-1" name="__codelineno-30-1" href="#__codelineno-30-1"></a><span class="nv">$o</span> <span class="p">=</span> <span class="no">[pscustomobject]</span><span class="p">@{</span> <span class="n">A</span> <span class="p">=</span> <span class="n">1</span> <span class="p">}</span>
+<a id="__codelineno-30-2" name="__codelineno-30-2" href="#__codelineno-30-2"></a><span class="nv">$o</span> <span class="p">|</span> <span class="nb">Add-Member</span> <span class="n">-NotePropertyName</span> <span class="n">B</span> <span class="n">-NotePropertyValue</span> <span class="n">2</span>
+<a id="__codelineno-30-3" name="__codelineno-30-3" href="#__codelineno-30-3"></a><span class="p">(</span><span class="nv">$o</span> <span class="p">|</span> <span class="nb">Get-Member</span> <span class="n">-MemberType</span> <span class="n">NoteProperty</span><span class="p">).</span><span class="n">Name</span> <span class="n">-join</span> <span class="s2">","</span>
+<a id="__codelineno-30-4" name="__codelineno-30-4" href="#__codelineno-30-4"></a><span class="nv">$o</span><span class="p">.</span><span class="n">B</span> <span class="p">*</span> <span class="n">5</span>
+</code></pre></div>
+<p><strong>Answer:</strong> A,B
+10</p>
+<p>Objects are extensible. Verified by running it in PowerShell 7.</p>
+<p><strong>Q167.</strong> Why prefer returning objects over Write-Host text?</p>
+<p><strong>Answer:</strong> Callers can filter, sort and export objects; host text is for display only</p>
+<p>Composable scripts.</p>
+<p><strong>Q168.</strong> A script must run unattended nightly. What is essential?</p>
+<p><strong>Answer:</strong> Logging, error handling with non-zero exit codes and least-privilege credentials</p>
+<p>Unattended reliability.</p>
+<p><strong>Q169.</strong> When does Get-Content huge.log | Select-Object -First 5 stop reading?</p>
+<p><strong>Answer:</strong> As soon as 5 lines are received (the pipeline signals upstream to stop)</p>
+<p>Streaming.</p>
+<p><strong>Q170.</strong> Which cmdlet adds safety for destructive actions?</p>
+<p><strong>Answer:</strong> -WhatIf / -Confirm via SupportsShouldProcess</p>
+<p>Preview first.</p>
+<p><strong>Q171.</strong> Remote results are missing methods. Why?</p>
+<p><strong>Answer:</strong> Objects are serialized and come back deserialized (properties only)</p>
+<p>Call methods remotely.</p>
+<p><strong>Q172.</strong> A module's helper functions leak to users. Fix?</p>
+<p><strong>Answer:</strong> Export only public functions with Export-ModuleMember or the manifest FunctionsToExport</p>
+<p>Small public API.</p>
+<p><strong>Q173.</strong> A native tool fails but the script continues. What do you check?</p>
+<p><strong>Answer:</strong> $LASTEXITCODE after calling it (and use throw)</p>
+<p>Native commands don't throw.</p>
+<p><strong>Q174.</strong> Which Pester feature isolates a test from the network?</p>
+<p><strong>Answer:</strong> Mock the command that calls out</p>
+<p>Deterministic tests.</p>
+<p><strong>Q175.</strong> How avoid secrets in scripts?</p>
+<p><strong>Answer:</strong> Use SecretManagement/vaults or CI secret variables</p>
+<p>Least exposure.</p>
+<p><strong>Q176.</strong> Why use [ordered] for output records?</p>
+<p><strong>Answer:</strong> Predictable column order in reports and JSON</p>
+<p>Readable output.</p>
+<p><strong>Q177.</strong> What's the main cost of $array += $item in a loop?</p>
+<p><strong>Answer:</strong> Each += allocates and copies a new array</p>
+<p>Use List[T].</p>
+<p><strong>Q178.</strong> What is -Parallel good for in PowerShell 7?</p>
+<p><strong>Answer:</strong> Running independent, slow tasks (I/O or remote) concurrently</p>
+<p>Use ThrottleLimit.</p>
+<p><strong>Q179.</strong> What belongs in a published module?</p>
+<p><strong>Answer:</strong> Manifest, tests, help, semantic version and signed or trusted source</p>
+<p>Gallery quality.</p>
+<h2 id="practical-coding-questions">Practical coding questions<a class="headerlink" href="#practical-coding-questions" title="Permanent link">&para;</a></h2>
+<h3 id="a-log-parser-with-reports-and-an-alert">A log parser with reports and an alert<a class="headerlink" href="#a-log-parser-with-reports-and-an-alert" title="Permanent link">&para;</a></h3>
+<p>Implement ConvertFrom-LogLine (named-group regex, typed properties, skip bad lines with Write-Verbose), then use the pipeline to report counts by level, the slowest requests, the server error rate, per-service average latency and an alert flag.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-31-1" name="__codelineno-31-1" href="#__codelineno-31-1"></a>$log = @"
+<a id="__codelineno-31-2" name="__codelineno-31-2" href="#__codelineno-31-2"></a>2026-03-01 10:00:01 INFO  web  GET /home 200 35ms
+<a id="__codelineno-31-3" name="__codelineno-31-3" href="#__codelineno-31-3"></a>2026-03-01 10:00:02 ERROR api  POST /pay 500 910ms
+<a id="__codelineno-31-4" name="__codelineno-31-4" href="#__codelineno-31-4"></a>2026-03-01 10:00:03 INFO  web  GET /cart 200 48ms
+<a id="__codelineno-31-5" name="__codelineno-31-5" href="#__codelineno-31-5"></a>2026-03-01 10:01:10 WARN  api  GET /items 200 700ms
+<a id="__codelineno-31-6" name="__codelineno-31-6" href="#__codelineno-31-6"></a>2026-03-01 10:01:11 ERROR api  POST /pay 500 880ms
+<a id="__codelineno-31-7" name="__codelineno-31-7" href="#__codelineno-31-7"></a>2026-03-01 10:02:00 INFO  web  GET /home 404 12ms
+<a id="__codelineno-31-8" name="__codelineno-31-8" href="#__codelineno-31-8"></a>bad line that should be skipped
+<a id="__codelineno-31-9" name="__codelineno-31-9" href="#__codelineno-31-9"></a>"@ -split "`n"
+<a id="__codelineno-31-10" name="__codelineno-31-10" href="#__codelineno-31-10"></a>
+<a id="__codelineno-31-11" name="__codelineno-31-11" href="#__codelineno-31-11"></a>function ConvertFrom-LogLine {
+<a id="__codelineno-31-12" name="__codelineno-31-12" href="#__codelineno-31-12"></a>    [CmdletBinding()]
+<a id="__codelineno-31-13" name="__codelineno-31-13" href="#__codelineno-31-13"></a>    param([Parameter(Mandatory, ValueFromPipeline)][string]$Line)
+<a id="__codelineno-31-14" name="__codelineno-31-14" href="#__codelineno-31-14"></a>    process {
+<a id="__codelineno-31-15" name="__codelineno-31-15" href="#__codelineno-31-15"></a>        # match "&lt;date&gt; &lt;time&gt; &lt;LEVEL&gt; &lt;service&gt; &lt;METHOD&gt; &lt;path&gt; &lt;status&gt; &lt;ms&gt;ms" with named groups;
+<a id="__codelineno-31-16" name="__codelineno-31-16" href="#__codelineno-31-16"></a>        # emit [pscustomobject] with Time ([datetime]), Level, Service, Path, Status ([int]), Ms ([int]);
+<a id="__codelineno-31-17" name="__codelineno-31-17" href="#__codelineno-31-17"></a>        # for lines that do not match, Write-Verbose and emit nothing
+<a id="__codelineno-31-18" name="__codelineno-31-18" href="#__codelineno-31-18"></a>    }
+<a id="__codelineno-31-19" name="__codelineno-31-19" href="#__codelineno-31-19"></a>}
+<a id="__codelineno-31-20" name="__codelineno-31-20" href="#__codelineno-31-20"></a>
+<a id="__codelineno-31-21" name="__codelineno-31-21" href="#__codelineno-31-21"></a>$entries = $log | ConvertFrom-LogLine
+<a id="__codelineno-31-22" name="__codelineno-31-22" href="#__codelineno-31-22"></a>"parsed: $($entries.Count) of $($log.Count) lines"
+<a id="__codelineno-31-23" name="__codelineno-31-23" href="#__codelineno-31-23"></a>"by level:"
+<a id="__codelineno-31-24" name="__codelineno-31-24" href="#__codelineno-31-24"></a>$entries | Group-Object Level | Sort-Object Name | ForEach-Object { "  {0,-5} {1}" -f $_.Name, $_.Count }
+<a id="__codelineno-31-25" name="__codelineno-31-25" href="#__codelineno-31-25"></a>"slowest:"
+<a id="__codelineno-31-26" name="__codelineno-31-26" href="#__codelineno-31-26"></a>$entries | Sort-Object Ms -Descending | Select-Object -First 2 | ForEach-Object { "  {0} {1} {2}ms" -f $_.Service, $_.Path, $_.Ms }
+<a id="__codelineno-31-27" name="__codelineno-31-27" href="#__codelineno-31-27"></a>$errRate = [math]::Round(100 * @($entries | Where-Object Status -ge 500).Count / $entries.Count, 1)
+<a id="__codelineno-31-28" name="__codelineno-31-28" href="#__codelineno-31-28"></a>"server error rate: $errRate%"
+<a id="__codelineno-31-29" name="__codelineno-31-29" href="#__codelineno-31-29"></a>$avg = $entries | Group-Object Service | ForEach-Object { [pscustomobject]@{ Service = $_.Name; AvgMs = [math]::Round(($_.Group | Measure-Object Ms -Average).Average, 1) } }
+<a id="__codelineno-31-30" name="__codelineno-31-30" href="#__codelineno-31-30"></a>($avg | Sort-Object Service | ForEach-Object { "$($_.Service)=$($_.AvgMs)" }) -join "; "
+<a id="__codelineno-31-31" name="__codelineno-31-31" href="#__codelineno-31-31"></a>$alert = $errRate -gt 10
+<a id="__codelineno-31-32" name="__codelineno-31-32" href="#__codelineno-31-32"></a>"ALERT: $alert"
+<a id="__codelineno-31-33" name="__codelineno-31-33" href="#__codelineno-31-33"></a>($entries | Select-Object Service, Path, Status | ConvertTo-Json -Compress -Depth 2).Length -gt 0
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-32-1" name="__codelineno-32-1" href="#__codelineno-32-1"></a>parsed: 6 of 7 lines
+<a id="__codelineno-32-2" name="__codelineno-32-2" href="#__codelineno-32-2"></a>by level:
+<a id="__codelineno-32-3" name="__codelineno-32-3" href="#__codelineno-32-3"></a>  ERROR 2
+<a id="__codelineno-32-4" name="__codelineno-32-4" href="#__codelineno-32-4"></a>  INFO  3
+<a id="__codelineno-32-5" name="__codelineno-32-5" href="#__codelineno-32-5"></a>  WARN  1
+<a id="__codelineno-32-6" name="__codelineno-32-6" href="#__codelineno-32-6"></a>slowest:
+<a id="__codelineno-32-7" name="__codelineno-32-7" href="#__codelineno-32-7"></a>  api /pay 910ms
+<a id="__codelineno-32-8" name="__codelineno-32-8" href="#__codelineno-32-8"></a>  api /pay 880ms
+<a id="__codelineno-32-9" name="__codelineno-32-9" href="#__codelineno-32-9"></a>server error rate: 33.3%
+<a id="__codelineno-32-10" name="__codelineno-32-10" href="#__codelineno-32-10"></a>api=830; web=31.7
+<a id="__codelineno-32-11" name="__codelineno-32-11" href="#__codelineno-32-11"></a>ALERT: True
+<a id="__codelineno-32-12" name="__codelineno-32-12" href="#__codelineno-32-12"></a>True
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+$log = @"
+2026-03-01 10:00:01 INFO  web  GET /home 200 35ms
+2026-03-01 10:00:02 ERROR api  POST /pay 500 910ms
+2026-03-01 10:00:03 INFO  web  GET /cart 200 48ms
+2026-03-01 10:01:10 WARN  api  GET /items 200 700ms
+2026-03-01 10:01:11 ERROR api  POST /pay 500 880ms
+2026-03-01 10:02:00 INFO  web  GET /home 404 12ms
+bad line that should be skipped
+"@ -split "`n"
+
+function ConvertFrom-LogLine {
+    [CmdletBinding()]
+    param([Parameter(Mandatory, ValueFromPipeline)][string]$Line)
+    process {
+        if ($Line -match '^(?&lt;ts&gt;\S+ \S+) (?&lt;level&gt;[A-Z]+)\s+(?&lt;svc&gt;\w+)\s+(?&lt;method&gt;[A-Z]+) (?&lt;path&gt;\S+) (?&lt;status&gt;\d{3}) (?&lt;ms&gt;\d+)ms$') {
+            [pscustomobject]@{
+                Time = [datetime]$Matches.ts; Level = $Matches.level; Service = $Matches.svc
+                Path = $Matches.path; Status = [int]$Matches.status; Ms = [int]$Matches.ms
+            }
+        } else { Write-Verbose "skipped: $Line" }
+    }
+}
+
+$entries = $log | ConvertFrom-LogLine
+"parsed: $($entries.Count) of $($log.Count) lines"
+"by level:"
+$entries | Group-Object Level | Sort-Object Name | ForEach-Object { "  {0,-5} {1}" -f $_.Name, $_.Count }
+"slowest:"
+$entries | Sort-Object Ms -Descending | Select-Object -First 2 | ForEach-Object { "  {0} {1} {2}ms" -f $_.Service, $_.Path, $_.Ms }
+$errRate = [math]::Round(100 * @($entries | Where-Object Status -ge 500).Count / $entries.Count, 1)
+"server error rate: $errRate%"
+$avg = $entries | Group-Object Service | ForEach-Object { [pscustomobject]@{ Service = $_.Name; AvgMs = [math]::Round(($_.Group | Measure-Object Ms -Average).Average, 1) } }
+($avg | Sort-Object Service | ForEach-Object { "$($_.Service)=$($_.AvgMs)" }) -join "; "
+$alert = $errRate -gt 10
+"ALERT: $alert"
+($entries | Select-Object Service, Path, Status | ConvertTo-Json -Compress -Depth 2).Length -gt 0
+```
+
+The function emits objects from process{} so the rest is ordinary pipeline work: Group-Object, Sort-Object, Measure-Object. Verified by running the solution with PowerShell 7.
+</code></pre></div>
+<h3 id="a-validating-pipeline-function-and-retry-helper">A validating pipeline function and retry helper<a class="headerlink" href="#a-validating-pipeline-function-and-retry-helper" title="Permanent link">&para;</a></h3>
+<p>Implement Test-Password (validation attributes, a List of problems, masked output) and Invoke-WithRetry (retry with attempt numbers, rethrow after the last attempt). Run both against the sample inputs.</p>
+<p>Starter code:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-34-1" name="__codelineno-34-1" href="#__codelineno-34-1"></a>function Test-Password {
+<a id="__codelineno-34-2" name="__codelineno-34-2" href="#__codelineno-34-2"></a>    [CmdletBinding()]
+<a id="__codelineno-34-3" name="__codelineno-34-3" href="#__codelineno-34-3"></a>    param([Parameter(Mandatory, ValueFromPipeline)][AllowEmptyString()][string]$Password,
+<a id="__codelineno-34-4" name="__codelineno-34-4" href="#__codelineno-34-4"></a>          [ValidateRange(4,64)][int]$MinLength = 8)
+<a id="__codelineno-34-5" name="__codelineno-34-5" href="#__codelineno-34-5"></a>    process {
+<a id="__codelineno-34-6" name="__codelineno-34-6" href="#__codelineno-34-6"></a>        # collect problems: "too short", "no uppercase" (case-sensitive test), "no digit", "no symbol" (non-word, non-space char)
+<a id="__codelineno-34-7" name="__codelineno-34-7" href="#__codelineno-34-7"></a>        # emit [pscustomobject] Password (masked with '*' of the same length), Valid (bool), Problems (comma-separated)
+<a id="__codelineno-34-8" name="__codelineno-34-8" href="#__codelineno-34-8"></a>    }
+<a id="__codelineno-34-9" name="__codelineno-34-9" href="#__codelineno-34-9"></a>}
+<a id="__codelineno-34-10" name="__codelineno-34-10" href="#__codelineno-34-10"></a>
+<a id="__codelineno-34-11" name="__codelineno-34-11" href="#__codelineno-34-11"></a>function Invoke-WithRetry {
+<a id="__codelineno-34-12" name="__codelineno-34-12" href="#__codelineno-34-12"></a>    param([scriptblock]$Action, [int]$Max = 3)
+<a id="__codelineno-34-13" name="__codelineno-34-13" href="#__codelineno-34-13"></a>    # run $Action with the attempt number; on failure write "attempt N failed: &lt;message&gt;" and retry;
+<a id="__codelineno-34-14" name="__codelineno-34-14" href="#__codelineno-34-14"></a>    # rethrow after the last attempt; return the action's result on success
+<a id="__codelineno-34-15" name="__codelineno-34-15" href="#__codelineno-34-15"></a>}
+<a id="__codelineno-34-16" name="__codelineno-34-16" href="#__codelineno-34-16"></a>
+<a id="__codelineno-34-17" name="__codelineno-34-17" href="#__codelineno-34-17"></a>'Passw0rd!', 'short1!', 'alllowercase1!', 'NoDigits!!', '' | Test-Password | ForEach-Object { "{0,-14} valid={1,-5} {2}" -f $_.Password, $_.Valid, $_.Problems }
+<a id="__codelineno-34-18" name="__codelineno-34-18" href="#__codelineno-34-18"></a>try { Test-Password -Password 'x' -MinLength 2 } catch { "validation: rejected" }
+<a id="__codelineno-34-19" name="__codelineno-34-19" href="#__codelineno-34-19"></a>$r = Invoke-WithRetry { param($n) if ($n -lt 3) { throw "flaky $n" } else { "ok on attempt $n" } }
+<a id="__codelineno-34-20" name="__codelineno-34-20" href="#__codelineno-34-20"></a>$r
+<a id="__codelineno-34-21" name="__codelineno-34-21" href="#__codelineno-34-21"></a>try { Invoke-WithRetry -Max 2 { throw "always" } } catch { "gave up: $($_.Exception.Message)" }
+</code></pre></div>
+<p>Expected output:</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-35-1" name="__codelineno-35-1" href="#__codelineno-35-1"></a>*********      valid=True
+<a id="__codelineno-35-2" name="__codelineno-35-2" href="#__codelineno-35-2"></a>*******        valid=False too short, no uppercase
+<a id="__codelineno-35-3" name="__codelineno-35-3" href="#__codelineno-35-3"></a>************** valid=False no uppercase
+<a id="__codelineno-35-4" name="__codelineno-35-4" href="#__codelineno-35-4"></a>**********     valid=False no digit
+<a id="__codelineno-35-5" name="__codelineno-35-5" href="#__codelineno-35-5"></a>               valid=False too short, no uppercase, no digit, no symbol
+<a id="__codelineno-35-6" name="__codelineno-35-6" href="#__codelineno-35-6"></a>validation: rejected
+<a id="__codelineno-35-7" name="__codelineno-35-7" href="#__codelineno-35-7"></a>attempt 1 failed: flaky 1
+<a id="__codelineno-35-8" name="__codelineno-35-8" href="#__codelineno-35-8"></a>attempt 2 failed: flaky 2
+<a id="__codelineno-35-9" name="__codelineno-35-9" href="#__codelineno-35-9"></a>ok on attempt 3
+<a id="__codelineno-35-10" name="__codelineno-35-10" href="#__codelineno-35-10"></a>attempt 1 failed: always
+<a id="__codelineno-35-11" name="__codelineno-35-11" href="#__codelineno-35-11"></a>attempt 2 failed: always
+<a id="__codelineno-35-12" name="__codelineno-35-12" href="#__codelineno-35-12"></a>gave up: always
+</code></pre></div>
+<p>??? success "Show a solution"</p>
+<div class="highlight"><pre><span></span><code>```
+function Test-Password {
+    [CmdletBinding()]
+    param([Parameter(Mandatory, ValueFromPipeline)][AllowEmptyString()][string]$Password,
+          [ValidateRange(4,64)][int]$MinLength = 8)
+    process {
+        $problems = [System.Collections.Generic.List[string]]::new()
+        if ($Password.Length -lt $MinLength) { $problems.Add("too short") }
+        if ($Password -cnotmatch '[A-Z]') { $problems.Add("no uppercase") }
+        if ($Password -notmatch '\d') { $problems.Add("no digit") }
+        if ($Password -notmatch '[^\w\s]') { $problems.Add("no symbol") }
+        [pscustomobject]@{ Password = ('*' * $Password.Length); Valid = ($problems.Count -eq 0); Problems = ($problems -join ', ') }
+    }
+}
+
+function Invoke-WithRetry {
+    param([scriptblock]$Action, [int]$Max = 3)
+    for ($i = 1; $i -le $Max; $i++) {
+        try { return &amp; $Action $i }
+        catch { Write-Output "attempt $i failed: $($_.Exception.Message)"; if ($i -eq $Max) { throw } }
+    }
+}
+
+'Passw0rd!', 'short1!', 'alllowercase1!', 'NoDigits!!', '' | Test-Password | ForEach-Object { "{0,-14} valid={1,-5} {2}" -f $_.Password, $_.Valid, $_.Problems }
+try { Test-Password -Password 'x' -MinLength 2 } catch { "validation: rejected" }
+$r = Invoke-WithRetry { param($n) if ($n -lt 3) { throw "flaky $n" } else { "ok on attempt $n" } }
+$r
+try { Invoke-WithRetry -Max 2 { throw "always" } } catch { "gave up: $($_.Exception.Message)" }
+```
+
+Parameter validation rejects bad arguments before the body runs; process{} handles each piped value; try/catch with a loop gives retries and rethrows the final failure. Verified by running the solution with PowerShell 7.
+</code></pre></div>
+<hr />
+<p>More free practice: the <a href="../">PowerShell Mastery Path</a> curriculum, the <a href="https://learnmasterypath.com/interview-pack/">Interview Prep Pack</a> and the <a href="https://learnmasterypath.com/resume/">free resume ATS check</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/python-mastery-path/">Python</a></li><li><a href="https://learnmasterypath.com/java-mastery-path/">Java</a></li><li><a href="https://learnmasterypath.com/javascript-mastery-path/">JavaScript</a></li><li><a href="https://learnmasterypath.com/typescript-mastery-path/">TypeScript</a></li><li><a href="https://learnmasterypath.com/csharp-mastery-path/">C#</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href=".." class="md-footer__link md-footer__link--prev" aria-label="Previous: Home">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Home
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../cheat-sheet/" class="md-footer__link md-footer__link--next" aria-label="Next: Cheat Sheet">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Cheat Sheet
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/powershell-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/powershell-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>

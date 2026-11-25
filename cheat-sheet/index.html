@@ -1,0 +1,4939 @@
+
+<!doctype html>
+<html lang="en" class="no-js">
+  <head>
+    
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width,initial-scale=1">
+      
+        <meta name="description" content="A free PowerShell cheat sheet: 37 quick-reference tables from every level of the PowerShell Mastery Path, each linked to its full lesson.">
+      
+      
+      
+        <link rel="canonical" href="https://learnmasterypath.com/powershell-mastery-path/cheat-sheet/">
+      
+      
+        <link rel="prev" href="../interview-questions/">
+      
+      
+        <link rel="next" href="../level-1/">
+      
+      
+        
+      
+      
+      <link rel="icon" href="../assets/favicon.svg">
+      <meta name="generator" content="mkdocs-1.6.1, mkdocs-material-9.8.2">
+    
+    
+  
+  <title>PowerShell Cheat Sheet: Quick Reference, Beginner to Advanced</title>
+
+    
+      <link rel="stylesheet" href="../assets/stylesheets/main.57a0d79d.min.css">
+      
+        
+        <link rel="stylesheet" href="../assets/stylesheets/palette.fb2fffe2.min.css">
+      
+      
+
+
+    
+    
+      
+    
+    
+      
+    
+    
+      <link rel="stylesheet" href="../stylesheets/extra.css">
+    
+      <link rel="stylesheet" href="../stylesheets/progress-tracker.css">
+    
+      <link rel="stylesheet" href="../stylesheets/final-quiz.css">
+    
+    <script>__md_scope=new URL("..",location),__md_hash=e=>[...e].reduce(((e,_)=>(e<<5)-e+_.charCodeAt(0)),0),__md_get=(e,_=localStorage,t=__md_scope)=>JSON.parse(_.getItem(t.pathname+"."+e)),__md_set=(e,_,t=localStorage,a=__md_scope)=>{try{t.setItem(a.pathname+"."+e,JSON.stringify(_))}catch(e){}}</script>
+    
+      
+
+    
+    
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-05VBGCXN12"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-05VBGCXN12');
+  </script>
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Mastery Path">
+  <meta property="og:locale" content="en_US">
+  <meta property="og:title" content="PowerShell Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta property="og:description" content="A free PowerShell cheat sheet: 37 quick-reference tables from every level of the PowerShell Mastery Path, each linked to its full lesson.">
+  <meta property="og:url" content="https://learnmasterypath.com/powershell-mastery-path/cheat-sheet/">
+  <meta property="og:image" content="https://learnmasterypath.com/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mastery Path: free structured courses, beginner to master">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="PowerShell Cheat Sheet: Quick Reference, Beginner to Advanced">
+  <meta name="twitter:description" content="A free PowerShell cheat sheet: 37 quick-reference tables from every level of the PowerShell Mastery Path, each linked to its full lesson.">
+  <meta name="twitter:image" content="https://learnmasterypath.com/og-image.png">
+  <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-9440969811959397"
+     crossorigin="anonymous"></script><script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Mastery Path", "item": "https://learnmasterypath.com/"},
+      {"@type": "ListItem", "position": 2, "name": "PowerShell Mastery Path", "item": "https://learnmasterypath.com/powershell-mastery-path/"},
+      {"@type": "ListItem", "position": 3, "name": "Cheat Sheet", "item": "https://learnmasterypath.com/powershell-mastery-path/cheat-sheet/"}
+    ]
+  }
+  </script>
+  <style>
+    .md-banner a:hover { text-decoration: underline !important; }
+    .mp-related { margin-top: 2.4rem; padding-top: 1rem; border-top: 1px solid var(--md-default-fg-color--lightest); font-size: .78rem; }
+    .mp-related h2 { font-size: .9rem; margin: 0 0 .5rem; }
+    .mp-related ul { list-style: none; margin: 0; padding: 0; display: flex; flex-wrap: wrap; gap: .4rem .9rem; }
+    .mp-related li { margin: 0 !important; }
+  </style>
+  <script type="application/json" id="mp-course-meta">{"home": false, "id": "powershell-mastery-path", "name": "PowerShell Mastery Path", "repo": "https://github.com/SIGILIPELLI/powershell-mastery-path", "src": "cheat-sheet.md", "url": "https://learnmasterypath.com/powershell-mastery-path/"}</script>
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/learn.css">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap">
+  <link rel="stylesheet" href="https://learnmasterypath.com/assets/course.css?v=1">
+  <script src="https://learnmasterypath.com/assets/learn.js" defer></script>
+  <script src="https://learnmasterypath.com/assets/signup.js" defer></script>
+
+  </head>
+  
+  
+    
+    
+      
+    
+    
+    
+    
+    <body dir="ltr" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo">
+  
+    
+    <input class="md-toggle" data-md-toggle="drawer" type="checkbox" id="__drawer" autocomplete="off">
+    <input class="md-toggle" data-md-toggle="search" type="checkbox" id="__search" autocomplete="off">
+    <label class="md-overlay" for="__drawer"></label>
+    <div data-md-component="skip">
+      
+        
+        <a href="#powershell-cheat-sheet" class="md-skip">
+          Skip to content
+        </a>
+      
+    </div>
+    <div data-md-component="announce">
+      
+        <aside class="md-banner">
+          <div class="md-banner__inner md-grid md-typeset">
+            
+            
+  <a href="https://learnmasterypath.com/" style="color: inherit; text-decoration: none;">
+    &larr; Mastery Path &middot; all 100+ free courses
+  </a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/search/" style="color: inherit; text-decoration: none;">Search all courses</a>
+  <span style="opacity: .6; margin: 0 .6em;">|</span>
+  <a href="https://learnmasterypath.com/resume/" style="color: inherit; font-weight: 700; text-decoration: none;">
+    Got the skills? Free resume ATS check &rarr;
+  </a>
+
+          </div>
+          
+        </aside>
+      
+    </div>
+    
+    
+      
+
+<header class="md-header" data-md-component="header">
+  <nav class="md-header__inner md-grid" aria-label="Header">
+    <a href=".." title="PowerShell Mastery Path" class="md-header__button md-logo" aria-label="PowerShell Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    <label class="md-header__button md-icon" for="__drawer">
+      
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M3 6h18v2H3zm0 5h18v2H3zm0 5h18v2H3z"/></svg>
+    </label>
+    <div class="md-header__title" data-md-component="header-title">
+      <div class="md-header__ellipsis">
+        <div class="md-header__topic">
+          <span class="md-ellipsis">
+            PowerShell Mastery Path
+          </span>
+        </div>
+        <div class="md-header__topic" data-md-component="header-topic">
+          <span class="md-ellipsis">
+            
+              PowerShell Cheat Sheet: Quick Reference, Beginner to Advanced
+            
+          </span>
+        </div>
+      </div>
+    </div>
+    
+      
+        <form class="md-header__option" data-md-component="palette">
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: light)" data-md-color-scheme="default" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to dark mode"  type="radio" name="__palette" id="__palette_0">
+    
+      <label class="md-header__button md-icon" title="Switch to dark mode" for="__palette_1" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 8a4 4 0 0 0-4 4 4 4 0 0 0 4 4 4 4 0 0 0 4-4 4 4 0 0 0-4-4m0 10a6 6 0 0 1-6-6 6 6 0 0 1 6-6 6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+    
+    
+    
+    <input class="md-option" data-md-color-media="(prefers-color-scheme: dark)" data-md-color-scheme="slate" data-md-color-primary="indigo" data-md-color-accent="indigo"  aria-label="Switch to light mode"  type="radio" name="__palette" id="__palette_1">
+    
+      <label class="md-header__button md-icon" title="Switch to light mode" for="__palette_0" hidden>
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M12 18c-.89 0-1.74-.2-2.5-.55C11.56 16.5 13 14.42 13 12s-1.44-4.5-3.5-5.45C10.26 6.2 11.11 6 12 6a6 6 0 0 1 6 6 6 6 0 0 1-6 6m8-9.31V4h-4.69L12 .69 8.69 4H4v4.69L.69 12 4 15.31V20h4.69L12 23.31 15.31 20H20v-4.69L23.31 12z"/></svg>
+      </label>
+    
+  
+</form>
+      
+    
+    
+      <script>var palette=__md_get("__palette");if(palette&&palette.color){if("(prefers-color-scheme)"===palette.color.media){var media=matchMedia("(prefers-color-scheme: light)"),input=document.querySelector(media.matches?"[data-md-color-media='(prefers-color-scheme: light)']":"[data-md-color-media='(prefers-color-scheme: dark)']");palette.color.media=input.getAttribute("data-md-color-media"),palette.color.scheme=input.getAttribute("data-md-color-scheme"),palette.color.primary=input.getAttribute("data-md-color-primary"),palette.color.accent=input.getAttribute("data-md-color-accent")}for(var[key,value]of Object.entries(palette.color))document.body.setAttribute("data-md-color-"+key,value)}</script>
+    
+    
+    
+      
+      
+        <label class="md-header__button md-icon" for="__search">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        </label>
+        <div class="md-search" data-md-component="search" role="dialog">
+  <label class="md-search__overlay" for="__search"></label>
+  <div class="md-search__inner" role="search">
+    <form class="md-search__form" name="search">
+      <input type="text" class="md-search__input" name="query" aria-label="Search" placeholder="Search" autocapitalize="off" autocorrect="off" autocomplete="off" spellcheck="false" data-md-component="search-query" required>
+      <label class="md-search__icon md-icon" for="__search">
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M9.5 3A6.5 6.5 0 0 1 16 9.5c0 1.61-.59 3.09-1.56 4.23l.27.27h.79l5 5-1.5 1.5-5-5v-.79l-.27-.27A6.52 6.52 0 0 1 9.5 16 6.5 6.5 0 0 1 3 9.5 6.5 6.5 0 0 1 9.5 3m0 2C7 5 5 7 5 9.5S7 14 9.5 14 14 12 14 9.5 12 5 9.5 5"/></svg>
+        
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+      </label>
+      <nav class="md-search__options" aria-label="Search">
+        
+        <button type="reset" class="md-search__icon md-icon" title="Clear" aria-label="Clear" tabindex="-1">
+          
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M19 6.41 17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>
+        </button>
+      </nav>
+      
+        <div class="md-search__suggest" data-md-component="search-suggest"></div>
+      
+    </form>
+    <div class="md-search__output">
+      <div class="md-search__scrollwrap" tabindex="0" data-md-scrollfix>
+        <div class="md-search-result" data-md-component="search-result">
+          <div class="md-search-result__meta">
+            Initializing search
+          </div>
+          <ol class="md-search-result__list" role="presentation"></ol>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+      
+    
+    
+      <div class="md-header__source">
+        <a href="https://github.com/SIGILIPELLI/powershell-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    powershell-mastery-path
+  </div>
+</a>
+      </div>
+    
+  </nav>
+  
+</header>
+    
+    <div class="md-container" data-md-component="container">
+      
+      
+        
+          
+            
+<nav class="md-tabs" aria-label="Tabs" data-md-component="tabs">
+  <div class="md-grid">
+    <ul class="md-tabs__list">
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href=".." class="md-tabs__link">
+        
+  
+  
+    
+  
+  Home
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../interview-questions/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Interview Questions
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+    
+  
+  
+    <li class="md-tabs__item md-tabs__item--active">
+      <a href="./" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Cheat Sheet
+
+      </a>
+    </li>
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-1/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 1 · Entry
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-2/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 2 · Intermediate
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-3/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 3 · Advanced
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    
+    
+      <li class="md-tabs__item">
+        <a href="../level-4/" class="md-tabs__link">
+          
+  
+  
+    
+  
+  Level 4 · Master
+
+        </a>
+      </li>
+    
+  
+
+      
+        
+  
+  
+  
+  
+    <li class="md-tabs__item">
+      <a href="../quiz/" class="md-tabs__link">
+        
+  
+  
+    
+  
+  Final Quiz
+
+      </a>
+    </li>
+  
+
+      
+    </ul>
+  </div>
+</nav>
+          
+        
+      
+      <main class="md-main" data-md-component="main">
+        <div class="md-main__inner md-grid">
+          
+            
+              
+              <div class="md-sidebar md-sidebar--primary" data-md-component="sidebar" data-md-type="navigation" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+
+  
+
+
+<nav class="md-nav md-nav--primary md-nav--lifted" aria-label="Navigation" data-md-level="0">
+  <label class="md-nav__title" for="__drawer">
+    <a href=".." title="PowerShell Mastery Path" class="md-nav__button md-logo" aria-label="PowerShell Mastery Path" data-md-component="logo">
+      <svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg>
+    </a>
+    PowerShell Mastery Path
+  </label>
+  
+    <div class="md-nav__source">
+      <a href="https://github.com/SIGILIPELLI/powershell-mastery-path" title="Go to repository" class="md-source" data-md-component="source">
+  <div class="md-source__icon md-icon">
+    
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--! Font Awesome Free 7.1.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License) Copyright 2025 Fonticons, Inc.--><path d="M439.6 236.1 244 40.5c-5.4-5.5-12.8-8.5-20.4-8.5s-15 3-20.4 8.4L162.5 81l51.5 51.5c27.1-9.1 52.7 16.8 43.4 43.7l49.7 49.7c34.2-11.8 61.2 31 35.5 56.7-26.5 26.5-70.2-2.9-56-37.3L240.3 199v121.9c25.3 12.5 22.3 41.8 9.1 55-6.4 6.4-15.2 10.1-24.3 10.1s-17.8-3.6-24.3-10.1c-17.6-17.6-11.1-46.9 11.2-56v-123c-20.8-8.5-24.6-30.7-18.6-45L142.6 101 8.5 235.1C3 240.6 0 247.9 0 255.5s3 15 8.5 20.4l195.6 195.7c5.4 5.4 12.7 8.4 20.4 8.4s15-3 20.4-8.4l194.7-194.7c5.4-5.4 8.4-12.8 8.4-20.4s-3-15-8.4-20.4"/></svg>
+  </div>
+  <div class="md-source__repository">
+    powershell-mastery-path
+  </div>
+</a>
+    </div>
+  
+  <ul class="md-nav__list" data-md-scrollfix>
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href=".." class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Home
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../interview-questions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Interview Questions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+      
+      
+  
+  
+    
+  
+  
+  
+    <li class="md-nav__item md-nav__item--active">
+      
+      <input class="md-nav__toggle md-toggle" type="checkbox" id="__toc">
+      
+      
+        
+      
+      
+        <label class="md-nav__link md-nav__link--active" for="__toc">
+          
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+          <span class="md-nav__icon md-icon"></span>
+        </label>
+      
+      <a href="./" class="md-nav__link md-nav__link--active">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Cheat Sheet
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+      
+        
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-objects-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with Objects &amp; the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-arrays-hashtables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Arrays &amp; Hashtables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-modules-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Modules Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cmdlet-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Cmdlet Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-regular-expressions-in-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Regular Expressions in PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-remoting-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Remoting Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-with-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing with Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-jsonrest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with JSON/REST APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-script-modules-manifests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Script Modules &amp; Manifests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-csvexcel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with CSV/Excel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-functions-parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Functions &amp; Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-desired-state-configuration-dsc-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Desired State Configuration (DSC) Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-net-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with .NET from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-building-reusable-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Building Reusable Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-advanced-pester-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing Advanced (Pester Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-active-directory-system-admin-cmdlets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Active Directory &amp; System Admin Cmdlets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-scheduled-tasks-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Scheduled Tasks &amp; Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-remoting-background-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Remoting &amp; Background Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cicd-with-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · CI/CD with PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-cross-platform-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Cross-Platform PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-hardening-jea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Hardening (JEA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-building-powershell-based-devops-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Building PowerShell-based DevOps Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-publishing-modules-powershell-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Publishing Modules (PowerShell Gallery)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-logging-observability-for-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Logging &amp; Observability for Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_4" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-1/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 1 · Entry
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_4" id="__nav_4_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_4_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_4">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 1 · Entry
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/01-setup/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Setup & First Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/02-variables-types/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Variables & Types
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/03-control-flow/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Control Flow
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/04-functions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Functions
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/05-objects-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Objects & the Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/06-arrays-hashtables/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Arrays & Hashtables
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/07-working-with-files/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Working with Files
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/08-error-handling-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Error Handling Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/09-modules-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Modules Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-1/10-project-system-info-reporter/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — System Info Reporter
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_5" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-2/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 2 · Intermediate
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_5" id="__nav_5_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_5_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_5">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 2 · Intermediate
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/01-advanced-pipeline/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Pipeline
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/02-cmdlet-design/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Cmdlet Design
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/03-error-handling-advanced/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Error Handling Advanced
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/04-regular-expressions/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Regular Expressions in PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/05-remoting-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Remoting Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/06-testing-pester/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Testing with Pester
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/07-json-rest-apis/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Working with JSON/REST APIs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/08-script-modules-manifests/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Script Modules & Manifests
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/09-csv-excel-data/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Working with CSV/Excel Data
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-2/10-project-log-monitoring/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Log Monitoring Script
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_6" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-3/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 3 · Advanced
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_6" id="__nav_6_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_6_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_6">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 3 · Advanced
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/01-advanced-functions-validation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Functions & Parameter Validation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/02-dsc-basics/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · Desired State Configuration (DSC) Basics
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/03-working-with-dotnet/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Working with .NET from PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/04-building-reusable-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Building Reusable Modules
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/05-testing-advanced-mocking/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing Advanced (Pester Mocking)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/06-security/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Security
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/07-performance-optimization/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Performance Optimization
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/08-active-directory-admin/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Active Directory & System Admin Cmdlets
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/09-scheduled-tasks-automation/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Scheduled Tasks & Automation
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-3/10-project-admin-toolkit/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Project — Admin Toolkit Module
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    
+    
+      
+        
+          
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+        
+      
+    
+    
+    
+      
+      
+        
+      
+    
+    
+    <li class="md-nav__item md-nav__item--nested">
+      
+        
+        
+          
+        
+        <input class="md-nav__toggle md-toggle md-toggle--indeterminate" type="checkbox" id="__nav_7" >
+        
+          
+          <div class="md-nav__link md-nav__container">
+            <a href="../level-4/" class="md-nav__link ">
+              
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Level 4 · Master
+  
+
+    
+  </span>
+  
+  
+
+            </a>
+            
+              
+              <label class="md-nav__link " for="__nav_7" id="__nav_7_label" tabindex="0">
+                <span class="md-nav__icon md-icon"></span>
+              </label>
+            
+          </div>
+        
+        <nav class="md-nav" data-md-level="1" aria-labelledby="__nav_7_label" aria-expanded="false">
+          <label class="md-nav__title" for="__nav_7">
+            <span class="md-nav__icon md-icon"></span>
+            
+  
+    Level 4 · Master
+  
+
+          </label>
+          <ul class="md-nav__list" data-md-scrollfix>
+            
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/01-advanced-remoting-jobs/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    01 · Advanced Remoting & Background Jobs
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/02-cicd-powershell/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    02 · CI/CD with PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/03-cross-platform/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    03 · Cross-Platform PowerShell
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/04-security-hardening-jea/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    04 · Security Hardening (JEA)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/05-testing-at-scale-ci/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    05 · Testing at Scale & CI
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/06-performance-at-scale/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    06 · Performance at Scale
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/07-devops-tools/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    07 · Building PowerShell-based DevOps Tools
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/08-publishing-modules/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    08 · Publishing Modules (PowerShell Gallery)
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/09-logging-observability/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    09 · Logging & Observability for Scripts
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+              
+                
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../level-4/10-capstone-project/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    10 · Capstone Project
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+              
+            
+          </ul>
+        </nav>
+      
+    </li>
+  
+
+    
+      
+      
+  
+  
+  
+  
+    <li class="md-nav__item">
+      <a href="../quiz/" class="md-nav__link">
+        
+  
+  
+  <span class="md-ellipsis">
+    
+  
+    Final Quiz
+  
+
+    
+  </span>
+  
+  
+
+      </a>
+    </li>
+  
+
+    
+  </ul>
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+            
+              
+              <div class="md-sidebar md-sidebar--secondary" data-md-component="sidebar" data-md-type="toc" >
+                <div class="md-sidebar__scrollwrap">
+                  <div class="md-sidebar__inner">
+                    
+
+<nav class="md-nav md-nav--secondary" aria-label="Table of contents">
+  
+  
+  
+    
+  
+  
+    <label class="md-nav__title" for="__toc">
+      <span class="md-nav__icon md-icon"></span>
+      Table of contents
+    </label>
+    <ul class="md-nav__list" data-md-component="toc" data-md-scrollfix>
+      
+        <li class="md-nav__item">
+  <a href="#level-1-entry" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 1 · Entry
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 1 · Entry">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-setup-first-script" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Setup &amp; First Script
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-variables-types" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Variables &amp; Types
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-control-flow" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Control Flow
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-functions" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Functions
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-working-with-objects-the-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Working with Objects &amp; the Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-arrays-hashtables" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Arrays &amp; Hashtables
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-files" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with Files
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-error-handling-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Error Handling Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-modules-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Modules Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-2-intermediate" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 2 · Intermediate
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 2 · Intermediate">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-pipeline" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Pipeline
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cmdlet-design" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Cmdlet Design
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-error-handling-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Error Handling Advanced
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-regular-expressions-in-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Regular Expressions in PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-remoting-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Remoting Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-testing-with-pester" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Testing with Pester
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-working-with-jsonrest-apis" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Working with JSON/REST APIs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-script-modules-manifests" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Script Modules &amp; Manifests
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-working-with-csvexcel-data" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Working with CSV/Excel Data
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-3-advanced" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 3 · Advanced
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 3 · Advanced">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-functions-parameter-validation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Functions &amp; Parameter Validation
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-desired-state-configuration-dsc-basics" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · Desired State Configuration (DSC) Basics
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-working-with-net-from-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Working with .NET from PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-building-reusable-modules" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Building Reusable Modules
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-advanced-pester-mocking" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing Advanced (Pester Mocking)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-security" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Security
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-performance-optimization" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Performance Optimization
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-active-directory-system-admin-cmdlets" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Active Directory &amp; System Admin Cmdlets
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-scheduled-tasks-automation" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Scheduled Tasks &amp; Automation
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+        <li class="md-nav__item">
+  <a href="#level-4-master" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        Level 4 · Master
+      
+    </span>
+  </a>
+  
+    <nav class="md-nav" aria-label="Level 4 · Master">
+      <ul class="md-nav__list">
+        
+          <li class="md-nav__item">
+  <a href="#01-advanced-remoting-background-jobs" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        01 · Advanced Remoting &amp; Background Jobs
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#02-cicd-with-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        02 · CI/CD with PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#03-cross-platform-powershell" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        03 · Cross-Platform PowerShell
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#04-security-hardening-jea" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        04 · Security Hardening (JEA)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#05-testing-at-scale-ci" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        05 · Testing at Scale &amp; CI
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#06-performance-at-scale" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        06 · Performance at Scale
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#07-building-powershell-based-devops-tools" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        07 · Building PowerShell-based DevOps Tools
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#08-publishing-modules-powershell-gallery" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        08 · Publishing Modules (PowerShell Gallery)
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#09-logging-observability-for-scripts" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        09 · Logging &amp; Observability for Scripts
+      
+    </span>
+  </a>
+  
+</li>
+        
+          <li class="md-nav__item">
+  <a href="#10-capstone-project" class="md-nav__link">
+    <span class="md-ellipsis">
+      
+        10 · Capstone Project
+      
+    </span>
+  </a>
+  
+</li>
+        
+      </ul>
+    </nav>
+  
+</li>
+      
+    </ul>
+  
+</nav>
+                  </div>
+                </div>
+              </div>
+            
+          
+          
+            <div class="md-content" data-md-component="content">
+              
+                
+
+
+
+  
+
+
+              
+              <article class="md-content__inner md-typeset">
+                
+  
+                  
+
+
+  
+  
+
+
+<h1 id="powershell-cheat-sheet">PowerShell Cheat Sheet<a class="headerlink" href="#powershell-cheat-sheet" title="Permanent link">&para;</a></h1>
+<p>Quick-reference tables from <strong>37 lessons</strong> of the free PowerShell Mastery Path, in course order from beginner to advanced. Each section links to the full lesson with explanations and runnable examples.</p>
+<h2 id="level-1-entry">Level 1 · Entry<a class="headerlink" href="#level-1-entry" title="Permanent link">&para;</a></h2>
+<h3 id="01-setup-first-script"><a href="../level-1/01-setup/">01 · Setup &amp; First Script</a><a class="headerlink" href="#01-setup-first-script" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pwsh</code></td>
+<td>start an interactive PowerShell 7+ session</td>
+</tr>
+<tr>
+<td><code>pwsh ./script.ps1</code></td>
+<td>run a script from the shell</td>
+</tr>
+<tr>
+<td><code>Get-ExecutionPolicy</code> / <code>Set-ExecutionPolicy</code></td>
+<td>check / change script-running permissions</td>
+</tr>
+<tr>
+<td><code>Write-Output</code></td>
+<td>send an object down the pipeline</td>
+</tr>
+<tr>
+<td><code>Write-Host</code></td>
+<td>print directly to the console (not pipeable)</td>
+</tr>
+<tr>
+<td><code>Get-Help &lt;cmdlet&gt;</code></td>
+<td>show documentation for a cmdlet</td>
+</tr>
+<tr>
+<td><code>Get-Command -Noun &lt;thing&gt;</code></td>
+<td>find cmdlets related to a noun</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-variables-types"><a href="../level-1/02-variables-types/">02 · Variables &amp; Types</a><a class="headerlink" href="#02-variables-types" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Type literal</th>
+<th>.NET type</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[int]</code></td>
+<td><code>System.Int32</code></td>
+<td><code>[int]$x = 5</code></td>
+</tr>
+<tr>
+<td><code>[double]</code></td>
+<td><code>System.Double</code></td>
+<td><code>[double]$pi = 3.14</code></td>
+</tr>
+<tr>
+<td><code>[string]</code></td>
+<td><code>System.String</code></td>
+<td><code>[string]$s = "hi"</code></td>
+</tr>
+<tr>
+<td><code>[bool]</code></td>
+<td><code>System.Boolean</code></td>
+<td><code>[bool]$flag = $true</code></td>
+</tr>
+<tr>
+<td><code>[array]</code></td>
+<td><code>System.Object[]</code></td>
+<td><code>[array]$a = 1,2,3</code></td>
+</tr>
+<tr>
+<td><code>[hashtable]</code></td>
+<td><code>System.Collections.Hashtable</code></td>
+<td><code>[hashtable]$h = @{}</code></td>
+</tr>
+<tr>
+<td><code>[datetime]</code></td>
+<td><code>System.DateTime</code></td>
+<td><code>[datetime]$d = Get-Date</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-control-flow"><a href="../level-1/03-control-flow/">03 · Control Flow</a><a class="headerlink" href="#03-control-flow" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operator</th>
+<th>Meaning</th>
+<th>Example</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-eq</code></td>
+<td>equal</td>
+<td><code>$a -eq $b</code></td>
+</tr>
+<tr>
+<td><code>-ne</code></td>
+<td>not equal</td>
+<td><code>$a -ne $b</code></td>
+</tr>
+<tr>
+<td><code>-lt</code> / <code>-le</code></td>
+<td>less than / or equal</td>
+<td><code>$a -lt $b</code></td>
+</tr>
+<tr>
+<td><code>-gt</code> / <code>-ge</code></td>
+<td>greater than / or equal</td>
+<td><code>$a -gt $b</code></td>
+</tr>
+<tr>
+<td><code>-like</code></td>
+<td>wildcard match (string)</td>
+<td><code>$name -like "A*"</code></td>
+</tr>
+<tr>
+<td><code>-match</code></td>
+<td>regex match (string)</td>
+<td><code>$name -match "^A"</code></td>
+</tr>
+<tr>
+<td><code>-contains</code></td>
+<td>collection contains value</td>
+<td><code>$arr -contains 5</code></td>
+</tr>
+<tr>
+<td><code>-in</code></td>
+<td>value is in collection</td>
+<td><code>5 -in $arr</code></td>
+</tr>
+</tbody>
+</table>
+<p>All comparison operators are case-<em>insensitive</em> by default for strings; add
+an <code>i</code>/<code>c</code> prefix to be explicit: <code>-ieq</code> (insensitive, default) vs <code>-ceq</code>
+(case-sensitive).</p>
+<div class="highlight"><pre><span></span><code><a id="__codelineno-0-1" name="__codelineno-0-1" href="#__codelineno-0-1"></a><span class="s2">"Apple"</span> <span class="o">-eq</span> <span class="s2">"apple"</span>     <span class="c"># True  (case-insensitive by default)</span>
+<a id="__codelineno-0-2" name="__codelineno-0-2" href="#__codelineno-0-2"></a><span class="s2">"Apple"</span> <span class="o">-ceq</span> <span class="s2">"apple"</span>    <span class="c"># False (case-sensitive variant)</span>
+</code></pre></div>
+<h3 id="04-functions"><a href="../level-1/04-functions/">04 · Functions</a><a class="headerlink" href="#04-functions" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>function Verb-Noun { }</code></td>
+<td>define a function</td>
+</tr>
+<tr>
+<td><code>param($x, $y = 1)</code></td>
+<td>declare parameters with an optional default</td>
+</tr>
+<tr>
+<td><code>[Parameter(Mandatory)]</code></td>
+<td>require the caller to supply a value</td>
+</tr>
+<tr>
+<td><code>[ValidateRange(min,max)]</code></td>
+<td>validate a parameter's value</td>
+</tr>
+<tr>
+<td><code>return $value</code></td>
+<td>early exit with a value (optional otherwise)</td>
+</tr>
+<tr>
+<td><code>[CmdletBinding()]</code></td>
+<td>make a function behave like a real cmdlet</td>
+</tr>
+<tr>
+<td><code>process { }</code></td>
+<td>per-item block for pipeline input</td>
+</tr>
+<tr>
+<td><code>@params</code></td>
+<td>splat a hashtable as named arguments</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-working-with-objects-the-pipeline"><a href="../level-1/05-objects-pipeline/">05 · Working with Objects &amp; the Pipeline</a><a class="headerlink" href="#05-working-with-objects-the-pipeline" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cmdlet</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Get-Member</code></td>
+<td>list an object's properties and methods</td>
+</tr>
+<tr>
+<td><code>Select-Object</code></td>
+<td>pick specific properties, or <code>-First</code>/<code>-Last</code> N objects</td>
+</tr>
+<tr>
+<td><code>Where-Object</code></td>
+<td>filter objects by a condition</td>
+</tr>
+<tr>
+<td><code>Sort-Object</code></td>
+<td>sort objects by a property</td>
+</tr>
+<tr>
+<td><code>Group-Object</code></td>
+<td>group objects by a shared property value</td>
+</tr>
+<tr>
+<td><code>ForEach-Object</code></td>
+<td>run a script block per pipeline object</td>
+</tr>
+<tr>
+<td><code>Measure-Object</code></td>
+<td>compute count/sum/average/min/max</td>
+</tr>
+<tr>
+<td><code>Format-Table</code> / <code>Format-List</code></td>
+<td>control display (not the underlying data)</td>
+</tr>
+<tr>
+<td><code>$_</code></td>
+<td>the current object in the pipeline</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-arrays-hashtables"><a href="../level-1/06-arrays-hashtables/">06 · Arrays &amp; Hashtables</a><a class="headerlink" href="#06-arrays-hashtables" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$a = 1,2,3</code></td>
+<td>create an array</td>
+</tr>
+<tr>
+<td><code>$a[0]</code> / <code>$a[-1]</code></td>
+<td>index / last element</td>
+</tr>
+<tr>
+<td><code>$a[1..3]</code></td>
+<td>slice</td>
+</tr>
+<tr>
+<td><code>$a.Count</code></td>
+<td>number of elements</td>
+</tr>
+<tr>
+<td><code>[System.Collections.Generic.List[T]]::new()</code></td>
+<td>growable, strongly-typed list</td>
+</tr>
+<tr>
+<td><code>@{ k = v }</code></td>
+<td>create a hashtable</td>
+</tr>
+<tr>
+<td><code>$h["key"]</code> / <code>$h.key</code></td>
+<td>access a value</td>
+</tr>
+<tr>
+<td><code>$h.ContainsKey("k")</code></td>
+<td>check key existence</td>
+</tr>
+<tr>
+<td><code>$h.GetEnumerator()</code></td>
+<td>iterate key/value pairs</td>
+</tr>
+<tr>
+<td><code>[ordered]@{}</code></td>
+<td>hashtable that preserves insertion order</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-working-with-files"><a href="../level-1/07-working-with-files/">07 · Working with Files</a><a class="headerlink" href="#07-working-with-files" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Test-Path</code></td>
+<td>check whether a file/directory exists</td>
+</tr>
+<tr>
+<td><code>Get-Content</code></td>
+<td>read a file (array of lines, or <code>-Raw</code> for one string)</td>
+</tr>
+<tr>
+<td><code>Set-Content</code> / <code>Add-Content</code></td>
+<td>overwrite / append text</td>
+</tr>
+<tr>
+<td><code>New-Item -ItemType Directory</code></td>
+<td>create a directory</td>
+</tr>
+<tr>
+<td><code>Get-ChildItem</code></td>
+<td>list files/directories (<code>ls</code>/<code>dir</code> alias)</td>
+</tr>
+<tr>
+<td><code>Copy-Item</code> / <code>Move-Item</code> / <code>Remove-Item</code></td>
+<td>copy / move / delete</td>
+</tr>
+<tr>
+<td><code>Get-Item</code></td>
+<td>get metadata about a file/directory</td>
+</tr>
+<tr>
+<td><code>Split-Path</code> / <code>Join-Path</code></td>
+<td>decompose / build file paths</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-error-handling-basics"><a href="../level-1/08-error-handling-basics/">08 · Error Handling Basics</a><a class="headerlink" href="#08-error-handling-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminating error</td>
+<td>stops the current scope; catchable with <code>try/catch</code></td>
+</tr>
+<tr>
+<td>Non-terminating error</td>
+<td>prints and continues; needs <code>-ErrorAction Stop</code> to be catchable</td>
+</tr>
+<tr>
+<td><code>try { } catch { } finally { }</code></td>
+<td>structured error handling</td>
+</tr>
+<tr>
+<td><code>$_</code> / <code>$PSItem</code> in <code>catch</code></td>
+<td>the caught <code>ErrorRecord</code></td>
+</tr>
+<tr>
+<td><code>throw "message"</code></td>
+<td>raise your own terminating error</td>
+</tr>
+<tr>
+<td><code>$Error</code></td>
+<td>session-wide list of past errors, most recent first</td>
+</tr>
+<tr>
+<td><code>-ErrorAction Stop/SilentlyContinue/Continue/Inquire</code></td>
+<td>control how non-terminating errors behave</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-modules-basics"><a href="../level-1/09-modules-basics/">09 · Modules Basics</a><a class="headerlink" href="#09-modules-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Command</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Get-Module</code> / <code>Get-Module -ListAvailable</code></td>
+<td>list loaded / installed modules</td>
+</tr>
+<tr>
+<td><code>Find-Module</code></td>
+<td>search the PowerShell Gallery</td>
+</tr>
+<tr>
+<td><code>Install-Module -Scope CurrentUser</code></td>
+<td>install a module for your user</td>
+</tr>
+<tr>
+<td><code>Import-Module &lt;name-or-path&gt;</code></td>
+<td>load a module into the session</td>
+</tr>
+<tr>
+<td><code>Export-ModuleMember -Function ...</code></td>
+<td>control what a module exposes</td>
+</tr>
+<tr>
+<td><code>Remove-Module</code></td>
+<td>unload a module from the session</td>
+</tr>
+<tr>
+<td><code>. ./script.ps1</code></td>
+<td>dot-source a script into the current scope</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-2-intermediate">Level 2 · Intermediate<a class="headerlink" href="#level-2-intermediate" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-pipeline"><a href="../level-2/01-advanced-pipeline/">01 · Advanced Pipeline</a><a class="headerlink" href="#01-advanced-pipeline" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>What it means</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Streaming pipeline</td>
+<td>objects flow one at a time; memory stays flat</td>
+</tr>
+<tr>
+<td><code>Sort-Object</code> / <code>Group-Object</code></td>
+<td>must buffer everything first — no streaming</td>
+</tr>
+<tr>
+<td><code>$_</code> / <code>$PSItem</code></td>
+<td>current pipeline object; capture it before nesting pipelines</td>
+</tr>
+<tr>
+<td><code>begin { }</code></td>
+<td>runs once, before the first object</td>
+</tr>
+<tr>
+<td><code>process { }</code></td>
+<td>runs once <strong>per</strong> object</td>
+</tr>
+<tr>
+<td><code>end { }</code></td>
+<td>runs once, after the last object</td>
+</tr>
+<tr>
+<td><code>ValueFromPipeline</code></td>
+<td>binds the whole object to one parameter</td>
+</tr>
+<tr>
+<td><code>ValueFromPipelineByPropertyName</code></td>
+<td>binds a same-named property to a parameter</td>
+</tr>
+<tr>
+<td><code>return</code> inside <code>ForEach-Object</code></td>
+<td>exits only the current object's block call</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-cmdlet-design"><a href="../level-2/02-cmdlet-design/">02 · Cmdlet Design</a><a class="headerlink" href="#02-cmdlet-design" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Get-Verb</code></td>
+<td>list PowerShell's approved verbs</td>
+</tr>
+<tr>
+<td><code>[CmdletBinding()]</code></td>
+<td>unlocks <code>-Verbose</code>/<code>-Debug</code>/<code>-ErrorAction</code>/etc.</td>
+</tr>
+<tr>
+<td><code>[ValidateNotNullOrEmpty()]</code>, <code>[ValidateRange]</code>, <code>[ValidateSet]</code>, <code>[ValidatePattern]</code>, <code>[ValidateScript]</code></td>
+<td>fail fast on bad input</td>
+</tr>
+<tr>
+<td><code>ParameterSetName</code></td>
+<td>mutually exclusive groups of parameters</td>
+</tr>
+<tr>
+<td><code>$PSCmdlet.ParameterSetName</code></td>
+<td>which set was actually used</td>
+</tr>
+<tr>
+<td><code>SupportsShouldProcess</code> + <code>$PSCmdlet.ShouldProcess(...)</code></td>
+<td>enables <code>-WhatIf</code>/<code>-Confirm</code></td>
+</tr>
+<tr>
+<td><code>[OutputType(...)]</code></td>
+<td>documents the return type for tooling</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-error-handling-advanced"><a href="../level-2/03-error-handling-advanced/">03 · Error Handling Advanced</a><a class="headerlink" href="#03-error-handling-advanced" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Behavior</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Terminating error</td>
+<td>stops the current scope; catchable with <code>try/catch</code></td>
+</tr>
+<tr>
+<td>Non-terminating error</td>
+<td>reports and continues; needs <code>-ErrorAction Stop</code> to be catchable</td>
+</tr>
+<tr>
+<td><code>$ErrorActionPreference = "Stop"</code></td>
+<td>promotes all cmdlets' errors to terminating by default</td>
+</tr>
+<tr>
+<td><code>catch [SpecificType] { }</code></td>
+<td>order most-specific to least-specific, generic <code>catch</code> last</td>
+</tr>
+<tr>
+<td>Custom exception class</td>
+<td>lets callers <code>catch</code> your error type and read structured data</td>
+</tr>
+<tr>
+<td><code>throw "msg"</code></td>
+<td>raises a new terminating error</td>
+</tr>
+<tr>
+<td><code>throw</code> (bare, in <code>catch</code>)</td>
+<td>re-raises the original error, preserving its type/stack</td>
+</tr>
+<tr>
+<td><code>Write-Error</code></td>
+<td>non-terminating; reports and continues</td>
+</tr>
+<tr>
+<td><code>trap { }</code></td>
+<td>older scope-wide error handler; prefer <code>try/catch</code> in new code</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-regular-expressions-in-powershell"><a href="../level-2/04-regular-expressions/">04 · Regular Expressions in PowerShell</a><a class="headerlink" href="#04-regular-expressions-in-powershell" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Operator/Tool</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-match</code> / <code>-notmatch</code></td>
+<td>test a string against a regex, populates <code>$Matches</code></td>
+</tr>
+<tr>
+<td><code>-cmatch</code></td>
+<td>case-sensitive version of <code>-match</code></td>
+</tr>
+<tr>
+<td><code>-replace</code></td>
+<td>regex-powered find-and-replace</td>
+</tr>
+<tr>
+<td><code>-creplace</code></td>
+<td>case-sensitive version of <code>-replace</code></td>
+</tr>
+<tr>
+<td><code>$Matches['name']</code></td>
+<td>read a named capture group after a successful <code>-match</code></td>
+</tr>
+<tr>
+<td><code>Select-String</code></td>
+<td>grep-like search across strings/files, returns rich objects</td>
+</tr>
+<tr>
+<td><code>[regex]::Matches($s, $p)</code></td>
+<td>get <strong>every</strong> match, not just the first</td>
+</tr>
+<tr>
+<td><code>[regex]::Escape($s)</code></td>
+<td>treat a string as a literal pattern, not regex syntax</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-remoting-basics"><a href="../level-2/05-remoting-basics/">05 · Remoting Basics</a><a class="headerlink" href="#05-remoting-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cmdlet/Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Invoke-Command -ComputerName ...</code></td>
+<td>run a script block on one or more remote machines, one-shot</td>
+</tr>
+<tr>
+<td><code>New-PSSession</code> / <code>Remove-PSSession</code></td>
+<td>open/close a persistent remote connection</td>
+</tr>
+<tr>
+<td><code>Invoke-Command -Session $s</code></td>
+<td>reuse a persistent session, state carries over</td>
+</tr>
+<tr>
+<td><code>Enter-PSSession</code> / <code>Exit-PSSession</code></td>
+<td>interactive remote shell</td>
+</tr>
+<tr>
+<td><code>$using:variable</code></td>
+<td>pass a local variable into a remote script block</td>
+</tr>
+<tr>
+<td><code>-ArgumentList</code></td>
+<td>pass values positionally into a script block's <code>param()</code></td>
+</tr>
+<tr>
+<td><code>PSComputerName</code></td>
+<td>auto-added property showing which machine a result came from</td>
+</tr>
+<tr>
+<td><code>-ThrottleLimit</code></td>
+<td>cap how many remote connections run in parallel</td>
+</tr>
+<tr>
+<td><code>Copy-Item -ToSession</code> / <code>-FromSession</code></td>
+<td>transfer files over an existing session</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-testing-with-pester"><a href="../level-2/06-testing-pester/">06 · Testing with Pester</a><a class="headerlink" href="#06-testing-with-pester" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Describe</code></td>
+<td>groups all tests for one unit (usually a function)</td>
+</tr>
+<tr>
+<td><code>Context</code></td>
+<td>sub-groups related scenarios inside a <code>Describe</code></td>
+</tr>
+<tr>
+<td><code>It</code></td>
+<td>a single test case, named in plain English</td>
+</tr>
+<tr>
+<td><code>Should -Be</code>, <code>-BeTrue</code>, <code>-Throw</code>, <code>-Contain</code>, <code>-Match</code></td>
+<td>common assertions</td>
+</tr>
+<tr>
+<td><code>BeforeAll</code> / <code>AfterAll</code></td>
+<td>run once per <code>Describe</code>, before/after all tests</td>
+</tr>
+<tr>
+<td><code>BeforeEach</code> / <code>AfterEach</code></td>
+<td>run before/after <strong>every</strong> <code>It</code></td>
+</tr>
+<tr>
+<td><code>Mock</code></td>
+<td>replace a real command with a fake for the test</td>
+</tr>
+<tr>
+<td><code>Should -Invoke ... -Times</code></td>
+<td>verify a mocked command was called N times</td>
+</tr>
+<tr>
+<td><code>-ForEach @(...)</code></td>
+<td>run one <code>It</code> block once per data row</td>
+</tr>
+<tr>
+<td><code>Invoke-Pester -Path ... -Output Detailed</code></td>
+<td>run tests from the command line</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-working-with-jsonrest-apis"><a href="../level-2/07-json-rest-apis/">07 · Working with JSON/REST APIs</a><a class="headerlink" href="#07-working-with-jsonrest-apis" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cmdlet/Parameter</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>ConvertTo-Json -Depth N</code></td>
+<td>serialize an object to a JSON string; always set <code>-Depth</code> explicitly for nested data</td>
+</tr>
+<tr>
+<td><code>ConvertFrom-Json</code></td>
+<td>parse a JSON string into <code>[pscustomobject]</code></td>
+</tr>
+<tr>
+<td><code>Invoke-RestMethod</code></td>
+<td>call an API, get the parsed JSON body back directly</td>
+</tr>
+<tr>
+<td><code>Invoke-WebRequest</code></td>
+<td>call an API, get the raw response (status, headers, raw content)</td>
+</tr>
+<tr>
+<td><code>-Method Post/Put/Delete</code></td>
+<td>HTTP verb to use</td>
+</tr>
+<tr>
+<td><code>-Body</code></td>
+<td>request payload (JSON-encode it first)</td>
+</tr>
+<tr>
+<td><code>-ContentType "application/json"</code></td>
+<td>tells the server the body's format</td>
+</tr>
+<tr>
+<td><code>-Headers @{...}</code></td>
+<td>custom headers, e.g. <code>Authorization</code></td>
+</tr>
+<tr>
+<td><code>-ResponseHeadersVariable</code> / <code>-StatusCodeVariable</code></td>
+<td>capture headers/status alongside the parsed body</td>
+</tr>
+<tr>
+<td><code>-ErrorAction Stop</code></td>
+<td>required for <code>try/catch</code> to catch a non-2xx response</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-script-modules-manifests"><a href="../level-2/08-script-modules-manifests/">08 · Script Modules &amp; Manifests</a><a class="headerlink" href="#08-script-modules-manifests" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.psm1</code></td>
+<td>the module's actual code</td>
+</tr>
+<tr>
+<td><code>.psd1</code> (manifest)</td>
+<td>metadata: version, author, exports, dependencies</td>
+</tr>
+<tr>
+<td><code>New-ModuleManifest</code></td>
+<td>generate a correctly-formatted <code>.psd1</code></td>
+</tr>
+<tr>
+<td><code>Test-ModuleManifest</code></td>
+<td>validate a manifest before publishing/sharing</td>
+</tr>
+<tr>
+<td><code>FunctionsToExport</code></td>
+<td>explicit public function list — avoid leaving it as <code>'*'</code></td>
+</tr>
+<tr>
+<td><code>RequiredModules</code></td>
+<td>fail fast if a dependency is missing</td>
+</tr>
+<tr>
+<td><code>Import-Module &lt;folder&gt;</code></td>
+<td>loads via the manifest automatically</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-working-with-csvexcel-data"><a href="../level-2/09-csv-excel-data/">09 · Working with CSV/Excel Data</a><a class="headerlink" href="#09-working-with-csvexcel-data" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cmdlet/Parameter</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Export-Csv -NoTypeInformation</code></td>
+<td>write objects to CSV (always include this switch)</td>
+</tr>
+<tr>
+<td><code>Import-Csv</code></td>
+<td>read CSV rows back as objects — <strong>all properties are strings</strong></td>
+</tr>
+<tr>
+<td><code>-Delimiter ";"</code></td>
+<td>use a non-comma separator</td>
+</tr>
+<tr>
+<td><code>-Append</code></td>
+<td>add rows without rewriting the header</td>
+</tr>
+<tr>
+<td><code>[int]$_.Property</code></td>
+<td>cast before sorting/comparing numeric-looking CSV columns</td>
+</tr>
+<tr>
+<td><code>Measure-Object -Sum</code></td>
+<td>one of the few cmdlets that auto-coerces numeric strings</td>
+</tr>
+<tr>
+<td><code>Export-Excel</code> / <code>Import-Excel</code> (ImportExcel module)</td>
+<td>real <code>.xlsx</code> files with proper types</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-3-advanced">Level 3 · Advanced<a class="headerlink" href="#level-3-advanced" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-functions-parameter-validation"><a href="../level-3/01-advanced-functions-validation/">01 · Advanced Functions &amp; Parameter Validation</a><a class="headerlink" href="#01-advanced-functions-parameter-validation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[CmdletBinding()]</code></td>
+<td>opt into common parameters, strict binding, pipeline blocks</td>
+</tr>
+<tr>
+<td><code>[Parameter(Mandatory)]</code></td>
+<td>require a value; prompts interactively if missing</td>
+</tr>
+<tr>
+<td><code>ValueFromPipeline</code></td>
+<td>bind the whole pipeline object to this parameter</td>
+</tr>
+<tr>
+<td><code>ValueFromPipelineByPropertyName</code></td>
+<td>bind a same-named property of the pipeline object</td>
+</tr>
+<tr>
+<td><code>ValidateSet</code>, <code>ValidateRange</code>, <code>ValidatePattern</code>, <code>ValidateScript</code></td>
+<td>reject bad values before the body runs</td>
+</tr>
+<tr>
+<td><code>begin</code></td>
+<td>runs once, before any pipeline item</td>
+</tr>
+<tr>
+<td><code>process</code></td>
+<td>runs once per pipeline item</td>
+</tr>
+<tr>
+<td><code>end</code></td>
+<td>runs once, after all pipeline items</td>
+</tr>
+<tr>
+<td><code>$_</code> / <code>$PSItem</code></td>
+<td>current item inside an active pipeline context only</td>
+</tr>
+<tr>
+<td>Comment-based help (<code>&lt;# .SYNOPSIS ... #&gt;</code>)</td>
+<td>powers <code>Get-Help</code> for your own functions</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-desired-state-configuration-dsc-basics"><a href="../level-3/02-dsc-basics/">02 · Desired State Configuration (DSC) Basics</a><a class="headerlink" href="#02-desired-state-configuration-dsc-basics" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>configuration { }</code></td>
+<td>declarative block compiled to one MOF per node</td>
+</tr>
+<tr>
+<td><code>Node "name" { }</code></td>
+<td>target a specific machine; one MOF file per node</td>
+</tr>
+<tr>
+<td>Built-in resources (<code>File</code>, <code>Service</code>, <code>WindowsFeature</code>, <code>Registry</code>)</td>
+<td>describe one piece of desired state</td>
+</tr>
+<tr>
+<td><code>-OutputPath</code></td>
+<td>where compiled <code>.mof</code> files land</td>
+</tr>
+<tr>
+<td><code>Start-DscConfiguration -Wait -Verbose</code></td>
+<td>apply a compiled configuration</td>
+</tr>
+<tr>
+<td><code>Test-DscConfiguration -Detailed</code></td>
+<td>audit drift without changing anything</td>
+</tr>
+<tr>
+<td><code>DependsOn = "[Type]Name"</code></td>
+<td>force one resource to apply after another</td>
+</tr>
+<tr>
+<td><code>Get-DscConfiguration</code></td>
+<td>show current state as last applied</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-working-with-net-from-powershell"><a href="../level-3/03-working-with-dotnet/">03 · Working with .NET from PowerShell</a><a class="headerlink" href="#03-working-with-net-from-powershell" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Syntax</th>
+<th>Meaning</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>[Type]::Member</code></td>
+<td>access a static property/method</td>
+</tr>
+<tr>
+<td><code>[Type]::new(...)</code></td>
+<td>construct an instance (preferred over <code>New-Object</code>)</td>
+</tr>
+<tr>
+<td><code>.Property</code>, <code>.Method()</code></td>
+<td>instance members, same as any PowerShell object</td>
+</tr>
+<tr>
+<td><code>[void]$x.Method()</code></td>
+<td>call a method and discard its return value</td>
+</tr>
+<tr>
+<td><code>[System.Collections.Generic.List[T]]</code></td>
+<td>strongly-typed, faster list</td>
+</tr>
+<tr>
+<td><code>[System.Collections.Generic.Dictionary[K,V]]</code></td>
+<td>strongly-typed key/value store</td>
+</tr>
+<tr>
+<td><code>$_.Exception.GetType().Name</code></td>
+<td>the specific .NET exception type in a <code>catch</code></td>
+</tr>
+<tr>
+<td><code>class</code> with a wrapped .NET member</td>
+<td>compose .NET behavior you can't subclass directly</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-building-reusable-modules"><a href="../level-3/04-building-reusable-modules/">04 · Building Reusable Modules</a><a class="headerlink" href="#04-building-reusable-modules" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Role</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Public/*.ps1</code></td>
+<td>one function per file, exported to callers</td>
+</tr>
+<tr>
+<td><code>Private/*.ps1</code></td>
+<td>shared internal helpers, never exported</td>
+</tr>
+<tr>
+<td><code>.psm1</code></td>
+<td>loader: dot-sources every file, then <code>Export-ModuleMember</code></td>
+</tr>
+<tr>
+<td><code>.psd1</code> <code>FunctionsToExport</code></td>
+<td>second export gate, also speeds up discovery</td>
+</tr>
+<tr>
+<td><code>Export-ModuleMember -Function</code></td>
+<td>the actual visibility boundary</td>
+</tr>
+<tr>
+<td><code>Import-Module -Force</code></td>
+<td>reload after edits (module caching otherwise hides changes)</td>
+</tr>
+<tr>
+<td><code>Get-Command -Module Name</code></td>
+<td>confirm exactly what's exported</td>
+</tr>
+<tr>
+<td>Dot-sourcing outside <code>.psm1</code></td>
+<td>anti-pattern — bypasses the whole module boundary</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-testing-advanced-pester-mocking"><a href="../level-3/05-testing-advanced-mocking/">05 · Testing Advanced (Pester Mocking)</a><a class="headerlink" href="#05-testing-advanced-pester-mocking" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Mock Cmd -ModuleName X</code></td>
+<td>mock a command as seen from inside module <code>X</code></td>
+</tr>
+<tr>
+<td><code>Should -Invoke Cmd -ModuleName X</code></td>
+<td>assert against a mock defined with the same <code>-ModuleName</code></td>
+</tr>
+<tr>
+<td><code>-ParameterFilter { ... }</code></td>
+<td>mock/assert conditionally, based on the arguments passed</td>
+</tr>
+<tr>
+<td><code>Should -Invoke ... -Times 0 -Exactly</code></td>
+<td>prove a side effect did NOT happen</td>
+</tr>
+<tr>
+<td><code>Should -Invoke ... -Times N -Exactly</code></td>
+<td>prove a call happened exactly N times, no more</td>
+</tr>
+<tr>
+<td><code>BeforeEach { Mock ... }</code></td>
+<td>fresh, reset mocks for every <code>It</code></td>
+</tr>
+<tr>
+<td><code>-Throw "*substring*"</code></td>
+<td>assert an exception message contains specific text</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-security"><a href="../level-3/06-security/">06 · Security</a><a class="headerlink" href="#06-security" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Use</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SecureString</code></td>
+<td>encrypted-in-memory string; damage limitation, not unbreakable</td>
+</tr>
+<tr>
+<td><code>[PSCredential]::new($user, $secureString)</code></td>
+<td>pair a username with a secure password</td>
+</tr>
+<tr>
+<td><code>$cred.GetNetworkCredential().Password</code></td>
+<td>decrypt only at the point of use</td>
+</tr>
+<tr>
+<td><code>ConvertTo-SecureString -AsPlainText -Force</code> on a literal</td>
+<td>smell — hardcoded secret in disguise</td>
+</tr>
+<tr>
+<td><code>[Runtime.InteropServices.Marshal]::ZeroFreeBSTR</code></td>
+<td>explicitly clear decrypted memory after use</td>
+</tr>
+<tr>
+<td><code>Get-FileHash -Algorithm SHA256</code></td>
+<td>integrity checks — never password storage</td>
+</tr>
+<tr>
+<td><code>Select-String -Pattern 'password\|apikey\|secret'</code></td>
+<td>quick pre-commit secret sweep</td>
+</tr>
+<tr>
+<td><code>ExecutionPolicy</code></td>
+<td>accident prevention, not an attacker-facing security boundary</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-performance-optimization"><a href="../level-3/07-performance-optimization/">07 · Performance Optimization</a><a class="headerlink" href="#07-performance-optimization" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Pattern</th>
+<th>Verdict</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>$array += $item</code> in a loop</td>
+<td>avoid — O(n²), full copy every iteration</td>
+</tr>
+<tr>
+<td><code>[List[T]]::new()</code> + <code>.Add()</code></td>
+<td>fast, in-place growth</td>
+</tr>
+<tr>
+<td>loop output captured by <code>$result = for (...) { }</code></td>
+<td>fast, often the simplest fix</td>
+</tr>
+<tr>
+<td><code>\|</code> pipeline over an in-memory collection</td>
+<td>slower per-item, but streams (low memory)</td>
+</tr>
+<tr>
+<td><code>foreach</code> / <code>.Where()</code> / <code>.ForEach()</code> over in-memory data</td>
+<td>faster for pure CPU-bound work</td>
+</tr>
+<tr>
+<td><code>Format-*</code>, <code>Out-GridView</code> inside a loop</td>
+<td>avoid — format once, after the loop</td>
+</tr>
+<tr>
+<td><code>Measure-Command { }</code></td>
+<td>compare two implementations directly, run several times</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-active-directory-system-admin-cmdlets"><a href="../level-3/08-active-directory-admin/">08 · Active Directory &amp; System Admin Cmdlets</a><a class="headerlink" href="#08-active-directory-system-admin-cmdlets" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Cmdlet</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Get-ADUser -Filter "..." -Properties ...</code></td>
+<td>query users; <code>-Properties</code> needed beyond defaults</td>
+</tr>
+<tr>
+<td><code>-Filter</code> (PS syntax) vs <code>-LDAPFilter</code> (raw LDAP)</td>
+<td>different grammars, don't mix</td>
+</tr>
+<tr>
+<td><code>New-ADUser ... -Enabled $true</code></td>
+<td>create; disabled by default without this</td>
+</tr>
+<tr>
+<td><code>Set-ADUser</code> / <code>Set-ADAccountPassword</code></td>
+<td>modify attributes / reset password</td>
+</tr>
+<tr>
+<td><code>Add-ADGroupMember</code> / <code>Remove-ADGroupMember -Confirm:$false</code></td>
+<td>manage group membership</td>
+</tr>
+<tr>
+<td><code>Get-ADComputer -Filter ...</code></td>
+<td>query computer objects</td>
+</tr>
+<tr>
+<td><code>New-ADOrganizationalUnit -ProtectedFromAccidentalDeletion $true</code></td>
+<td>create OU with delete protection</td>
+</tr>
+<tr>
+<td><code>-WhatIf</code></td>
+<td>dry-run any state-changing AD cmdlet before running for real</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-scheduled-tasks-automation"><a href="../level-3/09-scheduled-tasks-automation/">09 · Scheduled Tasks &amp; Automation</a><a class="headerlink" href="#09-scheduled-tasks-automation" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Platform</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Register-ScheduledTask</code> + Action/Trigger/Settings</td>
+<td>Windows</td>
+<td>schedule a recurring script</td>
+</tr>
+<tr>
+<td><code>Get-ScheduledTaskInfo</code></td>
+<td>Windows</td>
+<td>last run time/result, next run time</td>
+</tr>
+<tr>
+<td><code>crontab -e</code></td>
+<td>Linux/macOS</td>
+<td>schedule <code>pwsh -File ...</code></td>
+</tr>
+<tr>
+<td><code>Start-Job</code> / <code>Wait-Job</code> / <code>Receive-Job</code> / <code>Remove-Job</code></td>
+<td>cross-platform</td>
+<td>background execution in a separate process</td>
+</tr>
+<tr>
+<td><code>-ArgumentList</code> / <code>$using:var</code></td>
+<td>cross-platform</td>
+<td>pass data into a job (no automatic variable inheritance)</td>
+</tr>
+<tr>
+<td>Retry-with-backoff pattern</td>
+<td>cross-platform</td>
+<td>survive transient failures unattended</td>
+</tr>
+<tr>
+<td><code>$PSScriptRoot</code> for all paths</td>
+<td>cross-platform</td>
+<td>scheduler working directory isn't guaranteed</td>
+</tr>
+</tbody>
+</table>
+<h2 id="level-4-master">Level 4 · Master<a class="headerlink" href="#level-4-master" title="Permanent link">&para;</a></h2>
+<h3 id="01-advanced-remoting-background-jobs"><a href="../level-4/01-advanced-remoting-jobs/">01 · Advanced Remoting &amp; Background Jobs</a><a class="headerlink" href="#01-advanced-remoting-background-jobs" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Tool</th>
+<th>Cost</th>
+<th>Use when</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>Start-Job</code></td>
+<td>new process per job</td>
+<td>isolation matters more than speed</td>
+</tr>
+<tr>
+<td><code>Start-ThreadJob</code></td>
+<td>new thread, same process</td>
+<td>many lightweight concurrent tasks</td>
+</tr>
+<tr>
+<td><code>ForEach-Object -Parallel</code></td>
+<td>new thread per item, simplest syntax</td>
+<td>quick fan-out over a collection</td>
+</tr>
+<tr>
+<td><code>$using:variable</code></td>
+<td>required to read outer scope in any of the above</td>
+<td>any variable a parallel block needs</td>
+</tr>
+<tr>
+<td><code>ConcurrentBag</code>/<code>ConcurrentDictionary</code>/<code>ConcurrentQueue</code></td>
+<td>thread-safe collections</td>
+<td>accumulating results from parallel work</td>
+</tr>
+<tr>
+<td><code>New-PSSession</code> + <code>Invoke-Command -Session</code></td>
+<td>persistent remote connection</td>
+<td>multiple related remote calls</td>
+</tr>
+<tr>
+<td><code>Invoke-Command -ComputerName @(...)</code></td>
+<td>parallel fan-out, per-machine</td>
+<td>one-off command across many machines</td>
+</tr>
+<tr>
+<td><code>-ThrottleLimit</code></td>
+<td>caps concurrency</td>
+<td>always set deliberately, don't rely on the default</td>
+</tr>
+</tbody>
+</table>
+<h3 id="02-cicd-with-powershell"><a href="../level-4/02-cicd-powershell/">02 · CI/CD with PowerShell</a><a class="headerlink" href="#02-cicd-with-powershell" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>build.ps1 -Task Build\|Test\|All</code></td>
+<td>one entry point, same on a laptop and in CI</td>
+</tr>
+<tr>
+<td><code>New-PesterConfiguration</code></td>
+<td>explicit, discoverable test-run settings</td>
+</tr>
+<tr>
+<td><code>$config.Run.Exit = $true</code></td>
+<td>makes Pester set the process exit code on failure</td>
+</tr>
+<tr>
+<td>Checking <code>$result.FailedCount</code></td>
+<td>connects test failure to pipeline failure</td>
+</tr>
+<tr>
+<td><code>shell: pwsh</code> in GitHub Actions</td>
+<td>run YAML <code>run:</code> blocks as PowerShell</td>
+</tr>
+<tr>
+<td><code>runs-on: ubuntu-latest</code></td>
+<td>cheaper, cross-platform-safe unless Windows-only cmdlets are needed</td>
+</tr>
+<tr>
+<td>Case-sensitive paths on Linux CI</td>
+<td>common source of "works on my machine"</td>
+</tr>
+<tr>
+<td><code>exit 1</code> on any caught error</td>
+<td>explicit pipeline failure signal beyond Pester's own</td>
+</tr>
+</tbody>
+</table>
+<h3 id="03-cross-platform-powershell"><a href="../level-4/03-cross-platform/">03 · Cross-Platform PowerShell</a><a class="headerlink" href="#03-cross-platform-powershell" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concern</th>
+<th>Cross-platform fix</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Which OS is this?</td>
+<td><code>$IsWindows</code> / <code>$IsLinux</code> / <code>$IsMacOS</code></td>
+</tr>
+<tr>
+<td>Building a path</td>
+<td><code>Join-Path</code>, never a literal <code>\</code> or <code>/</code></td>
+</tr>
+<tr>
+<td>Home directory</td>
+<td><code>$HOME</code> (works everywhere; avoid <code>$env:USERPROFILE</code>/<code>$env:HOME</code> directly)</td>
+</tr>
+<tr>
+<td>Splitting text into lines</td>
+<td><code>-split '\r?\n'</code>, not just <code>"</code>n"<code>or</code>"<code>r</code>n"`</td>
+</tr>
+<tr>
+<td>Filesystem case sensitivity</td>
+<td>assume case-sensitive always, regardless of what your dev machine tolerates</td>
+</tr>
+<tr>
+<td>Native command success/failure</td>
+<td>check <code>$LASTEXITCODE</code>, not <code>$?</code></td>
+</tr>
+<tr>
+<td><code>ls</code>, <code>dir</code>, other aliases</td>
+<td>call <code>Get-ChildItem</code> directly in portable scripts</td>
+</tr>
+<tr>
+<td>Environment variables</td>
+<td><code>$env:PATH</code> uses <code>[System.IO.Path]::PathSeparator</code> to split (<code>:</code> vs <code>;</code>)</td>
+</tr>
+</tbody>
+</table>
+<h3 id="04-security-hardening-jea"><a href="../level-4/04-security-hardening-jea/">04 · Security Hardening (JEA)</a><a class="headerlink" href="#04-security-hardening-jea" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Piece</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>.psrc</code> (role capability file)</td>
+<td>allow-list of cmdlets/functions/programs for one role</td>
+</tr>
+<tr>
+<td><code>.pssc</code> (session configuration file)</td>
+<td>binds role(s) to security group(s), sets session type</td>
+</tr>
+<tr>
+<td><code>SessionType RestrictedRemoteServer</code></td>
+<td>minimal baseline, nothing extra unless granted</td>
+</tr>
+<tr>
+<td><code>RunAsVirtualAccount</code></td>
+<td>connecting user's identity never runs the commands</td>
+</tr>
+<tr>
+<td><code>RoleDefinitions</code></td>
+<td>maps a security group to a role capability</td>
+</tr>
+<tr>
+<td>Parameter-constrained <code>VisibleCmdlets</code></td>
+<td>narrows a broad cmdlet to specific safe arguments</td>
+</tr>
+<tr>
+<td><code>Register-PSSessionConfiguration</code></td>
+<td>activates the endpoint (Windows/WinRM)</td>
+</tr>
+<tr>
+<td>Testing as the restricted role</td>
+<td>the only real verification of what's actually exposed</td>
+</tr>
+</tbody>
+</table>
+<h3 id="05-testing-at-scale-ci"><a href="../level-4/05-testing-at-scale-ci/">05 · Testing at Scale &amp; CI</a><a class="headerlink" href="#05-testing-at-scale-ci" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>-Tag "Name"</code> on <code>Describe</code>/<code>It</code></td>
+<td>group tests for selective execution</td>
+</tr>
+<tr>
+<td><code>$config.Filter.Tag = 'Unit'</code></td>
+<td>run only tests matching a tag</td>
+</tr>
+<tr>
+<td><code>$config.TestResult.OutputFormat = 'NUnitXml'</code></td>
+<td>CI-parseable results</td>
+</tr>
+<tr>
+<td><code>$config.CodeCoverage.Enabled = $true</code></td>
+<td>measure which commands executed</td>
+</tr>
+<tr>
+<td><code>CoveragePercentTarget</code></td>
+<td>fail the build if coverage drops below a threshold</td>
+</tr>
+<tr>
+<td>Command coverage ≠ scenario coverage</td>
+<td>100% coverage can still miss edge cases</td>
+</tr>
+<tr>
+<td>Split suites by tag (<code>Unit</code> vs <code>Slow</code>/<code>Integration</code>)</td>
+<td>keep fast feedback fast</td>
+</tr>
+</tbody>
+</table>
+<h3 id="06-performance-at-scale"><a href="../level-4/06-performance-at-scale/">06 · Performance at Scale</a><a class="headerlink" href="#06-performance-at-scale" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Situation</th>
+<th>Prefer</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Repeated membership/lookup checks against a large, static set</td>
+<td>hashtable or <code>HashSet[T]</code>, built once</td>
+</tr>
+<tr>
+<td>One-off <code>-contains</code> check on a small array</td>
+<td>plain array is fine, don't over-engineer</td>
+</tr>
+<tr>
+<td>Reading a very large file, need speed and low memory</td>
+<td><code>[System.IO.File]::ReadLines()</code></td>
+</tr>
+<tr>
+<td>Reading a large file, readability matters more than raw speed</td>
+<td><code>Get-Content</code> (streams, pipeline-friendly)</td>
+</tr>
+<tr>
+<td>Need the whole file as one string (regex across lines, etc.)</td>
+<td><code>Get-Content -Raw</code> (accept the memory cost)</td>
+</tr>
+<tr>
+<td>Need only the first N results (or first match)</td>
+<td>keep it in the pipeline, use <code>-First</code>/short-circuit <code>Where-Object</code></td>
+</tr>
+<tr>
+<td>Any performance claim</td>
+<td>verify with <code>Measure-Command</code> on your actual data, don't assume</td>
+</tr>
+</tbody>
+</table>
+<h3 id="07-building-powershell-based-devops-tools"><a href="../level-4/07-devops-tools/">07 · Building PowerShell-based DevOps Tools</a><a class="headerlink" href="#07-building-powershell-based-devops-tools" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Feature</th>
+<th>Purpose</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Multiple <code>[Parameter(ParameterSetName=...)]</code> per param</td>
+<td>share a parameter across sets</td>
+</tr>
+<tr>
+<td><code>$PSCmdlet.ParameterSetName</code></td>
+<td>detect which set actually bound</td>
+</tr>
+<tr>
+<td>Mandatory param missing, no input redirected</td>
+<td>hangs on a prompt — always pass everything explicitly in automation</td>
+</tr>
+<tr>
+<td><code>$ErrorActionPreference = 'Stop'</code></td>
+<td>non-terminating errors become catchable</td>
+</tr>
+<tr>
+<td><code>Write-Log</code> with level + timestamp</td>
+<td>structured, parseable output</td>
+</tr>
+<tr>
+<td>Explicit <code>exit 0</code> / <code>exit 1</code></td>
+<td>reliable outcome signal for any caller</td>
+</tr>
+<tr>
+<td><code>-DryRun</code> / <code>-WhatIf</code></td>
+<td>let callers verify intent before committing</td>
+</tr>
+<tr>
+<td><code>-Verbose</code> for detail, quiet default output</td>
+<td>serves both interactive and CI use</td>
+</tr>
+</tbody>
+</table>
+<h3 id="08-publishing-modules-powershell-gallery"><a href="../level-4/08-publishing-modules/">08 · Publishing Modules (PowerShell Gallery)</a><a class="headerlink" href="#08-publishing-modules-powershell-gallery" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Step</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Generate a correct manifest</td>
+<td><code>New-ModuleManifest</code></td>
+</tr>
+<tr>
+<td>Validate it parses correctly</td>
+<td><code>Test-ModuleManifest</code></td>
+</tr>
+<tr>
+<td>Lint before publishing</td>
+<td><code>Invoke-ScriptAnalyzer -Recurse</code></td>
+</tr>
+<tr>
+<td>Publish</td>
+<td><code>Publish-Module -Path ... -NuGetApiKey ...</code></td>
+</tr>
+<tr>
+<td>Bump version before every publish</td>
+<td><code>ModuleVersion</code> in <code>.psd1</code>, semantic versioning</td>
+</tr>
+<tr>
+<td>Declare PowerShell/module dependencies</td>
+<td><code>#Requires</code>, <code>RequiredModules</code> in manifest</td>
+</tr>
+<tr>
+<td>Keep the publish folder clean</td>
+<td>scope <code>-Path</code> to only real module content</td>
+</tr>
+</tbody>
+</table>
+<h3 id="09-logging-observability-for-scripts"><a href="../level-4/09-logging-observability/">09 · Logging &amp; Observability for Scripts</a><a class="headerlink" href="#09-logging-observability-for-scripts" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Need</th>
+<th>Tool</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Structured, machine-parseable entries</td>
+<td>custom <code>Write-Log</code> writing JSON Lines</td>
+</tr>
+<tr>
+<td>Time an operation, capture success/failure</td>
+<td><code>[System.Diagnostics.Stopwatch]</code> + <code>try</code>/<code>catch</code></td>
+</tr>
+<tr>
+<td>Capture an entire interactive session verbatim</td>
+<td><code>Start-Transcript</code> / <code>Stop-Transcript</code></td>
+</tr>
+<tr>
+<td>Make non-terminating errors catchable</td>
+<td><code>$ErrorActionPreference = 'Stop'</code> or <code>-ErrorAction Stop</code></td>
+</tr>
+<tr>
+<td>Find where an error happened</td>
+<td><code>$_.InvocationInfo.ScriptLineNumber</code></td>
+</tr>
+<tr>
+<td>Avoid the tight-loop logging trap</td>
+<td>batch entries, write once instead of per-iteration</td>
+</tr>
+</tbody>
+</table>
+<h3 id="10-capstone-project"><a href="../level-4/10-capstone-project/">10 · Capstone Project</a><a class="headerlink" href="#10-capstone-project" title="Permanent link">&para;</a></h3>
+<table>
+<thead>
+<tr>
+<th>Concept</th>
+<th>Where it came from</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Public/Private folder split</td>
+<td>Building Reusable Modules (Level 3)</td>
+</tr>
+<tr>
+<td>Generated manifest, <code>Test-ModuleManifest</code></td>
+<td>Publishing Modules (Level 4, module 08)</td>
+</tr>
+<tr>
+<td><code>-ErrorAction SilentlyContinue</code> for expected absence</td>
+<td>Error handling (Level 1-2)</td>
+</tr>
+<tr>
+<td><code>[System.Diagnostics.Stopwatch]</code> timing</td>
+<td>Performance at Scale (Level 4, module 06)</td>
+</tr>
+<tr>
+<td>Structured JSON-lines logging</td>
+<td>Logging &amp; Observability (Level 4, module 09)</td>
+</tr>
+<tr>
+<td>Tagged Pester tests, <code>Unit</code> vs <code>Integration</code></td>
+<td>Testing at Scale &amp; CI (Level 4, module 05)</td>
+</tr>
+<tr>
+<td>Cross-platform <code>Get-PSDrive</code></td>
+<td>Cross-Platform PowerShell (Level 4, module 03)</td>
+</tr>
+</tbody>
+</table>
+<hr />
+<p>Go deeper with the full <a href="../">PowerShell Mastery Path</a> curriculum or test yourself with the <a href="../interview-questions/">interview questions</a>.</p>
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+                
+  
+  <nav class="mp-related" aria-label="Related free courses">
+    <h2>Related free courses</h2>
+    <ul>
+      <li><a href="https://learnmasterypath.com/python-mastery-path/">Python</a></li><li><a href="https://learnmasterypath.com/java-mastery-path/">Java</a></li><li><a href="https://learnmasterypath.com/javascript-mastery-path/">JavaScript</a></li><li><a href="https://learnmasterypath.com/typescript-mastery-path/">TypeScript</a></li><li><a href="https://learnmasterypath.com/csharp-mastery-path/">C#</a></li>
+      <li><a href="https://learnmasterypath.com/">All 100+ courses &rarr;</a></li>
+    </ul>
+  </nav>
+  
+
+              </article>
+            </div>
+          
+          
+<script>var target=document.getElementById(location.hash.slice(1));target&&target.name&&(target.checked=target.name.startsWith("__tabbed_"))</script>
+        </div>
+        
+          <button type="button" class="md-top md-icon" data-md-component="top" hidden>
+  
+  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8z"/></svg>
+  Back to top
+</button>
+        
+      </main>
+      
+        <footer class="md-footer">
+  
+    
+      
+      <nav class="md-footer__inner md-grid" aria-label="Footer" >
+        
+          
+          <a href="../interview-questions/" class="md-footer__link md-footer__link--prev" aria-label="Previous: Interview Questions">
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M20 11v2H8l5.5 5.5-1.42 1.42L4.16 12l7.92-7.92L13.5 5.5 8 11z"/></svg>
+            </div>
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Previous
+              </span>
+              <div class="md-ellipsis">
+                Interview Questions
+              </div>
+            </div>
+          </a>
+        
+        
+          
+          <a href="../level-1/" class="md-footer__link md-footer__link--next" aria-label="Next: Overview">
+            <div class="md-footer__title">
+              <span class="md-footer__direction">
+                Next
+              </span>
+              <div class="md-ellipsis">
+                Overview
+              </div>
+            </div>
+            <div class="md-footer__button md-icon">
+              
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path d="M4 11v2h12l-5.5 5.5 1.42 1.42L19.84 12l-7.92-7.92L10.5 5.5 16 11z"/></svg>
+            </div>
+          </a>
+        
+      </nav>
+    
+  
+  <div class="md-footer-meta md-typeset">
+    <div class="md-footer-meta__inner md-grid">
+      <div class="md-copyright">
+  
+  
+    Made with
+    <a href="https://squidfunk.github.io/mkdocs-material/" target="_blank" rel="noopener">
+      Material for MkDocs
+    </a>
+  
+</div>
+      
+    </div>
+  </div>
+</footer>
+      
+  <div class="mp-foot">
+    <div class="mp-foot-inner">
+      <a class="mp-foot-brand" href="https://learnmasterypath.com/"><svg class="mp-mark" viewBox="0 0 160 160" role="img" aria-label="Mastery Path logo">
+  <circle cx="80" cy="80" r="74" fill="#FAF7EF" stroke="#2FA98D" stroke-width="5"/>
+  <rect class="mp-bar mp-bar-1" x="36" y="90" width="17" height="24" rx="5" fill="#2FA98D"/>
+  <rect class="mp-bar mp-bar-2" x="59" y="74" width="17" height="40" rx="5" fill="#7FC9B7"/>
+  <rect class="mp-bar mp-bar-3" x="82" y="56" width="17" height="58" rx="5" fill="#E0B457"/>
+  <rect class="mp-bar mp-bar-4" x="105" y="38" width="17" height="76" rx="5" fill="#C97B4A"/>
+  <circle class="mp-dot" cx="44.5" cy="82" r="7" fill="#22261f"/>
+</svg><span>Mastery Path</span></a>
+      <nav class="mp-sitelinks" aria-label="Site and legal links">
+        <a href="https://learnmasterypath.com/">All courses</a>
+        <a href="https://learnmasterypath.com/about.html">About</a>
+        <a href="https://learnmasterypath.com/contact.html">Contact</a>
+        <a href="https://learnmasterypath.com/powershell-mastery-path/privacy/">Privacy Policy</a>
+        <a href="https://learnmasterypath.com/terms.html">Terms</a>
+        <a href="https://learnmasterypath.com/powershell-mastery-path/license/">License</a>
+        <a href="https://learnmasterypath.com/verify/">Verify a certificate</a>
+      </nav>
+    </div>
+    <p class="mp-license-note">
+      © 2026 Vinod Kumar Sigilipelli · Except where otherwise noted, lesson content is licensed under
+      <a rel="license" href="https://creativecommons.org/licenses/by/4.0/">CC BY 4.0</a> and code examples under the
+      <a href="https://opensource.org/license/mit">MIT License</a>.
+    </p>
+  </div>
+
+    </div>
+    <div class="md-dialog" data-md-component="dialog">
+      <div class="md-dialog__inner md-typeset"></div>
+    </div>
+    
+    
+    
+      
+      
+      <script id="__config" type="application/json">{"annotate": null, "base": "..", "features": ["navigation.path", "navigation.tabs", "navigation.sections", "navigation.expand", "navigation.top", "navigation.footer", "navigation.indexes", "toc.follow", "content.code.copy", "content.code.annotate", "search.suggest", "search.highlight"], "search": "../assets/javascripts/workers/search.a7633da7.min.js", "tags": null, "translations": {"clipboard.copied": "Copied to clipboard", "clipboard.copy": "Copy to clipboard", "search.result.more.one": "1 more on this page", "search.result.more.other": "# more on this page", "search.result.none": "No matching documents", "search.result.one": "1 matching document", "search.result.other": "# matching documents", "search.result.placeholder": "Type to start searching", "search.result.term.missing": "Missing", "select.version": "Select version"}, "version": null}</script>
+    
+    
+      <script src="../assets/javascripts/bundle.a5f9d56c.min.js"></script>
+      
+        <script src="../javascripts/progress-tracker.js"></script>
+      
+        <script src="../javascripts/final-quiz.js"></script>
+      
+    
+  </body>
+</html>
