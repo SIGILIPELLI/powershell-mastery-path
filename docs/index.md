@@ -7,7 +7,7 @@ description: "Free PowerShell course from beginner to advanced -- hands-on lesso
 
 A structured, module-wise PowerShell training program that takes you from your
 first `.ps1` script to production-grade automation tooling — with runnable
-code snippets in every module and a hands-on project at the end of each level.
+code snippets in every module and a hands-on project at the end of Levels 1–3 and a capstone at the end of Level 4.
 
 ## How the program is organized
 
@@ -23,7 +23,7 @@ code snippets in every module and a hands-on project at the end of each level.
 - Work through each level in order — later modules assume earlier ones.
 - Every topic page has runnable code snippets — copy them into a local `.ps1`
   file and run with `pwsh`, or paste into your terminal.
-- Each level ends with a project that combines everything learned in that level.
+- Levels 1–3 each end with a project that combines everything learned in that level, and Level 4 ends with the course capstone.
 - Use the search bar (top of the page) to jump straight to a topic.
 - Examples target PowerShell 7+ (`pwsh`), cross-platform on Windows, macOS, and Linux.
 
